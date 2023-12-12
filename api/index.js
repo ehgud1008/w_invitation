@@ -17,3 +17,8 @@ const port = process.env.PORT || 3000;
 app.listen(port, function () {
     console.log('server on! ' + port);
 });
+
+app.use(express.static(path.join(__dirname, 'client/dist')));
+app.get('*', (req,res) => {
+    res.sendFile(path.join(__dirname, 'client', 'dist, index.html'));
+})
