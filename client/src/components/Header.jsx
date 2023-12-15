@@ -1,51 +1,54 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import Menu from './Menu';
 
 const Header = () => {
+  const [isTop, setIsTop] = useState(false);
+  const [menuToggle, setMenuToggle] = useState(false);
 
+  useEffect( () => {
+    window.addEventListener('scroll', checkTop);
+    return () => {
+      window.removeEventListener('scroll', checkTop);
+    }
+  }, []);
+  const checkTop = () => {
+    const scrollTop = window.scrollY;
+    if(scrollTop == 0)  {
+      setIsTop(true);
+    }
+    else {
+      setIsTop(false);
+      setMenuToggle(false);
+    }
+  }
+
+
+  const handleMenuToggle = () => { 
+    
+  }
   return (
-    <header className='bg-slate-200 shadow-md'>
-      <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
-        {/* 햄버거 아이콘 */}
-        <div class="block lg:hidden">
-          <div id="burger" class="flex items-center" onclick="toggleMenu()">
-            <img src='/images/hamburger.png' className='w-7 h-7' alt='menu' />
+  //   <header className={`w-full py-5 px-6 ${ menuToggle ? "hidden" : "block" } md:hidden`}
+    (!isTop ? 
+      <header className='shadow-md opacity-80 fixed
+             w-full inset-x-0 top-0'>
+        <div className='max-w-7xl mx-auto px-2 sm:px-6 lg:px-8'>
+          <div className='flex items-center justify-between h-12'>
+            <div>Kim Cheolsu & Younghee Kim</div>
+            <button className='' onClick={ () => {setMenuToggle(!menuToggle); console.log(menuToggle);} }>
+              <img src="/images/hamburger.png" className='w-7 h-7'/>
+            </button>
           </div>
+          { menuToggle 
+            ? <Menu />
+            : ''
+          }
+          
         </div>
-        <ul className='flex gap-4 hidden lg:flex absolute  top-0 right-0 mt-16 mr-4 bg-white shadow-md rounded-md'>
-          <Link to="">
-            <li className='sm:inline text-slate-700 hover:underline font-bold'>인사말</li>
-          </Link>
-          <Link to="">
-            <li className='sm:inline text-slate-700 hover:underline font-bold'>인터뷰</li>
-          </Link>
-          <Link to="">
-            <li className='sm:inline text-slate-700 hover:underline font-bold'>웨딩데이</li>
-          </Link>
-          <Link to="">
-            <li className='sm:inline text-slate-700 hover:underline font-bold'>갤러리</li>
-          </Link>
-          <Link to="">
-            <li className='sm:inline text-slate-700 hover:underline font-bold'>예식정보</li>
-          </Link>
-          <Link to="">
-            <li className='sm:inline text-slate-700 hover:underline font-bold'>게스트북</li>
-          </Link>
-          <Link to="">
-            <li className='sm:inline text-slate-700 hover:underline font-bold'>연락처</li>
-          </Link>
-          <Link to="">
-            <li className='sm:inline text-slate-700 hover:underline font-bold'> 마음 전하실 곳</li>
-          </Link>
-          <Link to="">
-            <li className='sm:inline text-slate-700 hover:underline font-bold'>오시는 길</li>
-          </Link>
-          <Link to="">
-            <li className='sm:inline text-slate-700 hover:underline font-bold'>감사 인사</li>
-          </Link>
-        </ul>
-      </div>
-    </header>
+      </header>
+       : ''
+    )
+    
   )
 }
 
