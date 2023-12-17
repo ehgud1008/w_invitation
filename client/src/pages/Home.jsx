@@ -1,6 +1,4 @@
 import React from 'react'
-import Gallery from './Gallery'
-import Calendar from './Calendar'
  
 const Home = () => {
   return (
@@ -45,11 +43,6 @@ const Home = () => {
             <button className='flex items-center py-5 px-32 rounded-lg text-rose-red font-semibold bg-rose-100 opacity-70 flex'>
               <img src='/images/interview2.png' className='w-5 h-5 mr-1.5' alt='interview' />신랑 & 신부의 인터뷰
             </button>
-        </div>
-        <Gallery />
-        <Calendar />
-        <div className='mt-36'>
-
         </div>
         {/* <div className="max-w-md bg-white p-8 rounded-lg shadow-lg w-full lg:w-2/3">
         <h2 className="text-2xl font-bold mb-4">날짜 & 시간</h2>

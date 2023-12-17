@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const Gallery = () => {
+
+  useEffect( () => {
+    
+  })
   return (
     <div className='grid place-items-center'>
         <div className='grid place-items-center mb-10'>

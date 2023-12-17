@@ -8,9 +8,7 @@ const Calendar = () => {
     const drawWeddingDate = () => {
         const weddingDate = date.getDate();
 
-        console.log(document.querySelectorAll('.in'));
         for(let _date of document.querySelectorAll('.in')){
-            console.log(_date);
             if(+_date.innerText === weddingDate) {
                 _date.classList.add('text-slate-50');
                 _date.classList.add('bg-gray-950');
@@ -21,6 +19,7 @@ const Calendar = () => {
     }
 
     useEffect( () => {
+        console.log("!@#$!@#$!#@$");
         //db에서 결혼날짜 받아와서 세팅하는거로 변경 TODO
         const viewYear = date.getFullYear();
         const viewMonth = date.getMonth();
@@ -72,18 +71,17 @@ const Calendar = () => {
 
         setDates(dates.join(''));
 
-        
     }, drawWeddingDate());
 
     
   return (
-    <div className=''>
+    <div className='mb-10 grid items-center justify-center'>
         <div className='flex place-content-center mb-5'>
             {/* <button className='text-lg '>&lt;</button> */}
             <p className='mx-5 text-2xl'>{viewTitleDate}</p>
             {/* <button className='text-lg '>&gt;</button> */}
         </div>
-        <table>
+        <table className='mb-10'>
             <thead className='place-content-center border-solid border-y-2 mb-10'>
                 <tr className=''>
                     <th className='lg:px-10 md:px-7 sm:px-4 px-4 py-2 text-red-500'>Sun</th>
@@ -98,16 +96,6 @@ const Calendar = () => {
             <tbody dangerouslySetInnerHTML={ {__html:dates}}>
             </tbody>
         </table>
-        {/* <div className='flex place-content-center border-solid border-y-2 p-2 mb-10'>
-            <div className='mx-3'>Sun</div>
-            <div className='mx-3'>Mon</div>
-            <div className='mx-3'>Tue</div>
-            <div className='mx-3'>Wed</div>
-            <div className='mx-3'>Thu</div>
-            <div className='mx-3'>Fri</div>
-            <div className='mx-3'>Sat</div>
-        </div> */}
-        
     </div>
   )
 }
