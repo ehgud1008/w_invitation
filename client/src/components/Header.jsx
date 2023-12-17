@@ -7,6 +7,8 @@ const Header = () => {
   const [menuToggle, setMenuToggle] = useState(false);
 
   useEffect( () => {
+    setIsTop(true);
+    setMenuToggle(true);
     window.addEventListener('scroll', checkTop);
     return () => {
       window.removeEventListener('scroll', checkTop);
