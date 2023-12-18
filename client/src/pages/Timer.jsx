@@ -1,62 +1,76 @@
 import React, { useEffect, useState } from 'react'
 
 const Timer = () => {
-    const date = new Date('2023-12-31 12:31 PM');
+    const date = new Date('2023-12-31 12:31:00 PM');
+    const today = new Date();
 
-    const [month, setMonth] = useState('');
-    const [day, setDay] = useState('');
-    const [hour, setHour] = useState('');
-    const [minute, setMinute] = useState('');
-    const [sec, setSec] = useState('');
+     //결혼날짜 - 오늘날짜 mill sec
+    const dis = date.getTime() - today.getTime();
+    const min1 = 1000 * 60; //밀리세컨드
     
-    const [time, setTime] = useState(''); //남은 단위
-    const setTimer = () => {
-        
-    }
+    const d = Math.floor(dis/(min1*60*24));   //1000*60*60*24
+    const h = Math.floor((dis%(min1*60*24))/(min1*60));  //1000*60*60
+    const m = Math.floor((dis%(min1*60))/ min1);       //1000*60
+    const s = Math.floor((dis%min1)/1000);             
 
+    // console.log(min1);
+    // console.log("일 = " + day);
+    // console.log("시 = " + hour);
+    // console.log("분 = " + minute);
+    // console.log("초 = " + second);
+    
+    const [day, setDay] = useState(d);
+    const [hour, setHour] = useState(h);
+    const [minute, setMinute] = useState(m);
+    const [second, setSecond] = useState(s);
+    
     useEffect( () => {
-        //결혼날짜 - 오늘날짜 sec
-        const today = new Date();
-        const todayMonth = today.getMonth();
-        const todayDay = today.getDate();
-        const todayHour = today.getHours();
-        const todayMin = today.getMinutes();
-        const todayMill = today.getMilliseconds();
+        const timer = setInterval( () => {
+            if(parseInt(second) > 0){
+                setSecond(parseInt(second)-1);
+            }
 
-
-        const dis = date.getTime() - today.getTime();
-        const min1 = 1000 * 60;
-        console.log(dis);
-
-        setDay(Math.floor(dis/min1*60*24));
-        setHour(Math.floor(dis%(min1*60*24)) / (min1*60));
-
-        console.log(day);
-        console.log(hour);
-
-        // const timer = setInterval( () => {
-            
-        // })
-    })
+            if(parseInt(second) === 0){
+                if(parseInt(minute) === 0 ){
+                    if(parseInt(hour) === 0) {
+                        if(parseInt(day) === 0){
+                            clearInterval(timer);
+                        }else{
+                            setDay(parseInt(day)-1);
+                            setHour(23);
+                            setMinute(59);
+                            setSecond(59);
+                        }
+                    }else{
+                        setHour(parseInt(hour)-1);
+                        setMinute(59);
+                        setSecond(59);
+                    }
+                }else{
+                    setMinute(parseInt(minute)-1);
+                    setSecond(59);
+                }
+            }
+        }, 1000);
+        
+        return () => clearInterval(timer);
+    }, [day, hour, minute, second]);
   return (
     <div className='mb-20'>
-        <div className='flex place-content-center'>
-            <div className=''>
-                달
+        {/* 디자인 추후 고려 */}
+        <div className='flex place-content-center bg-rose-red'>
+            <div className='mx-5 bg-yellow-950 text-slate-50 '>
+                {day}
             </div>
-            <div className=''>
-                일 ${day}
+            <div className='mx-5 bg-yellow-950 text-slate-50 '>
+                {hour}
             </div>
-            {/* 보통 한달에 720시간인데 3달 넘어가면 범위가 너무 커져서 굳이 ? */}
-            {/* <div className=''>
-                시 ${hour}
+            <div className='mx-5 bg-yellow-950 text-slate-50 '>
+                {minute}
             </div>
-            <div className=''>
-                분
+            <div className='mx-5 bg-yellow-950 text-slate-50 '>
+                {second}
             </div>
-            <div className=''>
-                초
-            </div> */}
         </div>
     </div>
   )

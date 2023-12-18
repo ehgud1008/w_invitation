@@ -75,7 +75,7 @@ const Calendar = () => {
 
     
   return (
-    <div className='mb-10 grid items-center justify-center'>
+    <div className='mt-20 mb-10 grid items-center justify-center'>
         <div className='flex place-content-center mb-5'>
             {/* <button className='text-lg '>&lt;</button> */}
             <p className='mx-5 text-2xl'>{viewTitleDate}</p>
