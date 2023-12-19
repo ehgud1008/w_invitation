@@ -32,7 +32,7 @@ const Header = () => {
   return (
   //   <header className={`w-full py-5 px-6 ${ menuToggle ? "hidden" : "block" } md:hidden`}
     (!isTop ? 
-      <header className='shadow-md opacity-80 fixed
+      <header className='shadow-md opacity-80 fixed  bg-white 
              w-full inset-x-0 top-0'>
         <div className='max-w-7xl mx-auto px-2 sm:px-6 lg:px-8'>
           <div className='flex items-center justify-between h-12'>
