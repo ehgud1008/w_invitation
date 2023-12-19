@@ -16,6 +16,9 @@ const Gallery = () => {
 
   useEffect( ( ) => {
     setOpenImageList(false);
+    
+    //슬라이드/앨범형 선택
+
     //db에서 가져온 이미지 세팅
   }, []);
 
@@ -33,6 +36,7 @@ const Gallery = () => {
       <div className='grid place-items-center mt-5'>
           <button onClick={handleMoreImage}>사진 더보기</button>
       </div>
+      
       {openImageList && <GalleryList />}
     </div>
   )

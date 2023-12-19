@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Gallery from './pages/Gallery';
 import Calendar from './pages/Calendar';
 import Timer from './pages/Timer';
+import Map from './pages/Map';
 
 export default function App() {
   
@@ -20,6 +21,7 @@ export default function App() {
       <Gallery />
       <Calendar />
       <Timer />
+      <Map />
     </BrowserRouter>
   )
 }

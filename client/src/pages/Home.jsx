@@ -39,8 +39,8 @@ const Home = () => {
             <span className='text-md'>신부부 · 신부모</span> <span className='text-sm'>의 차녀</span><span className='text-md ml-5'>영희</span>
           </p>
         </div>
-        <div className='grid place-items-center mb-16'>
-            <button className='flex items-center py-5 px-32 rounded-lg text-rose-red font-semibold bg-rose-100 opacity-70 flex'>
+        <div className='grid place-items-center mb-16 '>
+            <button className='flex items-center py-5 lg:px-56 md:px-32 sm:px-20 xs:px-16 rounded-lg text-rose-red font-semibold bg-rose-100 opacity-70 flex'>
               <img src='/images/interview2.png' className='w-5 h-5 mr-1.5' alt='interview' />신랑 & 신부의 인터뷰
             </button>
         </div>
