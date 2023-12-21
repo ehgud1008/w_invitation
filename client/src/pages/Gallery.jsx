@@ -30,7 +30,7 @@ const Gallery = () => {
       </div>
       <div className='grid md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-2 mx-8'>
         {imageData.weddingImages.map((image, index) => (
-          <img src={image} className='aspect-[2/3] my-2 w-full hover:opacity-70' onClick={handleMoreImage}/>      
+          <img key={index} src={image} className='aspect-[2/3] my-2 w-full hover:opacity-70' onClick={handleMoreImage}/>      
         ))}
       </div>
       <div className='grid place-items-center mt-5'>

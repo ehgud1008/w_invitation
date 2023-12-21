@@ -1,7 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
  
 const Home = () => {
-  
+  const params = useParams();
+  const url = params.url;
+  console.log(params.url);
+  useEffect( () => {
+    const fetchWeddingInfo = async () => {
+      try {
+        const res = await fetch(`/api/wedding/${url}`);
+        const data = await res.json();
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    } 
+    fetchWeddingInfo();
+  }, [params.url])
   //seq, 신랑이름, 신랑영어이름, 신랑서열(1,2,3,4...), 신부이름, 신부영어이름, 신부서열,
   // 결혼날짜, 메인사진, 갤러리 사진(최대 10장), 영상링크하나,
   //식장 주소, 식장 약도, 식장번호, [지하철(호선, 출구, 도보)], [버스(정류장)]

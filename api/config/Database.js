@@ -4,9 +4,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // Sequelize를 사용하여 MySQL과 연결
-const sequelize = new Sequelize('mydb', 'root', process.env.MYSQLPW, {
+const sequelize = new Sequelize('wedding_invitation', 'root', process.env.MYSQLPW, {
     host: 'localhost',
-    dialect: 'mysql'
+    dialect: 'mysql',
+    logging : console.log,
 });
 
 sequelize.authenticate().then( ()=> {
@@ -15,4 +16,4 @@ sequelize.authenticate().then( ()=> {
     console.log("DB 연결 실패 : " + error);
 });
 
-module.exports = sequelize;
+export default sequelize;

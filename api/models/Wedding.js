@@ -6,6 +6,7 @@ class WeddingInfo extends Model {}
 WeddingInfo.init({
         seq : {
             type : DataTypes.INTEGER,
+            primaryKey : true,
             required : true,
         },
         groom_ko : {
@@ -46,7 +47,9 @@ WeddingInfo.init({
         }
     },{
         sequelize,
-        modelName : 'WeddingInfo'
+        modelName : 'WeddingInfo',
+        tableName : 'wedding_info',
+        timestamps : false,
     }
 );
 
