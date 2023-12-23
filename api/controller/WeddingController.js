@@ -1,12 +1,22 @@
-import WeddingInfo from '../models/wedding.js';
-
+import WeddingInfo from '../models/Wedding.js';
+import sequelize from 'sequelize';
 
 export const getWeddingInfo = async (req, res, next) => {
     const url = req.params.url;
-    console.log("!@#!@#!#!#@!#!@");
-    console.log(url);
     try{
         const weddingInfo = await WeddingInfo.findOne({ 
+            attributes : {
+                include : [
+                    [
+                        sequelize.fn(
+                            "DATE_FORMAT",
+                            sequelize.col("wedding_date"),
+                            "%Y-%m-%d %H:%i:%s"
+                        ),
+                        "wedding_date"
+                    ],
+                ]
+            },
             where : {
                 url : url,
              }

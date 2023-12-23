@@ -6,6 +6,8 @@ import Gallery from './pages/Gallery';
 import Calendar from './pages/Calendar';
 import Timer from './pages/Timer';
 import Map from './pages/Map';
+import Contact from './pages/Contact';
+import Map2 from './pages/Map';
 
 export default function App() {
   
@@ -21,7 +23,8 @@ export default function App() {
       <Gallery />
       <Calendar />
       <Timer />
-      <Map />
+      <Map2 />
+      <Contact />
     </BrowserRouter>
   )
 }

@@ -42,9 +42,13 @@ WeddingInfo.init({
             required : true,
         },
         wedding_date : {
-            type : DataTypes.DATE,
+            type : DataTypes.VIRTUAL,
             required : true,
-        }
+            // get() {
+            //     //return sequelize.literal(`DATE_FORMAT(wedding_date, '%Y%m%d')`);
+            //     return this.getDataValue('paymentDate').toLocaleString('en-GB', { timeZone: 'UTC' });
+            // },
+        },
     },{
         sequelize,
         modelName : 'WeddingInfo',
