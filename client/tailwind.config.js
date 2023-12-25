@@ -20,6 +20,8 @@ export default {
       },
       colors : {
         'rose-red' : '#7b2934',
+        'accordion-blue' : '#edeef1',
+        'accordion-rose' : '#f7f3f4',
       }
     },
     screens: {

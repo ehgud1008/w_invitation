@@ -7,6 +7,7 @@ import Calendar from './pages/Calendar';
 import Timer from './pages/Timer';
 import Location from './pages/Location';
 import Contact from './pages/Contact';
+import Account from './pages/Account';
 
 export default function App() {
   
@@ -24,6 +25,7 @@ export default function App() {
       <Timer />
       <Location />
       <Contact />
+      <Account />
     </BrowserRouter>
   )
 }

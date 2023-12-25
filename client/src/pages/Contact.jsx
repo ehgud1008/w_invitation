@@ -78,7 +78,7 @@ const Contact = () => {
             </div>
             <div className="mt-2 grid place-items-center">
               <p className="text-sm font-bold tracking-tightest mb-3">
-                신랑측 혼주 연락하기
+                신부측 혼주 연락하기
               </p>
               <div className="">
                 <div className="flex items-centermr-3">
@@ -98,8 +98,8 @@ const Contact = () => {
                 </div>
                 <div className="">
                   <div className="flex place-content-around text-xs">
-                    <p className="py-3">김철수<br/>아버님</p>
-                    <p className="py-3">김철수<br/>어머님</p>
+                    <p className="py-3">김영희<br/>아버님</p>
+                    <p className="py-3">김영희<br/>어머님</p>
                   </div>
                 </div>
               </div>
