@@ -67,7 +67,7 @@ const Home = () => {
                 멘트 추후 설정 가능
               </p>
             </div>
-            <div className='md:w-2/5 sm:w-4/5 grid place-items-center border-solid border-y-2 p-5 mb-10'>
+            <div className='md:w-2/5 sm:w-4/5 xs:w-4/5 grid place-items-center border-solid border-y-2 p-5 mb-10'>
               <p className='leading-10'>
                 <span className='text-md'>신랑부 · 신랑모</span> <span className='text-sm'>의 장남</span><span className='text-md ml-5'>철수</span>
               </p>

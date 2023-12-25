@@ -15,6 +15,9 @@ export default {
       widest: '1em',
     },
     extend: {
+      backgroundImage : {
+        'bg-pink' : "url('/images/pinkBg.jpg')",
+      },
       colors : {
         'rose-red' : '#7b2934',
       }

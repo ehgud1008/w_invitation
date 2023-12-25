@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Map } from 'react-kakao-maps-sdk';
 
-const KakaoMap = () => {
+const Location = () => {
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
 
   //약도 모달 열기 func
@@ -116,8 +116,8 @@ const KakaoMap = () => {
             원하시는 앱을 선택하시면 길안내가 시작됩니다.
           </p>
           <span className='flex pt-3 text-sm'>
-            <button className='border-2 border-gray-600 px-3 py-2 rounded-md mr-5 w-1/4'>카카오내비</button>
-            <button className='border-2 border-gray-600 px-3 py-2 rounded-md mr-5 w-1/4'>티맵</button>
+            <button className='border-2 border-gray-600 px-3 py-2 rounded-md mr-5 lg:w-1/4 md:w-1/4 sm:w-1/4'>카카오내비</button>
+            <button className='border-2 border-gray-600 px-3 py-2 rounded-md mr-5 sm:w-1/4'>티맵</button>
           </span>
         </div>
         <div className='text-left pb-3'>
@@ -155,4 +155,4 @@ const KakaoMap = () => {
   )
 }
 
-export default KakaoMap
+export default Location

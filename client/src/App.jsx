@@ -5,7 +5,7 @@ import Header from './components/Header';
 import Gallery from './pages/Gallery';
 import Calendar from './pages/Calendar';
 import Timer from './pages/Timer';
-import KakaoMap from './pages/KakaoMap';
+import Location from './pages/Location';
 import Contact from './pages/Contact';
 
 export default function App() {
@@ -22,7 +22,7 @@ export default function App() {
       <Gallery />
       <Calendar />
       <Timer />
-      <KakaoMap />
+      <Location />
       <Contact />
     </BrowserRouter>
   )
