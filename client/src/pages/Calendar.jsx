@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from 'react'
 
 const Calendar = () => {
-    const [viewTitleDate, setViewTitleDate] = useState('');
     const [dates, setDates] = useState('');
-    const date = new Date('2023-12-31 12:31 PM');
+    const date = new Date('2023-12-31 13:00:00');
+    var monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+    ];  
+    var weekNames = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"]; 
+
+    const [dateNum, setDateNum] = useState('');
+    const [monthEng, setMonthEng] = useState('');
+    const [viewWeek, setViewWeek] = useState('');
+    const [viewDate, setViewDate] = useState('');
+
 
     const drawWeddingDate = () => {
         const weddingDate = date.getDate();
-
+        
         for(let _date of document.querySelectorAll('.in')){
             if(+_date.innerText === weddingDate) {
                 _date.classList.add('text-slate-50');
@@ -19,12 +28,10 @@ const Calendar = () => {
     }
 
     useEffect( () => {
-        console.log("!@#$!@#$!#@$");
+        console.log(date);
         //db에서 결혼날짜 받아와서 세팅하는거로 변경 TODO
         const viewYear = date.getFullYear();
         const viewMonth = date.getMonth();
-
-        setViewTitleDate(viewYear + "년 " + (viewMonth+1) + "월");
 
         //지난달 마지막날, 요일
         const prevLastDate = new Date(viewYear, viewMonth, 0).getDate();
@@ -71,31 +78,67 @@ const Calendar = () => {
 
         setDates(dates.join(''));
 
+        setDateNum(date.getDate());
+        setMonthEng(monthNames[date.getMonth()]);
+        setViewWeek(weekNames[date.getDay()] + " ");
+        const tmp = date.getHours() > 12 ? 'pm' : 'am';
+        const tmp2 = date.getHours() % 12 ? date.getHours() % 12 : 12;
+        const tmp3 = date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes();
+        setViewDate(tmp2+":"+tmp3 + " " + tmp);
+
     }, drawWeddingDate());
 
     
   return (
-    <div className='mt-20 mb-10 grid items-center justify-center mx-8'>
-        <div className='flex place-content-center mb-5'>
-            {/* <button className='text-lg '>&lt;</button> */}
-            <p className='mx-5 text-2xl'>{viewTitleDate}</p>
-            {/* <button className='text-lg '>&gt;</button> */}
-        </div>
-        <table className='mb-10'>
-            <thead className='place-content-center border-solid border-y-2 mb-10'>
-                <tr className=''>
-                    <th className='lg:px-10 md:px-7 sm:px-4 xs:px-2 px-4 py-2 text-red-500'>Sun</th>
-                    <th className='lg:px-10 md:px-7 sm:px-4 xs:px-2 px-4 py-2 '>Mon</th>
-                    <th className='lg:px-10 md:px-7 sm:px-4 xs:px-2 px-4 py-2 '>Tue</th>
-                    <th className='lg:px-10 md:px-7 sm:px-4 xs:px-2 px-4 py-2 '>Wed</th>
-                    <th className='lg:px-10 md:px-7 sm:px-4 xs:px-2 px-4 py-2 '>Thu</th>
-                    <th className='lg:px-10 md:px-7 sm:px-4 xs:px-2 px-4 py-2 '>Fri</th>
-                    <th className='lg:px-10 md:px-7 sm:px-4 xs:px-2 px-4 py-2 text-blue-500'>Sat</th>
-                </tr>
+    // <div className='mt-20 mb-10 grid items-center justify-center mx-8'>
+    //     <div className='flex place-content-center mb-5'>
+    //         {/* <button className='text-lg '>&lt;</button> */}
+    //         <p className='mx-5 text-2xl'>{viewTitleDate}</p>
+    //         {/* <button className='text-lg '>&gt;</button> */}
+    //     </div>
+    //     <table className='mb-10'>
+    //         <thead className='place-content-center border-solid border-y-2 mb-10'>
+    //             <tr className=''>
+    //                 <th className='px-4 py-2 text-red-500'>Sun</th>
+    //                 <th className='px-4 py-2 '>Mon</th>
+    //                 <th className='px-4 py-2 '>Tue</th>
+    //                 <th className='px-4 py-2 '>Wed</th>
+    //                 <th className='px-4 py-2 '>Thu</th>
+    //                 <th className='px-4 py-2 '>Fri</th>
+    //                 <th className='px-4 py-2 text-blue-500'>Sat</th>
+    //             </tr>
+    //         </thead>
+    //         <tbody dangerouslySetInnerHTML={ {__html:dates}}>
+    //         </tbody>
+    //     </table>
+    // </div>
+    <div className="calendar-section p-4 mb-10 mt-10">
+      <div className="calendar-wrap">
+        <div className="relative bg-white rounded-lg shadow-md p-4">
+          <div className="flex justify-between items-center mb-4">
+            <div className="text-xl font-bold">{monthEng} {dateNum}</div>
+            <div className="day-time">
+                <span className="day">{viewWeek} {viewDate}</span>
+            </div>
+          </div>
+          <table className="w-full text-center">
+            <thead>
+              <tr className="border-b">
+                <th className="py-2 text-red-500">Sun</th>
+                <th className="py-2">Mon</th>
+                <th className="py-2">Tue</th>
+                <th className="py-2">Wed</th>
+                <th className="py-2">Thu</th>
+                <th className="py-2">Fri</th>
+                <th className="py-2 text-blue-500">Sat</th>
+              </tr>
             </thead>
             <tbody dangerouslySetInnerHTML={ {__html:dates}}>
             </tbody>
-        </table>
+          </table>
+        </div>
+        
+      </div>
     </div>
   )
 }

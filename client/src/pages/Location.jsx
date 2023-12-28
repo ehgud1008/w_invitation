@@ -13,20 +13,20 @@ const Location = () => {
   //주소 복사하기 func
   const handleAddressCopy = () => {
     const textToCopy = document.getElementById('address').innerHTML;
-    // 텍스트를 복사하기 위해 임시로 textarea 엘리먼트를 생성합니다.
-    const tempTextArea = document.createElement("textarea");
-    tempTextArea.value = textToCopy;
-    document.body.appendChild(tempTextArea);
-
-    // textarea를 선택하고 복사 명령을 실행합니다.
-    tempTextArea.select();
-    document.execCommand("copy");
-
-    // 임시 textarea 엘리먼트를 제거합니다.
-    document.body.removeChild(tempTextArea);
-
-    alert("텍스트가 복사되었습니다: " + textToCopy); // 복사 완료 메시지
     // alert("주소를 복사했습니다.")
+    if (textToCopy) {
+      navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+          alert('텍스트가 복사되었습니다 : ' + textToCopy);
+          // 또는 성공 시 사용자에게 알림을 보여줄 수 있습니다.
+          // alert('텍스트가 복사되었습니다.');
+        })
+        .catch(err => {
+          alert('복사에 실패했습니다 : ' + err);
+          // 또는 실패 시 사용자에게 알림을 보여줄 수 있습니다.
+          // alert('복사에 실패했습니다. 다시 시도해주세요.');
+        });
+    }
   }
 
   //약도 다운로드 func
