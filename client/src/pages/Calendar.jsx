@@ -90,35 +90,13 @@ const Calendar = () => {
 
     
   return (
-    // <div className='mt-20 mb-10 grid items-center justify-center mx-8'>
-    //     <div className='flex place-content-center mb-5'>
-    //         {/* <button className='text-lg '>&lt;</button> */}
-    //         <p className='mx-5 text-2xl'>{viewTitleDate}</p>
-    //         {/* <button className='text-lg '>&gt;</button> */}
-    //     </div>
-    //     <table className='mb-10'>
-    //         <thead className='place-content-center border-solid border-y-2 mb-10'>
-    //             <tr className=''>
-    //                 <th className='px-4 py-2 text-red-500'>Sun</th>
-    //                 <th className='px-4 py-2 '>Mon</th>
-    //                 <th className='px-4 py-2 '>Tue</th>
-    //                 <th className='px-4 py-2 '>Wed</th>
-    //                 <th className='px-4 py-2 '>Thu</th>
-    //                 <th className='px-4 py-2 '>Fri</th>
-    //                 <th className='px-4 py-2 text-blue-500'>Sat</th>
-    //             </tr>
-    //         </thead>
-    //         <tbody dangerouslySetInnerHTML={ {__html:dates}}>
-    //         </tbody>
-    //     </table>
-    // </div>
     <div className="calendar-section p-4 mb-10 mt-10">
       <div className="calendar-wrap">
         <div className="relative bg-white rounded-lg shadow-md p-4">
           <div className="flex justify-between items-center mb-4">
-            <div className="text-xl font-bold">{monthEng} {dateNum}</div>
+            <div className="font-bold"><span className='text-xl'>{monthEng}</span> <span className='text-md'>{dateNum}</span> </div>
             <div className="day-time">
-                <span className="day">{viewWeek} {viewDate}</span>
+                <span className="text-sm">{viewWeek} {viewDate}</span>
             </div>
           </div>
           <table className="w-full text-center">
