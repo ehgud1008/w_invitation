@@ -8,6 +8,7 @@ import Timer from './pages/Timer';
 import Location from './pages/Location';
 import Contact from './pages/Contact';
 import Account from './pages/Account';
+import Message from './pages/Message';
 
 export default function App() {
   
@@ -26,6 +27,7 @@ export default function App() {
       <Location />
       <Contact />
       <Account />
+      <Message />
     </BrowserRouter>
   )
 }

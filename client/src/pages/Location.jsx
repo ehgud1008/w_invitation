@@ -66,79 +66,48 @@ const Location = () => {
   }, []);
 
   return (
-    // <div className='grid place-items-center mx-8'>
-    //   <p className='mb-5'>Location</p>
-    //   <p className='mb-5'>오시는 길을 안내합니다</p>
-    //   <div id="map" className='w-full h-80 z-0'>
-    //   </div>
-    //   <div className='px-5 pt-5 pb-3 w-full flex items-center justify-between'>
-    //     <span className='flex items-center font-bold'>
-    //       <img src='/images/location.png' className='w-4 h-4 mr-2' alt="location" />
-    //       <div id="address">서울시 마포구 양화로 87 (서교동378-7)</div>
-    //     </span>
-    //     <button className='' onClick={handleAddressCopy}>
-    //       <img src='/images/copy.png' className='w-4 h-4' alt='copy' />
-    //     </button>
-    //   </div>
-    //   <div className='pb-5 grid place-items-center'>
-    //     {/* <span className='text-sm'>식장 안내</span> */}
-    //     <span className=''>웨딩 시그니처 4층 아너스홀</span>
-    //     <span className='flex items-center'>
-    //       <button onClick={handleCallHall}><img src="/images/tel.png" className='w-4 h-4 mr-3'/></button> 02-00-0000
-    //     </span>
-    //   </div>
-    //   <div className='w-2/3 grid place-items-center mb-5'>
-    //     <button onClick={handleModelOpen} className='py-2 md:px-10 sm:px-5 xs:px-3 border-2 rounded-md border-gray-500 flex items-center'>
-    //       <img src="/images/map.png" className='w-4 h-4 mr-3' alt="map" />약도 이미지 보기
-    //     </button>
-    //   </div>
-    //   {isMapModalOpen && (
-    //     <div className='myModal backdrop-blur-sm fixed top-0 left-0 w-full h-full flex items-center justify-center' id="mapModal">
-    //       <div className="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
-    //       <div className="modal-content z-50">
-    //         <button onClick={handleDownloadMap} className="absolute top-0 left-0 mt-4 ml-4 py-2 px-4">
-    //           <img src="/images/download.png" className='w-6 h-6' alt="download" />
-    //         </button>
-    //         <button onClick={handleModalClose} className="absolute top-0 right-0 mt-4 mr-4 py-2 px-4">
-    //           <img src="/images/close.png" className='w-6 h-6' alt="close" />
-    //         </button>
-    //         <img src="/images/hall_map.jpg" className='w-full' alt="hall_map" id="img01" />
-    //       </div>
-    //     </div>
-    //   )}
-              
-    <div class="bg-white ">
-      <div class="grid place-items-center text-xl font-bold pt-5 my-5">오 시 는 길</div>
+    <div className="bg-white">
+      <div className="grid place-items-center text-xl font-bold pt-5 my-5">오 시 는 길</div>
       <div id="map" className='w-full h-64 z-0'>
       </div>
-      <div class="map-area bg-white p-6 rounded-lg">
+      <div className="map-area bg-white p-6 rounded-lg">
         <div className='flex'>
-          {/* <div class="mb-4">
-              <div class="text-lg font-semibold mb-2">웨딩 시그니처 4층 아너스홀</div>
-              <div class="text-sm mb-2">
+          {/* <div className="mb-4">
+              <div className="text-lg font-semibold mb-2">웨딩 시그니처 4층 아너스홀</div>
+              <div className="text-sm mb-2">
                   <p>서울시 마포구 양화로 87 (서교동378-7)</p>
                   <p>Tel. 02-00-0000</p>
               </div>
           </div> */}
         </div>
-          {/* <div id="map_canvas" class="map">
-              <div class="w-full h-full">
+          {/* <div id="map_canvas" className="map">
+              <div className="w-full h-full">
                   <a href="https://map.kakao.com/?urlX=510720.0&amp;urlY=1124069.0&amp;itemId=26497843&amp;q=%EC%84%9C%EC%9A%B8%EC%88%B2A%ED%83%80%EC%9B%8C&amp;srcid=26497843&amp;map_type=TYPE_MAP&amp;from=roughmap" target="_blank">
-                      <img class="map rounded-lg" src="//t1.daumcdn.net/roughmap/imgmap/e4a136bdc0a737dd8c6a0812eebdb5fa1bfe55660e458c000633c51c83b13def" width="100%" height="100%" />
+                      <img className="map rounded-lg" src="//t1.daumcdn.net/roughmap/imgmap/e4a136bdc0a737dd8c6a0812eebdb5fa1bfe55660e458c000633c51c83b13def" width="100%" height="100%" />
                   </a>
               </div>
           </div> */}
           <div className='px-3 pb-3 w-full flex items-center justify-between'>
             <span className='flex items-center font-bold'>
               <img src='/images/location.png' className='w-4 h-4 mr-2' alt="location" />
-              <div id="address">서울시 마포구 양화로 87 (서교동378-7)</div>
+              <div id="address">서울시 마포구 양화로 87 (서교동378-7)asdfasdfasdfㅁㄴㅇㄻㄴㅇㄹ</div>
             </span>
-            <button className='' onClick={handleAddressCopy}>
+            <button className='w-7' onClick={handleAddressCopy}>
               <img src='/images/copy.png' className='w-4 h-4' alt='copy' />
             </button>
           </div>
-          <div class="link mt-4 w-full mb-6">
-              <ul class="flex gap-4 justify-around">
+
+          <div className='px-3 pb-3 w-full flex items-center justify-between'>
+            <span className='flex items-center'>
+              <span className='pl-6'>웨딩 시그니처 4층 아너스홀</span>
+            </span>
+            <span className='flex items-center'>
+              <button onClick={handleCallHall}><img src="/images/tel.png" className='w-4 h-4'/></button> 
+            </span>
+          </div>
+
+          <div className="link mt-4 w-full mb-6">
+              <ul className="flex gap-4 justify-around">
                   {/* <li className='grid justify-items-center'>
                     <img src="/images/tmap.png" className='w-10 h-10 border-2 border-slate-500 mb-2 rounded-full'/>
                     <span>티맵</span>
@@ -177,9 +146,9 @@ const Location = () => {
             </div>
           )}
       </div>
-      <div class="w-full h-1 bg-gray-100"/>
-      <div class="grid grid-cols-1 md:grid-cols-2 mt-2 mb-4">
-          <div class="info px-8 rounded-lg">
+      <div className="w-full h-1 bg-gray-100"/>
+      <div className="grid grid-cols-1 md:grid-cols-2 mt-2 mb-4">
+          <div className="info px-8 rounded-lg">
             <div className='text-left pb-3'>
               <p className='mt-5 text-left font-bold '>
                 지하철 이용 시
@@ -193,7 +162,7 @@ const Location = () => {
                 </li>
               </ul>
             </div>
-            <div class="w-full h-1 bg-gray-100"/>
+            <div className="w-full h-1 bg-gray-100"/>
             <div className='text-left pb-3'>
               <p className='mt-5 text-left font-bold '>
                 버스 이용 시
@@ -213,7 +182,7 @@ const Location = () => {
                 </li>
               </ul>
             </div>
-            <div class="w-full h-1 bg-gray-100"/>
+            <div className="w-full h-1 bg-gray-100"/>
             <div className='text-left pb-3'>
               <p className='mt-5 text-left font-bold '>
                 승용차 및 도보 이용 시
@@ -230,7 +199,7 @@ const Location = () => {
                 </li>
               </ul>
             </div>
-            <div class="w-full h-1 bg-gray-100"/>
+            <div className="w-full h-1 bg-gray-100"/>
             <div className='text-left pb-3'>
               <p className='mt-5 text-left font-bold '>
                 전세버스안내
@@ -241,9 +210,9 @@ const Location = () => {
                 </li>
               </ul>
             </div>
-            <div class="w-full h-1 bg-gray-100 mb-10"/>
+            <div className="w-full h-1 bg-gray-100 mb-10"/>
           </div>
-          <div class="info bg-gray-100 p-4 rounded-lg" />
+          <div className="info bg-gray-100 p-4 rounded-lg" />
       </div>
     </div>
 
