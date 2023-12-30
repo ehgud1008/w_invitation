@@ -34,7 +34,7 @@ const Message = () => {
                 </div>
                 
                 <div className='grid place-items-center'>
-                    <button type="button" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">등록하기</button>
+                    <button type="button" className="bg-black hover:bg-slate-700 text-white font-bold py-2 px-4 rounded">등록하기</button>
                 </div>
             </form>
             <div className="w-full h-1 bg-gray-100"/>
