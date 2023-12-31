@@ -1,6 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 
 const RSVP_input = () => {
+    const [selectedSideOption, setSelectedSideOption] = useState('');
+    const [selectedAttendOption, setSelectedAttendOption] = useState('');
+    const [selectedMealOption, setSelectedMealOption] = useState('');
+
+    const [companions, setCompanions] = useState('');
+
+    const handleOptionChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        console.log(name);
+        console.log(value);
+        
+        if(name==="side") setSelectedSideOption(value);
+        if(name==="attend") setSelectedAttendOption(value);
+        if(name==="meal") setSelectedMealOption(value);
+
+    }
+
+    const handleInputChange = (event) => {
+        const value = event.target.value;
+        console.log(value);
+        // 숫자만 입력되도록 제한
+        const regex = /^[0-9]*$/;
+        if (regex.test(value)) {
+            if(value <= 100){
+                setCompanions(value);
+            }else{
+                alert("100명 이하 인원만 입력해주세요");
+            }
+        }else{
+            alert("숫자만 입력해주세요");
+        }
+    }
   return (
     <div className="fixed top-0 left-0 w-full h-full justify-center items-center bg-black bg-opacity-50 z-50 overflow-scroll">
         <div className="bg-white w-full py-6 px-6 ">
@@ -18,17 +51,23 @@ const RSVP_input = () => {
                         <div className="">
                             <div className="mt-2">
                                 <ul className="grid w-full grid-cols-2">
-                                    <li className="px-3">
-                                        <input type="radio" id="hosting-small" name="hosting" value="1" className="hidden peer" required />
-                                        <div className="text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer hover:bg-slate-100">
-                                        신랑측
-                                        </div>
+                                    <li className="px-3 grid">
+                                        <input type="radio" name="side" id="side1" value="1" className="hidden peer"
+                                                checked={selectedSideOption === '1'}
+                                                onChange={handleOptionChange}  required />
+                                        <label htmlFor="side1" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
+                                                                            ${selectedSideOption === '1' ? 'bg-blue-50 text-blue-700' : 'bg-white'}`} >
+                                            신랑측
+                                        </label>
                                     </li>
-                                    <li className="px-3">
-                                        <input type="radio" id="hosting-small" name="hosting" value="1" className="hidden peer" required />
-                                        <div className="text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer hover:bg-slate-100">
-                                        신부측
-                                        </div>
+                                    <li className="px-3 grid">
+                                        <input type="radio" name="side" id="side2" value="2" className="hidden peer"
+                                                checked={selectedSideOption === '2'}
+                                                onChange={handleOptionChange} required />
+                                        <label for="side2" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
+                                                                        ${selectedSideOption === '2' ? 'bg-purple-50 text-purple-700' : 'bg-white'}`} >
+                                                신부측
+                                        </label>
                                     </li>
                                 </ul>
                             </div>
@@ -37,17 +76,23 @@ const RSVP_input = () => {
                             <span className="font-bold">참석 여부를 선택해 주세요</span><span className="point text-red-500">*</span>
                             <div className="mt-2">
                                 <ul className="grid w-full grid-cols-2">
-                                    <li className="px-3">
-                                        <input type="radio" id="hosting-small" name="hosting" value="1" className="hidden peer" required />
-                                        <div className="text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer hover:bg-slate-100">
-                                        신랑측
-                                        </div>
+                                    <li className="px-3 grid">
+                                        <input type="radio" name="attend" id="attend1" value="1" className="hidden peer"
+                                                checked={selectedAttendOption === '1'}
+                                                onChange={handleOptionChange}  required />
+                                        <label htmlFor="attend1" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
+                                                                            ${selectedAttendOption === '1' ? 'bg-slate-600 text-white' : 'bg-white'}`} >
+                                            참석 불가
+                                        </label>
                                     </li>
-                                    <li className="px-3">
-                                        <input type="radio" id="hosting-small" name="hosting" value="1" className="hidden peer" required />
-                                        <div className="text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer hover:bg-slate-100">
-                                        신부측
-                                        </div>
+                                    <li className="px-3 grid">
+                                        <input type="radio" name="attend" id="attend2" value="2" className="hidden peer"
+                                                checked={selectedAttendOption === '2'}
+                                                onChange={handleOptionChange} required />
+                                        <label for="attend2" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
+                                                                        ${selectedAttendOption === '2' ? 'bg-slate-600 text-white' : 'bg-white'}`} >
+                                            참석 가능
+                                        </label>
                                     </li>
                                 </ul>
                             </div>
@@ -71,24 +116,31 @@ const RSVP_input = () => {
                                 <span className="font-bold">동행인원</span><span className="point text-red-500">*</span>
                             </label>
                             <div className="inner">
-                                <input type="text" id="companions" name="companions" placeholder="본인 포함 총 인원" className="w-full border border-gray-300 rounded-md py-2 px-3" />
+                                <input type="text" onChange={handleInputChange} value={companions}
+                                     id="companions" name="companions" placeholder="본인 포함 총 인원" className="w-full border border-gray-300 rounded-md py-2 px-3" />
                             </div>
                         </div>
                         <div className="">
                             <span className="font-bold">식사 여부</span> <span className="point text-red-500">*</span>
                             <div className="mt-2">
                                 <ul className="grid w-full grid-cols-2">
-                                    <li className="px-3">
-                                        <input type="radio" id="hosting-small" name="hosting" value="1" className="hidden peer" required />
-                                        <div className="text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer hover:bg-slate-100">
-                                        신랑측
-                                        </div>
+                                <li className="px-3 grid">
+                                        <input type="radio" name="meal" id="meal1" value="1" className="hidden peer"
+                                                checked={selectedMealOption === '1'}
+                                                onChange={handleOptionChange}  required />
+                                        <label htmlFor="meal1" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
+                                                                            ${selectedMealOption === '1' ? 'bg-slate-600 text-white' : 'bg-white'}`} >
+                                            식사 가능
+                                        </label>
                                     </li>
-                                    <li className="px-3">
-                                        <input type="radio" id="hosting-small" name="hosting" value="1" className="hidden peer" required />
-                                        <div className="text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer hover:bg-slate-100">
-                                        신부측
-                                        </div>
+                                    <li className="px-3 grid">
+                                        <input type="radio" name="meal" id="meal2" value="2" className="hidden peer"
+                                                checked={selectedMealOption === '2'}
+                                                onChange={handleOptionChange} required />
+                                        <label for="meal2" className={`text-center w-full py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
+                                                                        ${selectedMealOption === '2' ? 'bg-slate-600 text-white' : 'bg-white'}`} >
+                                            식사 불가(답례품 수령)
+                                        </label>
                                     </li>
                                 </ul>
                             </div>
