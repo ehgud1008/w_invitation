@@ -6,7 +6,9 @@ const RSVP = () => {
 
     const handleOpenRSVP_input = () => {
         setIsOpenInput(!isOpenInput);
-      }
+        if(!isOpenInput) document.body.style.overflow = 'hidden'; // 스크롤바를 숨깁니다.
+        else document.body.style.overflow = 'auto'; // 스크롤바를 다시 표시합니다.
+    }
       
   return (
     <div className="bg-white px-8 ">
@@ -21,7 +23,7 @@ const RSVP = () => {
         </div>
         <div className="w-full h-1 bg-gray-100"/>
         
-        {isOpenInput && <RSVP_input />}
+        {isOpenInput && <RSVP_input handleOpenRSVP_input={handleOpenRSVP_input}  />}
 
     </div>
   )

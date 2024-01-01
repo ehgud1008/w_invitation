@@ -90,7 +90,7 @@ const Calendar = () => {
 
     
   return (
-    <div className="calendar-section p-4 mb-10 mt-10">
+    <div className="md:px-40 calendar-section p-4 mb-10 mt-10">
       <div className="calendar-wrap">
         <div className="relative bg-white rounded-lg shadow-md p-4">
           <div className="flex justify-between items-center mb-4">

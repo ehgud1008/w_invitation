@@ -23,7 +23,7 @@ const Gallery = () => {
   }, []);
 
   return (
-    <div className='grid place-items-center'>
+    <div className='md:px-40 grid place-items-center'>
       <div className='grid place-items-center mb-5'>
           <h1 className='text-3xl font-bold mb-2'> -Gellery-</h1>
           <h3 className='text-md'>두 사람의 사랑을 담은 순간</h3>

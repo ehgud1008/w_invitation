@@ -16,7 +16,7 @@ const Message = () => {
     }
     
   return (
-    <div className="bg-white px-5">
+    <div className="md:px-40 bg-white px-5">
         <div className="py-8">
             <div className="grid place-items-center text-md font-bold mb-4">Guest Book</div>
             <div className="grid place-items-center text-sm mb-5">축하 메시지를 남겨주세요.</div>

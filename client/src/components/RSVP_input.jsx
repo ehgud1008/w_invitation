@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const RSVP_input = () => {
+const RSVP_input = ({handleOpenRSVP_input}) => {
     const [selectedSideOption, setSelectedSideOption] = useState('');
     const [selectedAttendOption, setSelectedAttendOption] = useState('');
     const [selectedMealOption, setSelectedMealOption] = useState('');
@@ -34,6 +34,7 @@ const RSVP_input = () => {
             alert("숫자만 입력해주세요");
         }
     }
+
   return (
     <div className="fixed top-0 left-0 w-full h-full justify-center items-center bg-black bg-opacity-50 z-50 overflow-scroll">
         <div className="bg-white w-full py-6 px-6 ">
@@ -41,7 +42,7 @@ const RSVP_input = () => {
                 <form action="">
                     <div className="grid justify-center py-3 font-bold text-lg">
                         <span className="">참석 여부 전달하기</span>
-                        <button type="button" className="absolute top-4 right-4 text-gray-500 hover:text-gray-700" onClick="" >
+                        <button onClick={handleOpenRSVP_input} type="button" className="absolute top-4 right-4 text-gray-500 hover:text-gray-700" >
                             <svg className="w-8 h-8" viewBox="0 0 24 24">
                                 <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path>
                             </svg>
@@ -56,7 +57,7 @@ const RSVP_input = () => {
                                                 checked={selectedSideOption === '1'}
                                                 onChange={handleOptionChange}  required />
                                         <label htmlFor="side1" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
-                                                                            ${selectedSideOption === '1' ? 'bg-blue-50 text-blue-700' : 'bg-white'}`} >
+                                                                            ${selectedSideOption === '1' ? 'bg-blue-100 text-blue-700' : 'bg-white'}`} >
                                             신랑측
                                         </label>
                                     </li>
@@ -64,8 +65,8 @@ const RSVP_input = () => {
                                         <input type="radio" name="side" id="side2" value="2" className="hidden peer"
                                                 checked={selectedSideOption === '2'}
                                                 onChange={handleOptionChange} required />
-                                        <label for="side2" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
-                                                                        ${selectedSideOption === '2' ? 'bg-purple-50 text-purple-700' : 'bg-white'}`} >
+                                        <label htmlFor="side2" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
+                                                                        ${selectedSideOption === '2' ? 'bg-purple-100 text-purple-700' : 'bg-white'}`} >
                                                 신부측
                                         </label>
                                     </li>
@@ -81,7 +82,7 @@ const RSVP_input = () => {
                                                 checked={selectedAttendOption === '1'}
                                                 onChange={handleOptionChange}  required />
                                         <label htmlFor="attend1" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
-                                                                            ${selectedAttendOption === '1' ? 'bg-slate-600 text-white' : 'bg-white'}`} >
+                                                                            ${selectedAttendOption === '1' ? 'bg-slate-700 text-white' : 'bg-white'}`} >
                                             참석 불가
                                         </label>
                                     </li>
@@ -89,8 +90,8 @@ const RSVP_input = () => {
                                         <input type="radio" name="attend" id="attend2" value="2" className="hidden peer"
                                                 checked={selectedAttendOption === '2'}
                                                 onChange={handleOptionChange} required />
-                                        <label for="attend2" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
-                                                                        ${selectedAttendOption === '2' ? 'bg-slate-600 text-white' : 'bg-white'}`} >
+                                        <label htmlFor="attend2" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
+                                                                        ${selectedAttendOption === '2' ? 'bg-slate-700 text-white' : 'bg-white'}`} >
                                             참석 가능
                                         </label>
                                     </li>
@@ -98,13 +99,13 @@ const RSVP_input = () => {
                             </div>
                         </div>
                         <div className="">
-                            <label for="name" className="item-ttl block mb-1">
+                            <label htmlFor="name" className="item-ttl block mb-1">
                                 <span className="font-bold">성함</span><span className="point text-red-500">*</span>
                             </label>
                             <input type="text" id="name" name="name" className="w-full border border-gray-300 rounded-md py-2 px-3" />
                         </div>
                         <div className="row-wrap row-wrap-3">
-                            <label for="contact" className="item-ttl block mb-1">
+                            <label htmlFor="contact" className="item-ttl block mb-1">
                                 <span className="font-bold">대표 연락처</span><span className="point text-red-500">*</span>
                             </label>
                             <div className="inner">
@@ -112,7 +113,7 @@ const RSVP_input = () => {
                             </div>
                         </div>
                         <div className="row-wrap row-wrap-4">
-                            <label for="companions" className="item-ttl block mb-1">
+                            <label htmlFor="companions" className="item-ttl block mb-1">
                                 <span className="font-bold">동행인원</span><span className="point text-red-500">*</span>
                             </label>
                             <div className="inner">
@@ -129,7 +130,7 @@ const RSVP_input = () => {
                                                 checked={selectedMealOption === '1'}
                                                 onChange={handleOptionChange}  required />
                                         <label htmlFor="meal1" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
-                                                                            ${selectedMealOption === '1' ? 'bg-slate-600 text-white' : 'bg-white'}`} >
+                                                                            ${selectedMealOption === '1' ? 'bg-slate-700 text-white' : 'bg-white'}`} >
                                             식사 가능
                                         </label>
                                     </li>
@@ -137,8 +138,8 @@ const RSVP_input = () => {
                                         <input type="radio" name="meal" id="meal2" value="2" className="hidden peer"
                                                 checked={selectedMealOption === '2'}
                                                 onChange={handleOptionChange} required />
-                                        <label for="meal2" className={`text-center w-full py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
-                                                                        ${selectedMealOption === '2' ? 'bg-slate-600 text-white' : 'bg-white'}`} >
+                                        <label htmlFor="meal2" className={`text-center w-full py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
+                                                                        ${selectedMealOption === '2' ? 'bg-slate-700 text-white' : 'bg-white'}`} >
                                             식사 불가(답례품 수령)
                                         </label>
                                     </li>
@@ -161,7 +162,7 @@ const RSVP_input = () => {
                             </p>
                             <div className="check-wrap">
                                 <input type="checkbox" id="personalAgreement" name="personalAgreement" value="1" className="mr-2" />
-                                <label for="personalAgreement" className="basic-checkbox">
+                                <label htmlFor="personalAgreement" className="basic-checkbox">
                                     수집 및 이용에 동의합니다.
                                 </label>
                             </div>
@@ -170,7 +171,7 @@ const RSVP_input = () => {
                 </form>
             </div>
             <div className="buttons mt-4 flex justify-center">
-                <button type="button" className="btn btn-purple w-full max-w-xs" onClick="">
+                <button type="button" className="btn btn-purple w-full max-w-xs">
                     참석 여부 전달하기
                 </button>
             </div>

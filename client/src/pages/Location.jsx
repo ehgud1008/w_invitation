@@ -66,7 +66,7 @@ const Location = () => {
   }, []);
 
   return (
-    <div className="bg-white">
+    <div className="md:px-40 bg-white">
       <div className="grid place-items-center text-xl font-bold pt-5 my-5">오 시 는 길</div>
       <div id="map" className='w-full h-64 z-0'>
       </div>
@@ -147,7 +147,7 @@ const Location = () => {
           )}
       </div>
       <div className="w-full h-1 bg-gray-100"/>
-      <div className="grid grid-cols-1 md:grid-cols-2 mt-2 mb-4">
+      <div className="grid-cols-1 md:grid-cols-2 mt-2 mb-4">
           <div className="info px-8 rounded-lg">
             <div className='text-left pb-3'>
               <p className='mt-5 text-left font-bold '>
@@ -212,7 +212,7 @@ const Location = () => {
             </div>
             <div className="w-full h-1 bg-gray-100 mb-10"/>
           </div>
-          <div className="info bg-gray-100 p-4 rounded-lg" />
+          <div className="info bg-gray-100 p-1 rounded-lg" />
       </div>
     </div>
 

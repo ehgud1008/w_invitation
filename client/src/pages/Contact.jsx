@@ -12,7 +12,7 @@ const Contact = () => {
     window.location.href = `sms:${tel}`;
   };
   return (
-    <div className="grid place-items-center mt-10 ">
+    <div className="md:px-40 grid place-items-center mt-10 ">
       <p className="mb-3 text-sm">Contact</p>
       <p className="text-lg mb-3">축하를 전해보세요.</p>
       <div className="grid grid-cols-2">

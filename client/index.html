@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="path/to/sakura.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>청첩장 페이지</title>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=542aafd9b7f8a22ced5255cc2f8b7ed8"></script>
@@ -10,5 +11,9 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script src="path/to/sakura.min.js"></script>
+    <script>
+      var sakura = new Sakura('body');
+    </script>
   </body>
 </html>
