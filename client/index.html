@@ -3,17 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <link rel="stylesheet" href="path/to/sakura.min.css">
+    <link rel="stylesheet" href="/node_modules/sakura-js/dist/sakura.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>청첩장 페이지</title>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=542aafd9b7f8a22ced5255cc2f8b7ed8"></script>
   </head>
   <body>
     <div id="root"></div>
+    <script src="/node_modules/sakura-js/dist/sakura.min.js"></script>
     <script type="module" src="/src/main.jsx"></script>
-    <script src="path/to/sakura.min.js"></script>
     <script>
-      var sakura = new Sakura('body');
+      const sakura = new Sakura('body', {
+        // fallSpeed	꽃잎이 떨어지는 속도 계수(숫자가 높을수록 꽃잎이 더 느리게 떨어집니다).	정수	1
+        // maxSize	꽃잎의 최대 크기.	정수	14
+        // minSize	꽃잎의 최소 크기.	정수	10
+        // delay	꽃잎 사이의 지연 시간(ms)입니다. 이를 늘리면 새 꽃잎이 떨어지는 데 시간이 더 걸리고 그 반대도 마찬가지입니다.	정수	300
+        // colors.gradientColorStart	꽃잎은 선형 그라데이션 으로 만들어집니다 . 이것은 시작 색상(rgba)입니다.	끈	'rgba(255, 183, 197, 0.9)'
+        // colors.gradientColorEnd	선형 그라데이션 끝 색상(rgba)입니다.	끈	'rgba(255, 197, 208, 0.9)'
+        // colors.gradientColorDegree	선형 그라데이션이 기울어지는 정도입니다.	정수	120
+        fallSpeed:0.7,
+        maxSize:14,
+        delay: 300,
+    colors: [
+        {
+            gradientColorStart: 'rgba(255, 183, 197, 0.9)',
+            gradientColorEnd: 'rgba(255, 197, 208, 0.9)',
+            gradientColorDegree: 120,
+        },
+        {
+            gradientColorStart: 'rgba(255,189,189)',
+            gradientColorEnd: 'rgba(227,170,181)',
+            gradientColorDegree: 120,
+        },
+        {
+            gradientColorStart: 'rgba(212,152,163)',
+            gradientColorEnd: 'rgba(242,185,196)',
+            gradientColorDegree: 120,
+        },
+    ],
+});
     </script>
   </body>
 </html>
