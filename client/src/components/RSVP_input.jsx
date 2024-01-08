@@ -4,7 +4,7 @@ const RSVP_input = ({handleOpenRSVP_input}) => {
     const [selectedSideOption, setSelectedSideOption] = useState('');
     const [selectedAttendOption, setSelectedAttendOption] = useState('');
     const [selectedMealOption, setSelectedMealOption] = useState('');
-
+    
     const [companions, setCompanions] = useState('');
 
     const handleOptionChange = (event) => {
@@ -34,7 +34,7 @@ const RSVP_input = ({handleOpenRSVP_input}) => {
             alert("숫자만 입력해주세요");
         }
     }
-
+    
   return (
     <div className="fixed top-0 left-0 w-full h-full justify-center items-center bg-black bg-opacity-50 z-50 overflow-scroll">
         <div className="bg-white w-full py-6 px-6 ">
@@ -148,13 +148,13 @@ const RSVP_input = ({handleOpenRSVP_input}) => {
                         </div>
                         <div className="row-wrap row-wrap-6">
                             <span className="font-bold">추가 전달 사항</span>
-                            <textarea id="additionalNote" name="additionalNote" maxLength={100} className="w-full border border-gray-300 rounded-md py-2 px-3 h-28 resize-none" placeholder="추가적으로 주최자에게 전달하고 싶은 내용을 작성해 주세요." />
+                            <textarea id="additionalNote" name="additionalNote" maxLength={100} className="mt-2 w-full border border-gray-300 rounded-md py-2 px-3 h-28 resize-none" placeholder="추가적으로 주최자에게 전달하고 싶은 내용을 작성해 주세요." />
                         </div>
                         <div className="row-wrap personal-info">
                             <label className="item-ttl block mb-1">
                                 <span className="font-bold">개인정보 수집 및 이용 동의</span><span className="point text-red-500">*</span>
                             </label>
-                            <p className="info-txt mb-2">
+                            <p className="mt-2 info-txt mb-2 p-5 border border-gray-300 rounded-md">
                                 참석여부 전달을 위한 개인정보 수집 및 이용에 동의해
                                 주세요.
                                 <br />
