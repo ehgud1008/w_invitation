@@ -10,6 +10,7 @@ import Contact from './pages/Contact';
 import Account from './pages/Account';
 import Message from './pages/Message';
 import RSVP from './pages/RSVP';
+import Footer from './components/Footer';
 
 export default function App() {
   
@@ -30,6 +31,8 @@ export default function App() {
       <Account />
       <RSVP />
       <Message />
+
+      <Footer />
     </BrowserRouter>
   )
 }

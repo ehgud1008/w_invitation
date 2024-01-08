@@ -1,20 +1,22 @@
 import React, { useState } from "react";
 
 const RSVP_input = ({handleOpenRSVP_input}) => {
-    const [selectedSideOption, setSelectedSideOption] = useState('');
-    const [selectedAttendOption, setSelectedAttendOption] = useState('');
-    const [selectedMealOption, setSelectedMealOption] = useState('');
+    const [selectedSideOption, setSelectedSideOption] = useState('');       //신랑측/신부측 구분
+    const [selectedAttendOption, setSelectedAttendOption] = useState('');   //참석 여부 구분
+    const [selectedMealOption, setSelectedMealOption] = useState('');       //식사 여부 구분
     
-    const [companions, setCompanions] = useState('');
+    const [companions, setCompanions] = useState('');   //동행인원 
 
+    //라디오박스 option 변경 기능
     const handleOptionChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
-        console.log(name);
-        console.log(value);
         
+        //신랑측/신부측
         if(name==="side") setSelectedSideOption(value);
+        //참석 여부
         if(name==="attend") setSelectedAttendOption(value);
+        //식사 여부
         if(name==="meal") setSelectedMealOption(value);
 
     }
@@ -35,6 +37,9 @@ const RSVP_input = ({handleOpenRSVP_input}) => {
         }
     }
     
+    const handleRSVPsubmit = () => {
+
+    }
   return (
     <div className="fixed top-0 left-0 w-full h-full justify-center items-center bg-black bg-opacity-50 z-50 overflow-scroll">
         <div className="bg-white w-full py-6 px-6 ">
@@ -102,14 +107,14 @@ const RSVP_input = ({handleOpenRSVP_input}) => {
                             <label htmlFor="name" className="item-ttl block mb-1">
                                 <span className="font-bold">성함</span><span className="point text-red-500">*</span>
                             </label>
-                            <input type="text" id="name" name="name" className="w-full border border-gray-300 rounded-md py-2 px-3" />
+                            <input type="text" id="name" name="name" className="w-full border border-gray-300 rounded-md py-2 px-3" maxLength="10" placeholder="성함을 입력해주세요."/>
                         </div>
                         <div className="row-wrap row-wrap-3">
                             <label htmlFor="contact" className="item-ttl block mb-1">
                                 <span className="font-bold">대표 연락처</span><span className="point text-red-500">*</span>
                             </label>
                             <div className="inner">
-                                <input type="text" id="contact" name="contact" className="w-full border border-gray-300 rounded-md py-2 px-3" />
+                                <input type="text" id="contact" name="contact" className="w-full border border-gray-300 rounded-md py-2 px-3"  maxLength="13" placeholder="대표연락처를 입력해주세요(-제외)."/>
                             </div>
                         </div>
                         <div className="row-wrap row-wrap-4">
@@ -118,7 +123,7 @@ const RSVP_input = ({handleOpenRSVP_input}) => {
                             </label>
                             <div className="inner">
                                 <input type="text" onChange={handleInputChange} value={companions}
-                                     id="companions" name="companions" placeholder="본인 포함 총 인원" className="w-full border border-gray-300 rounded-md py-2 px-3" />
+                                     id="companions" name="companions" placeholder="본인 포함 총 인원(최대 100명)" className="w-full border border-gray-300 rounded-md py-2 px-3" />
                             </div>
                         </div>
                         <div className="">
@@ -171,7 +176,7 @@ const RSVP_input = ({handleOpenRSVP_input}) => {
                 </form>
             </div>
             <div className="buttons mt-4 flex justify-center">
-                <button type="button" className="btn btn-purple w-full max-w-xs">
+                <button onSubmit={handleRSVPsubmit} type="button" className="bg-slate-700 text-white py-3 w-full border border-slate-600 rounded-md">
                     참석 여부 전달하기
                 </button>
             </div>
