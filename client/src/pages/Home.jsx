@@ -7,10 +7,33 @@ const Home = () => {
   const params = useParams();
   const url = params.url;
   
-  // const [weddingInfo, setWeddingInfo] = useState(null);
   const [weddingDate, setWeddingDate] = useState('');
-  const [weddingInfo, setWeddingInfo] = useState(null);
   const { marriageData, setMarriageData } = useContext(MarriageContext);
+
+
+  //날짜 뽑아오기('Y', 'M', 'D')
+  const stringFormatDate = (dateString, format) => {
+    if (!dateString || !format) return '';
+  
+    // 'YYYY-MM-DD hh:mm:ss' 형식의 문자열을 Date 객체로 변환
+    const date = new Date(dateString);
+  
+    // 유효한 날짜인지 확인
+    if (isNaN(date.getTime())) {
+      return '';
+    }
+  
+    switch (format) {
+      case 'Y':
+        return date.getFullYear().toString(); // 연도 반환
+      case 'M':
+        return (date.getMonth() + 1).toString().padStart(2, '0'); // 월 반환 (1을 더하고 두 자리로 표시)
+      case 'D':
+        return date.getDate().toString().padStart(2, '0'); // 일 반환 (두 자리로 표시)
+      default:
+        return '';
+    }
+  };
 
   useEffect( () => {
     const fetchWeddingInfo = async () => {
@@ -19,24 +42,18 @@ const Home = () => {
         const data = await res.json();
         console.log(data);
         if(data == null){
-          //리다이렉트 시키던지 alert 시키던지 
+          //리다이렉트 시키던지 alert 시키던지
           console.log("ASDFASDF");
           return;
         }
         setMarriageData(data);
-        console.log(marriageData);
-        const wedding_date = new Date(marriageData.wedding_date);
-
-        console.log(wedding_date);
-        // setWeddingDate(wedding_date);
-        // fetchWeddingInfo();
       } catch (error) {
         console.log(error);
       }
     } 
     
     fetchWeddingInfo();
-  }, [params.url]);
+  }, [url, setMarriageData]);
 
   //seq, 신랑이름, 신랑영어이름, 신랑서열(1,2,3,4...), 신부이름, 신부영어이름, 신부서열,
   // 결혼날짜, 메인사진, 갤러리 사진(최대 10장), 영상링크하나,
@@ -47,12 +64,12 @@ const Home = () => {
         <div className="flex flex-col items-center justify-center min-h-screen mt-20">
             <div className="flex font-bold mb-4 items-center">
               <span className='col'>
-                <p className='text-lg  tracking-widest'>{marriageData.groom_ko}</p>
+                <p className='text-lg tracking-widest'>{marriageData.groom_ko}</p>
                 {/* <p className='text-xs'>Kim Cheolsu</p> */}
               </span>
               <span className='grid place-items-center mx-5 tracking-widest indent-3.5'>
-                <p className='text-xl border-solid border-b-2 border-slate-500 '>{(marriageData.getMonth()+1) < 10? "0" + (marriageData.getMonth()+1) : (weddingDate.getMonth()+1)}</p>
-                <p className='text-xl'>{marriageData.getDate() < 10 ? "0" + marriageData.getDate() : marriageData.getDate()}</p>
+                <p className='text-xl border-solid border-b-2 border-slate-500'>{stringFormatDate(marriageData.wedding_date, "M")}</p>
+                <p className='text-xl'>{stringFormatDate(marriageData.wedding_date, "D")}</p>
               </span>
               <span className='col'>
                 <p className='text-lg ml-5 tracking-widest'>{marriageData.bride_ko}</p>
