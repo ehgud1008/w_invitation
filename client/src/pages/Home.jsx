@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { MarriageContext } from '../MarriageContext';
  
 const Home = () => {
   const params = useParams();
   const url = params.url;
   
-  const [weddingInfo, setWeddingInfo] = useState(null);
+  // const [weddingInfo, setWeddingInfo] = useState(null);
   const [weddingDate, setWeddingDate] = useState('');
-  
+  const [weddingInfo, setWeddingInfo] = useState(null);
+  const { marriageData, setMarriageData } = useContext(MarriageContext);
+
   useEffect( () => {
     const fetchWeddingInfo = async () => {
       try {
@@ -20,11 +23,13 @@ const Home = () => {
           console.log("ASDFASDF");
           return;
         }
-        setWeddingInfo(data);
-        const wedding_date = new Date(data.wedding_date);
+        setMarriageData(data);
+        console.log(marriageData);
+        const wedding_date = new Date(marriageData.wedding_date);
+
         console.log(wedding_date);
-        setWeddingDate(wedding_date);
-        
+        // setWeddingDate(wedding_date);
+        // fetchWeddingInfo();
       } catch (error) {
         console.log(error);
       }
@@ -32,24 +37,25 @@ const Home = () => {
     
     fetchWeddingInfo();
   }, [params.url]);
+
   //seq, 신랑이름, 신랑영어이름, 신랑서열(1,2,3,4...), 신부이름, 신부영어이름, 신부서열,
   // 결혼날짜, 메인사진, 갤러리 사진(최대 10장), 영상링크하나,
   //식장 주소, 식장 약도, 식장번호, [지하철(호선, 출구, 도보)], [버스(정류장)]
   return (
     <main>
-      {weddingInfo && (
+      {marriageData && (
         <div className="flex flex-col items-center justify-center min-h-screen mt-20">
             <div className="flex font-bold mb-4 items-center">
               <span className='col'>
-                <p className='text-lg  tracking-widest'>{weddingInfo.groom_ko}</p>
+                <p className='text-lg  tracking-widest'>{marriageData.groom_ko}</p>
                 {/* <p className='text-xs'>Kim Cheolsu</p> */}
               </span>
               <span className='grid place-items-center mx-5 tracking-widest indent-3.5'>
-                <p className='text-xl border-solid border-b-2 border-slate-500 '>{(weddingDate.getMonth()+1) < 10? "0" + (weddingDate.getMonth()+1) : (weddingDate.getMonth()+1)}</p>
-                <p className='text-xl'>{weddingDate.getDate() < 10 ? "0" + weddingDate.getDate() : weddingDate.getDate()}</p>
+                <p className='text-xl border-solid border-b-2 border-slate-500 '>{(marriageData.getMonth()+1) < 10? "0" + (marriageData.getMonth()+1) : (weddingDate.getMonth()+1)}</p>
+                <p className='text-xl'>{marriageData.getDate() < 10 ? "0" + marriageData.getDate() : marriageData.getDate()}</p>
               </span>
               <span className='col'>
-                <p className='text-lg ml-5 tracking-widest'>{weddingInfo.bride_ko}</p>
+                <p className='text-lg ml-5 tracking-widest'>{marriageData.bride_ko}</p>
                 {/* <p className='text-xs'>Younghee Kim</p> */}
               </span>
             </div>

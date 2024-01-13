@@ -11,6 +11,7 @@ import Account from './pages/Account';
 import Message from './pages/Message';
 import RSVP from './pages/RSVP';
 import Footer from './components/Footer';
+import { MarriageProvider } from './MarriageContext';
 
 export default function App() {
   
@@ -18,21 +19,23 @@ export default function App() {
     console.log("123123")
   })
   return (
-    <BrowserRouter>
-      <Header />
-      <Routes> 
-        <Route path='/wedding/:url' element={<Home />} />
-      </Routes>
-      <Gallery />
-      <Calendar />
-      <Timer />
-      <Location />
-      <Contact />
-      <Account />
-      <RSVP />
-      <Message />
+    <MarriageProvider>
+      <BrowserRouter>
+        <Header />
+        <Routes> 
+          <Route path='/wedding/:url' element={<Home />} />
+        </Routes>
+        <Gallery />
+        <Calendar />
+        <Timer />
+        <Location />
+        <Contact />
+        <Account />
+        <RSVP />
+        <Message />
 
-      <Footer />
-    </BrowserRouter>
+        <Footer />
+      </BrowserRouter>
+    </MarriageProvider>
   )
 }
