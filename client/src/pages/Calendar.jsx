@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { MarriageContext } from '../MarriageContext';
 
-const Calendar = () => {
+const Calendar = ({wedding_date}) => {
     const [dates, setDates] = useState('');
-    const date = new Date('2023-12-31 13:00:00');
+    
     var monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
     ];  
@@ -13,22 +14,30 @@ const Calendar = () => {
     const [viewWeek, setViewWeek] = useState('');
     const [viewDate, setViewDate] = useState('');
 
+    const { marriageData, setMarriageData } = useContext(MarriageContext);
 
     const drawWeddingDate = () => {
+      if(wedding_date){
+        const date = new Date(wedding_date);
         const weddingDate = date.getDate();
         
         for(let _date of document.querySelectorAll('.in')){
-            if(+_date.innerText === weddingDate) {
-                _date.classList.add('text-slate-50');
-                _date.classList.add('bg-gray-950');
-                _date.classList.add('rounded-full');
-                break;
-            }
+          if(+_date.innerText === weddingDate) {
+            _date.classList.add('text-slate-50');
+            _date.classList.add('bg-gray-950');
+            _date.classList.add('rounded-full');
+            break;
+          }
         }
+        for(let _date of document.querySelectorAll('.out')){
+            _date.classList.add('text-slate-300');
+        }
+      }
     }
 
     useEffect( () => {
-        console.log(date);
+      if(wedding_date) {
+        const date = new Date(wedding_date);
         //db에서 결혼날짜 받아와서 세팅하는거로 변경 TODO
         const viewYear = date.getFullYear();
         const viewMonth = date.getMonth();
@@ -86,6 +95,8 @@ const Calendar = () => {
         const tmp3 = date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes();
         setViewDate(tmp2+":"+tmp3 + " " + tmp);
 
+      }
+        
     }, drawWeddingDate());
 
     

@@ -21,6 +21,14 @@ WeddingInfo.init({
             type : DataTypes.STRING,
             required : true,
         },
+        groom_father : {
+            type : DataTypes.STRING,
+            required : true,
+        },
+        groom_mother : {
+            type : DataTypes.STRING,
+            required : true,
+        },
         groom_contract : {
             type : DataTypes.STRING,
             required : true,
@@ -34,6 +42,14 @@ WeddingInfo.init({
             required : true,
         },
         bride_no : {
+            type : DataTypes.STRING,
+            required : true,
+        },
+        bride_father : {
+            type : DataTypes.STRING,
+            required : true,
+        },
+        bride_mother : {
             type : DataTypes.STRING,
             required : true,
         },

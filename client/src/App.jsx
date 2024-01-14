@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home';
 import Header from './components/Header';
@@ -14,20 +14,19 @@ import Footer from './components/Footer';
 import { MarriageProvider } from './MarriageContext';
 
 export default function App() {
-  
+  const [wedding_date, setWeddingDate] = useState('');
   useEffect( () => {
-    console.log("123123")
   })
   return (
     <MarriageProvider>
       <BrowserRouter>
         <Header />
         <Routes> 
-          <Route path='/wedding/:url' element={<Home />} />
+          <Route path='/wedding/:url' element={<Home setWeddingDate={setWeddingDate}/>} />
         </Routes>
         <Gallery />
-        <Calendar />
-        <Timer />
+        <Calendar wedding_date={wedding_date}/>
+        <Timer wedding_date={wedding_date}/>
         <Location />
         <Contact />
         <Account />
