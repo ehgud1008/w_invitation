@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Map } from 'react-kakao-maps-sdk';
+import { LocationContext } from '../context/LocationContext';
 
-const Location = () => {
+const Location = ({seq}) => {
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
+  // const [locationData, setLocationData] = useContext(LocationContext);
 
   //약도 모달 열기 func
   const handleModelOpen = () => {
@@ -52,17 +54,30 @@ const Location = () => {
   }
 
   useEffect( ()=> {
-    // Kakao Maps SDK 초기화
-    window.kakao.maps.load(() => {
-      const container = document.getElementById('map');
-      const options = {
-        center: new window.kakao.maps.LatLng(37.5665, 126.9780), // 지도 중심 좌표
-        level: 3, // 줌 레벨
-      };
-      
-      // 지도 생성
-      const map = new window.kakao.maps.Map(container, options);
-    });
+    if(seq != null){
+      console.log("ASDFASDF" + seq);
+      const fetchLocationData = async () => {
+        try {
+          const res = await fetch(`/api/location/${seq}`)
+        } catch (error) {
+          
+        }
+      }
+  
+  
+      // Kakao Maps SDK 초기화
+      window.kakao.maps.load(() => {
+        const container = document.getElementById('map');
+        const options = {
+          center: new window.kakao.maps.LatLng(37.5665, 126.9780), // 지도 중심 좌표
+          level: 3, // 줌 레벨
+        };
+        
+        // 지도 생성
+        const map = new window.kakao.maps.Map(container, options);
+      });
+
+    }
   }, []);
 
   return (

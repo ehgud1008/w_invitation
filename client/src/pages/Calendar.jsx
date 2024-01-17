@@ -1,20 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { MarriageContext } from '../MarriageContext';
+import { MarriageContext } from '../context/MarriageContext';
 
 const Calendar = ({wedding_date}) => {
     const [dates, setDates] = useState('');
     
-    var monthNames = ["January", "February", "March", "April", "May", "June",
+    const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
     ];  
-    var weekNames = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"]; 
+    const weekNames = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"]; 
 
     const [dateNum, setDateNum] = useState('');
     const [monthEng, setMonthEng] = useState('');
     const [viewWeek, setViewWeek] = useState('');
     const [viewDate, setViewDate] = useState('');
-
-    const { marriageData, setMarriageData } = useContext(MarriageContext);
 
     const drawWeddingDate = () => {
       if(wedding_date){

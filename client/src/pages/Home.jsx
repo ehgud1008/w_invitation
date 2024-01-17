@@ -1,18 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { MarriageContext } from '../MarriageContext';
+import { MarriageContext } from '../context/MarriageContext';
  
-const Home = ({setWeddingDate}) => {
+const Home = ({setWeddingDate, setSeq}) => {
   const params = useParams();
   const url = params.url;
-  
   const { marriageData, setMarriageData } = useContext(MarriageContext);
+  const weekNames = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
 
-  //날짜 뽑아오기('Y', 'M', 'D')
+  //날짜 뽑아오기('Y', 'M', 'D', "H", "MM", "S", "W")
   const stringFormatDate = (dateString, format) => {
     if (!dateString || !format) return '';
-  
+
     // 'YYYY-MM-DD hh:mm:ss' 형식의 문자열을 Date 객체로 변환
     const date = new Date(dateString);
   
@@ -28,11 +28,21 @@ const Home = ({setWeddingDate}) => {
         return (date.getMonth() + 1).toString().padStart(2, '0'); // 월 반환 (1을 더하고 두 자리로 표시)
       case 'D':
         return date.getDate().toString().padStart(2, '0'); // 일 반환 (두 자리로 표시)
+      case 'H':
+        return date.getHours().toString(); // 시
+      case 'MM':
+        return date.getMinutes().toString() === "0" ? "" : date.getMinutes().toString() + "분"; // 분
+      case 'S':
+        return date.getSeconds().toString(); // 초
+      case 'W':
+        return weekNames[date.getDay()]; // 요일
+      case 'A':
+        return date.getHours() > 12 ? '오후' : '오전'; // 오전/오후
       default:
         return '';
     }
   };
-
+  
   useEffect( () => {
     const fetchWeddingInfo = async () => {
       try {
@@ -47,6 +57,8 @@ const Home = ({setWeddingDate}) => {
         setMarriageData(data);
         
         setWeddingDate(data.wedding_date);
+        setSeq(data.seq);
+
       } catch (error) {
         console.log(error);
       }
@@ -66,7 +78,6 @@ const Home = ({setWeddingDate}) => {
               <div className="flex font-bold mb-4 items-center">
                 <span className='col'>
                   <p className='text-lg tracking-widest'>{marriageData.groom_ko}</p>
-                  {/* <p className='text-xs'>Kim Cheolsu</p> */}
                 </span>
                 <span className='grid place-items-center mx-5 tracking-widest indent-3.5'>
                   <p className='text-xl border-solid border-b-2 border-slate-500'>{stringFormatDate(marriageData.wedding_date, "M")}</p>
@@ -74,7 +85,6 @@ const Home = ({setWeddingDate}) => {
                 </span>
                 <span className='col'>
                   <p className='text-lg ml-5 tracking-widest'>{marriageData.bride_ko}</p>
-                  {/* <p className='text-xs'>Younghee Kim</p> */}
                 </span>
               </div>
               {/* <img src="/images/wedding_sample.jpg" alt="신랑 & 신부" className="rounded-full h-40 w-40 object-cover mb-4 animate-pulse" /> */}
@@ -82,7 +92,14 @@ const Home = ({setWeddingDate}) => {
                 <img src="/images/wedding_sample.jpg" alt="신랑 & 신부" className="full h-100 w-50 object-cover mb-8 aspect-[2/3]"/>
               </div>
               <p className="text-md text-gray-700 mb-8 text-center">
-                2020년 1월 1일 월요일 오후 12시 00분<br/>웨딩 시그니처 4층 아너스홀
+                {stringFormatDate(marriageData.wedding_date, "Y")}년&nbsp;
+                {stringFormatDate(marriageData.wedding_date, "M")}월&nbsp;
+                {stringFormatDate(marriageData.wedding_date, "D")}일&nbsp;
+                {stringFormatDate(marriageData.wedding_date, "W")}&nbsp;
+                {stringFormatDate(marriageData.wedding_date, "A")}&nbsp;
+                {stringFormatDate(marriageData.wedding_date, "H")}시&nbsp;
+                {stringFormatDate(marriageData.wedding_date, "MM")}<br/>
+
               </p>
               <div className='mx-20 mt-5 grid place-items-center mb-16'>
                 <img src='/images/wedding.png' className='w-40 h-40'/>

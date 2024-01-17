@@ -11,30 +11,34 @@ import Account from './pages/Account';
 import Message from './pages/Message';
 import RSVP from './pages/RSVP';
 import Footer from './components/Footer';
-import { MarriageProvider } from './MarriageContext';
+import { MarriageProvider } from './context/MarriageContext';
+import { LocationProvider } from './context/LocationContext';
 
 export default function App() {
   const [wedding_date, setWeddingDate] = useState('');
+  const [seq, setSeq] = useState('');
   useEffect( () => {
   })
   return (
     <MarriageProvider>
-      <BrowserRouter>
-        <Header />
-        <Routes> 
-          <Route path='/wedding/:url' element={<Home setWeddingDate={setWeddingDate}/>} />
-        </Routes>
-        <Gallery />
-        <Calendar wedding_date={wedding_date}/>
-        <Timer wedding_date={wedding_date}/>
-        <Location />
-        <Contact />
-        <Account />
-        <RSVP />
-        <Message />
+      <LocationProvider>
+        <BrowserRouter>
+          <Header />
+          <Routes> 
+            <Route path='/wedding/:url' element={<Home setWeddingDate={setWeddingDate} setSeq={setSeq}/>} />
+          </Routes>
+          <Gallery />
+          <Calendar wedding_date={wedding_date}/>
+          <Timer wedding_date={wedding_date}/>
+          <Location seq={seq} />
+          <Contact />
+          <Account />
+          <RSVP />
+          <Message />
 
-        <Footer />
-      </BrowserRouter>
+          <Footer />
+        </BrowserRouter>
+      </LocationProvider>
     </MarriageProvider>
   )
 }

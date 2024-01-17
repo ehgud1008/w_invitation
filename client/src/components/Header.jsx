@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Menu from './Menu';
+import { MarriageContext } from '../context/MarriageContext';
 
 const Header = () => {
   const [isTop, setIsTop] = useState(false);
   const [menuToggle, setMenuToggle] = useState(false);
+  const weekNames = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"]; 
+
+  const { marriageData, setMarriageData } = useContext(MarriageContext);
 
   useEffect( () => {
     setIsTop(true);
@@ -36,7 +40,7 @@ const Header = () => {
              w-full inset-x-0 top-0'>
         <div className='max-w-7xl mx-auto px-2 sm:px-6 lg:px-8'>
           <div className='flex items-center justify-between h-12'>
-            <div>Kim Cheolsu & Younghee Kim</div>
+            {/* <div>{marriageData.groom_en} & {marriageData.bride_en}</div> */}
             <button className='' onClick={ () => {setMenuToggle(!menuToggle); console.log(menuToggle);} }>
               <img src="/images/hamburger.png" className='w-7 h-7'/>
             </button>
