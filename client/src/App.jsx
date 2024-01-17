@@ -16,7 +16,7 @@ import { LocationProvider } from './context/LocationContext';
 
 export default function App() {
   const [wedding_date, setWeddingDate] = useState('');
-  const [seq, setSeq] = useState('');
+  const [seq, setSeq] = useState(0);
   useEffect( () => {
   })
   return (

@@ -4,8 +4,9 @@ import { LocationContext } from '../context/LocationContext';
 
 const Location = ({seq}) => {
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
-  // const [locationData, setLocationData] = useContext(LocationContext);
+  const {locationData, setLocationData} = useContext(LocationContext);
 
+  console.log(seq);
   //약도 모달 열기 func
   const handleModelOpen = () => {
     setIsMapModalOpen(true);
@@ -54,17 +55,28 @@ const Location = ({seq}) => {
   }
 
   useEffect( ()=> {
-    if(seq != null){
+    if(seq > 0){
       console.log("ASDFASDF" + seq);
       const fetchLocationData = async () => {
         try {
-          const res = await fetch(`/api/location/${seq}`)
+          const res = await fetch(`/api/location/${seq}`);
+          const data = res.json();
+          console.log(data);
+
+          if(data == null){
+            //리다이렉트 시키던지 alert 시키던지
+            console.log("ASDFASDF");
+            return;
+          }
+
+          setLocationData(data);
+
         } catch (error) {
-          
+          console.log(error);
         }
       }
-  
-  
+      fetchLocationData();
+
       // Kakao Maps SDK 초기화
       window.kakao.maps.load(() => {
         const container = document.getElementById('map');
@@ -78,7 +90,7 @@ const Location = ({seq}) => {
       });
 
     }
-  }, []);
+  }, [seq]);
 
   return (
     <div className="md:px-40 bg-white">
