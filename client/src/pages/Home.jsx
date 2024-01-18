@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { useParams } from 'react-router-dom';
 import { MarriageContext } from '../context/MarriageContext';
  
@@ -48,7 +49,6 @@ const Home = ({setWeddingDate, setSeq}) => {
       try {
         const res = await fetch(`/api/wedding/${url}`);
         const data = await res.json();
-        console.log(data);
         if(data == null){
           //리다이렉트 시키던지 alert 시키던지
           console.log("ASDFASDF");

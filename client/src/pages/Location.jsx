@@ -6,7 +6,6 @@ const Location = ({seq}) => {
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
   const {locationData, setLocationData} = useContext(LocationContext);
 
-  console.log(seq);
   //약도 모달 열기 func
   const handleModelOpen = () => {
     setIsMapModalOpen(true);
@@ -50,33 +49,27 @@ const Location = ({seq}) => {
   
   //식장에 전화하기
   const handleCallHall = () => {
-    const tel = '010-1234-5678'; // 전화번호를 여기에 입력하세요
+    const tel = locationData.hall_contract; // 전화번호를 여기에 입력하세요
     window.location.href = `tel:${tel}`;
   }
 
   useEffect( ()=> {
     if(seq > 0){
-      console.log("ASDFASDF" + seq);
       const fetchLocationData = async () => {
         try {
           const res = await fetch(`/api/location/${seq}`);
-          const data = res.json();
-          console.log(data);
-
+          const data = await res.json();
           if(data == null){
             //리다이렉트 시키던지 alert 시키던지
             console.log("ASDFASDF");
             return;
           }
-
           setLocationData(data);
-
         } catch (error) {
           console.log(error);
         }
       }
       fetchLocationData();
-
       // Kakao Maps SDK 초기화
       window.kakao.maps.load(() => {
         const container = document.getElementById('map');
@@ -117,16 +110,16 @@ const Location = ({seq}) => {
           <div className='px-3 pb-3 w-full flex items-center justify-between'>
             <span className='flex items-center font-bold'>
               <img src='/images/location.png' className='w-4 h-4 mr-2' alt="location" />
-              <div id="address">서울시 마포구 양화로 87 (서교동378-7)asdfasdfasdfㅁㄴㅇㄻㄴㅇㄹ</div>
+              <div id="address">{locationData != null? locationData.address : ""}</div>
             </span>
-            <button className='w-7' onClick={handleAddressCopy}>
-              <img src='/images/copy.png' className='w-4 h-4' alt='copy' />
+            <button className='' onClick={handleAddressCopy}>
+              <img src='/images/copy.png' className='w-5 h-4' alt='copy' />
             </button>
           </div>
 
           <div className='px-3 pb-3 w-full flex items-center justify-between'>
             <span className='flex items-center'>
-              <span className='pl-6'>웨딩 시그니처 4층 아너스홀</span>
+              <span className='pl-6'>{locationData != null? locationData.hall_name : ""}</span>
             </span>
             <span className='flex items-center'>
               <button onClick={handleCallHall}><img src="/images/tel.png" className='w-4 h-4'/></button> 
@@ -182,10 +175,7 @@ const Location = ({seq}) => {
               </p>
               <ul className='list-inside text-sm pt-3'>
                 <li className='list-disc'>
-                  2호선, 6호선 합정역 : 2번 출구 도보 4분<br/>
-                </li>
-                <li className='list-disc'>
-                  홍대입구, 공항철도, 경의선 : 1번출구 도보 11분
+                  {locationData != null? locationData.subway : ""}
                 </li>
               </ul>
             </div>
