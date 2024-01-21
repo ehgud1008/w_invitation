@@ -1,6 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import {MessageContext} from '../context/MessageContext';
 
-const Message = () => {
+const Message = ({seq}) => {
+
+    const {messageData, setMessageData} = useContext(MessageContext);
 
     const handleChange = (e) => {
         const inputText = e.target.value;
@@ -15,6 +18,23 @@ const Message = () => {
         
     }
     
+    useEffect( () => {
+        if(seq) {
+            const fetchMessageData = async () => {
+                try {
+                    const res = await fetch(`/api/message/${seq}`);
+                    const data = await res.json();
+                    console.log(data);
+                    setMessageData(data);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+            console.log(messageData);
+
+            fetchMessageData();
+        }
+    }, [seq])
   return (
     <div className="md:px-40 bg-white px-5">
         <div className="py-8">

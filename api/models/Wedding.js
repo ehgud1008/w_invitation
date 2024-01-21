@@ -29,7 +29,7 @@ WeddingInfo.init({
             type : DataTypes.STRING,
             required : true,
         },
-        groom_contract : {
+        groom_contact : {
             type : DataTypes.STRING,
             required : true,
         },
@@ -53,7 +53,7 @@ WeddingInfo.init({
             type : DataTypes.STRING,
             required : true,
         },
-        bride_contract : {
+        bride_contact : {
             type : DataTypes.STRING,
             required : true,
         },

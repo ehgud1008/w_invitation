@@ -8,6 +8,7 @@ const Timer = ({wedding_date}) => {
 
     useEffect( () => {
         if(wedding_date){
+            console.log(wedding_date);
             const date = new Date(wedding_date);
             const today = new Date();
             
@@ -24,32 +25,31 @@ const Timer = ({wedding_date}) => {
             setHour(h);
             setMinute(m);
             setSecond(s);
-        }
             
-        const timer = setInterval( () => {
-            //1초 마이너스
-            if(parseInt(second) > 0){
-                setSecond(parseInt(second)-1);
-            }
+            const timer = setInterval( () => {
+                //1초 마이너스
+                if(parseInt(second) > 0){
+                    setSecond(parseInt(second)-1);
+                }
                 
-            //타이머 설정
-            if(parseInt(second) === 0){
-                if(parseInt(minute) === 0 ){
-                    if(parseInt(hour) === 0) {
-                        if(parseInt(day) === 0){
-                            clearInterval(timer);
+                //타이머 설정
+                if(parseInt(second) === 0){
+                    if(parseInt(minute) === 0 ){
+                        if(parseInt(hour) === 0) {
+                            if(parseInt(day) === 0){
+                                clearInterval(timer);
+                            }else{
+                                setDay(parseInt(day)-1);
+                                setHour(23);
+                                setMinute(59);
+                                setSecond(59);
+                            }
                         }else{
-                            setDay(parseInt(day)-1);
-                            setHour(23);
+                            setHour(parseInt(hour)-1);
                             setMinute(59);
                             setSecond(59);
                         }
                     }else{
-                        setHour(parseInt(hour)-1);
-                        setMinute(59);
-                        setSecond(59);
-                    }
-                }else{
                     setMinute(parseInt(minute)-1);
                     setSecond(59);
                 }
@@ -57,7 +57,8 @@ const Timer = ({wedding_date}) => {
         }, 1000);
         
         return () => clearInterval(timer);
-    }, [day, hour, minute, second]);
+        }    
+    }, [wedding_date, day, hour, minute, second]);
     return (
         <div className='mb-20'>
         {/* 디자인 추후 고려 */}

@@ -17,7 +17,7 @@ LocationInfo.init({
             type : DataTypes.STRING,
             required : true,
         },
-        hall_contract : {
+        hall_contact : {
             type : DataTypes.STRING,
             required : true,
         },

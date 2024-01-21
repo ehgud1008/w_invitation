@@ -13,6 +13,7 @@ import RSVP from './pages/RSVP';
 import Footer from './components/Footer';
 import { MarriageProvider } from './context/MarriageContext';
 import { LocationProvider } from './context/LocationContext';
+import { MessageProvider } from './context/MessageContext';
 
 export default function App() {
   const [wedding_date, setWeddingDate] = useState('');
@@ -22,22 +23,23 @@ export default function App() {
   return (
     <MarriageProvider>
       <LocationProvider>
-        <BrowserRouter>
-          <Header />
-          <Routes> 
-            <Route path='/wedding/:url' element={<Home setWeddingDate={setWeddingDate} setSeq={setSeq}/>} />
-          </Routes>
-          <Gallery />
-          <Calendar wedding_date={wedding_date}/>
-          <Timer wedding_date={wedding_date}/>
-          <Location seq={seq} />
-          <Contact />
-          <Account />
-          <RSVP />
-          <Message />
-
-          <Footer />
-        </BrowserRouter>
+        <MessageProvider>
+          <BrowserRouter>
+            <Header />
+            <Routes> 
+              <Route path='/wedding/:url' element={<Home setWeddingDate={setWeddingDate} setSeq={setSeq}/>} />
+            </Routes>
+            <Gallery />
+            <Calendar wedding_date={wedding_date}/>
+            <Timer wedding_date={wedding_date}/>
+            <Location seq={seq} />
+            <Contact />
+            <Account />
+            <RSVP />
+            <Message seq={seq}/>
+            <Footer />
+          </BrowserRouter>  
+        </MessageProvider>
       </LocationProvider>
     </MarriageProvider>
   )

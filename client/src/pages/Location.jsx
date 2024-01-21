@@ -49,7 +49,7 @@ const Location = ({seq}) => {
   
   //식장에 전화하기
   const handleCallHall = () => {
-    const tel = locationData.hall_contract; // 전화번호를 여기에 입력하세요
+    const tel = locationData.hall_contact; // 전화번호를 여기에 입력하세요
     window.location.href = `tel:${tel}`;
   }
 

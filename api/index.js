@@ -4,6 +4,8 @@ import dotenv from 'dotenv';
 import path from 'path';
 import weddingRouter from './routes/wedding.js';
 import locationRouter from './routes/location.js';
+import messageRouter from './routes/message.js';
+
 
 dotenv.config();
 mongoose.connect(process.env.MONGODB_URI, { dbName: 'myfolio' })
@@ -22,6 +24,7 @@ app.listen(port, function () {
 
 app.use('/api/wedding', weddingRouter);
 app.use('/api/location', locationRouter);
+app.use('/api/message', messageRouter);
 
 app.use(express.static(path.join(__dirname, 'client/dist')));
 
