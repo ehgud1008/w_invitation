@@ -21,8 +21,6 @@ export const getLocationInfo = async (req, res, next) => {
                 wedding_seq : seq,
              }
         });
-        console.log("ASDFASDF");
-        console.log(locationInfo);
         return res.status(201).json(locationInfo);
     }catch(error){
         next(error);

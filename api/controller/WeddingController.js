@@ -21,7 +21,6 @@ export const getWeddingInfo = async (req, res, next) => {
                 url : url,
              }
         });
-        // console.log(weddingInfo);
         return res.status(201).json(weddingInfo);
     }catch(error){
         next(error);

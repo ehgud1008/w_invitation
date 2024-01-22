@@ -1,9 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react'
 import {MessageContext} from '../context/MessageContext';
+import { useParams } from 'react-router-dom';
 
 const Message = ({seq}) => {
+    const params = useParams();
 
     const {messageData, setMessageData} = useContext(MessageContext);
+    const [pagination, setPagination] = useState(null);
+    
+    const page = params.page || 1;
+    const pageSize = 5;
+    const limit = pageSize;
+    const offset = (page-1) * pageSize;
 
     const handleChange = (e) => {
         const inputText = e.target.value;
@@ -20,21 +28,38 @@ const Message = ({seq}) => {
     
     useEffect( () => {
         if(seq) {
+            console.log(page);
+            console.log(pageSize);
+            console.log(limit);
+            console.log(offset);
+            
             const fetchMessageData = async () => {
                 try {
-                    const res = await fetch(`/api/message/${seq}`);
+                    const res = await fetch(`/api/message/${seq}`, {
+                        method: 'POST',
+                        headers : {
+                            'Content-Type': 'application/json', // JSON 형태로 데이터를 보낸다고 명시
+                        },
+                        body : JSON.stringify({
+                            page : page,
+                            offset : offset,
+                        }),
+                    });
                     const data = await res.json();
-                    console.log(data);
-                    setMessageData(data);
+                    console.log(data.data);
+                    console.log(data.pagination);
+                    
+                    setMessageData(data.data);
+                    setPagination(data.pagination);
+
                 } catch (error) {
                     console.log(error);
                 }
             }
-            console.log(messageData);
-
             fetchMessageData();
         }
-    }, [seq])
+    }, [seq, page, offset]);
+
   return (
     <div className="md:px-40 bg-white px-5">
         <div className="py-8">
@@ -59,7 +84,24 @@ const Message = ({seq}) => {
             </form>
             <div className="w-full h-1 bg-gray-100"/>
             <div className="mt-8">
-                <ul>
+                {messageData ? 
+                    ( messageData.map( (message) => (
+                        <ul key={message.seq}>    
+                            <li className="border-b border-gray-300 py-4">
+                                <div className="flex justify-between items-center mb-2">
+                                    <div className="font-bold">{message.name}</div>
+                                    <div className="text-sm">{message.reg_date}</div>
+                                </div>
+                                <p className="mb-2">{message.message}</p>
+                                <a href="" className="text-red-500">댓글삭제</a>
+                            </li>
+                        </ul>
+                    ))) : 
+                    (
+                        ''
+                    )
+                }
+                {/* <ul>
                     <li className="border-b border-gray-300 py-4">
                         <div className="flex justify-between items-center mb-2">
                             <div className="font-bold">홍진경</div>
@@ -76,7 +118,7 @@ const Message = ({seq}) => {
                         <p className="mb-2">결혼축하해~결혼식에서 보자!!ㅎㅎ</p>
                         <a href="" className="text-red-500">댓글삭제</a>
                     </li>
-                </ul>
+                </ul> */}
             </div>
             <div className="flex justify-center mt-8">
                 <a href="#" className="mx-1">&lt;</a>
