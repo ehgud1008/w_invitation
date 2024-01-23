@@ -6,10 +6,9 @@ const Message = ({seq}) => {
     const params = useParams();
 
     const {messageData, setMessageData} = useContext(MessageContext);
-    const [pagination, setPagination] = useState(null);
-    
-    const page = params.page || 1;
-    const pageSize = 5;
+    const [pagination, setPagination] = useState({});
+    const [page, setPage] = useState(params.page || 1)
+    const pageSize = 3;
     const limit = pageSize;
     const offset = (page-1) * pageSize;
 
@@ -26,13 +25,21 @@ const Message = ({seq}) => {
         
     }
     
+    //이전페이지
+    const handlePrevPage = () => {
+        if (page > 1) setPage(page-1);
+    }
+    //다음페이지
+    const handleNextPage = () => {
+        if (page < pagination.totalPages) setPage(page+1);
+    }
+    //페이지 선택
+    const handlePageChange = (index) => {
+        setPage(index);
+    }
+
     useEffect( () => {
         if(seq) {
-            console.log(page);
-            console.log(pageSize);
-            console.log(limit);
-            console.log(offset);
-            
             const fetchMessageData = async () => {
                 try {
                     const res = await fetch(`/api/message/${seq}`, {
@@ -42,12 +49,12 @@ const Message = ({seq}) => {
                         },
                         body : JSON.stringify({
                             page : page,
+                            pageSize : pageSize,
+                            limit : limit,
                             offset : offset,
                         }),
                     });
                     const data = await res.json();
-                    console.log(data.data);
-                    console.log(data.pagination);
                     
                     setMessageData(data.data);
                     setPagination(data.pagination);
@@ -58,7 +65,7 @@ const Message = ({seq}) => {
             }
             fetchMessageData();
         }
-    }, [seq, page, offset]);
+    }, [seq, page]);
 
   return (
     <div className="md:px-40 bg-white px-5">
@@ -83,9 +90,9 @@ const Message = ({seq}) => {
                 </div>
             </form>
             <div className="w-full h-1 bg-gray-100"/>
-            <div className="mt-8">
+            <div className="mt-8 text-sm">
                 {messageData ? 
-                    ( messageData.map( (message) => (
+                    (messageData.map( (message) => (
                         <ul key={message.seq}>    
                             <li className="border-b border-gray-300 py-4">
                                 <div className="flex justify-between items-center mb-2">
@@ -101,33 +108,29 @@ const Message = ({seq}) => {
                         ''
                     )
                 }
-                {/* <ul>
-                    <li className="border-b border-gray-300 py-4">
-                        <div className="flex justify-between items-center mb-2">
-                            <div className="font-bold">홍진경</div>
-                            <div className="text-sm">2022.01.01.13:13:10</div>
-                        </div>
-                        <p className="mb-2">결혼축하해~결혼식에서 보자!!ㅎㅎ</p>
-                        <a href="" className="text-red-500">댓글삭제</a>
-                    </li>
-                    <li className="border-b border-gray-300 py-4">
-                        <div className="flex justify-between items-center mb-2">
-                            <div className="font-bold">홍진경</div>
-                            <div className="text-sm">2022.01.01.13:13:10</div>
-                        </div>
-                        <p className="mb-2">결혼축하해~결혼식에서 보자!!ㅎㅎ</p>
-                        <a href="" className="text-red-500">댓글삭제</a>
-                    </li>
-                </ul> */}
             </div>
             <div className="flex justify-center mt-8">
-                <a href="#" className="mx-1">&lt;</a>
-                <a href="#" className="mx-1">1</a>
-                <a href="#" className="mx-1">2</a>
-                <a href="#" className="mx-1">3</a>
-                <a href="#" className="mx-1">4</a>
-                <a href="#" className="mx-1">5</a>
-                <a href="#" className="mx-1">&gt;</a>
+                <button key="prev" onClick={handlePrevPage}
+                        disabled={pagination.page === 1}
+                        className='px-3 py-2 mx-1 rounded-md text-sm font-medium'>
+                    {'<'}
+                </button>
+                {Array.from({ length: pagination.totalPages }, (_, i) => (
+                    <button
+                        key={i + 1}
+                        onClick={() => handlePageChange(i + 1)}
+                        disabled={pagination.page === i + 1}
+                        className={`px-3 py-2 mx-1 rounded-md text-sm font-medium ${pagination.page === i + 1 ? 'bg-slate-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100'}`}
+                    >
+                        {i + 1}
+                    </button>
+                ))}
+                {Array.from({length:pagination.totalPages}, ( _))}
+                <button key="next" onClick={handleNextPage}
+                        disabled={pagination.page === pagination.totalPages} 
+                        className='px-3 py-2 mx-1 rounded-md text-sm font-medium'>
+                    {'>'}
+                </button>
             </div>
         </div>
     </div>

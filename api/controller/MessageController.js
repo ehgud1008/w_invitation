@@ -3,25 +3,27 @@ import sequelize from 'sequelize';
 
 export const getMessageInfo = async (req, res, next) => {
     const seq = req.params.seq;
-    const page = parseInt(req.query.page) || 1;
-    const pageSize = parseInt(req.query.pageSize) || 5;
-    const limit = pageSize;
-    const offset = (page - 1) * pageSize;
-
+    const {page, offset, pageSize, limit} = req.body;
+    console.log("@@@@@@@@@@@@@@@@@@@@");
+    console.log(page);
+    console.log(pageSize);
+    console.log(limit);
+    console.log(offset);
+    
     try{
         const messageInfo = await MessageInfo.findAll({ 
-            // attributes : {
-            //     include : [
-            //         [
-            //             sequelize.fn(
-            //                 "DATE_FORMAT",
-            //                 sequelize.col("wedding_date"),
-            //                 "%Y-%m-%d %H:%i:%s"
-            //             ),
-            //             "wedding_date"
-            //         ],
-            //     ]
-            // },
+            attributes : {
+                include : [
+                    [
+                        sequelize.fn(
+                            "DATE_FORMAT",
+                            sequelize.col("reg_date"),
+                            "%Y-%m-%d %H:%i:%s"
+                        ),
+                        "reg_date"
+                    ],
+                ]
+            },
             limit : limit,
             offset : offset,
             where : {
