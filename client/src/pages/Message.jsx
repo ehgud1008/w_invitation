@@ -12,6 +12,14 @@ const Message = ({seq}) => {
     const limit = pageSize;
     const offset = (page-1) * pageSize;
 
+    const [pageGroup, setPageGroup] = useState(1);
+    const pageGroupSize = 5;
+
+    // 페이지 번호 버튼 (현재 그룹에 해당하는 페이지만 표시)
+    const startPage = (pageGroup - 1) * pageGroupSize + 1;
+    const endPage = Math.min(pageGroup * pageGroupSize, pagination.totalPages);
+ 
+
     const handleChange = (e) => {
         const inputText = e.target.value;
         if(e.target.id == "message"){
@@ -25,17 +33,45 @@ const Message = ({seq}) => {
         
     }
     
+    const handlePrevGroup = () => {
+        if (pageGroup > 1) {
+            const newPageGroup = pageGroup - 1;
+            setPageGroup(newPageGroup);
+            setPage((newPageGroup - 1) * pageGroupSize + 1); // 수정된 코드
+          }
+    }
+    const handleNextGroup = () => {
+        const totalGroups = Math.ceil(pagination.totalPages / pageGroupSize);
+        if (pageGroup < totalGroups) {
+            const newPageGroup = pageGroup + 1;
+            setPageGroup(newPageGroup);
+            setPage((newPageGroup - 1) * pageGroupSize + 1); // 수정된 코드
+        }
+    }
     //이전페이지
     const handlePrevPage = () => {
-        if (page > 1) setPage(page-1);
+        if (page > 1) {
+            setPage(page - 1);
+            // 페이지 그룹 업데이트
+            if ((page - 1) % pageGroupSize === 0) {
+                setPageGroup((page - 1) / pageGroupSize);
+            }
+        }
     }
     //다음페이지
     const handleNextPage = () => {
-        if (page < pagination.totalPages) setPage(page+1);
+        if (page < pagination.totalPages) {
+            setPage(page + 1);
+            // 페이지 그룹 업데이트
+            if ((page + 1 - 1) % pageGroupSize === 0) {
+                setPageGroup((page + 1 - 1) / pageGroupSize + 1);
+            }
+        }
     }
+
     //페이지 선택
     const handlePageChange = (index) => {
-        setPage(index);
+        setPage(startPage + index - 1); // 수정된 코드
     }
 
     useEffect( () => {
@@ -110,26 +146,33 @@ const Message = ({seq}) => {
                 }
             </div>
             <div className="flex justify-center mt-8">
+                <button key="prev-group" onClick={handlePrevGroup} disabled={pageGroup === 1}
+                        className='px-2 py-2 mx-1 rounded-md text-sm font-medium'>
+                    {'<<'}
+                </button>
                 <button key="prev" onClick={handlePrevPage}
                         disabled={pagination.page === 1}
-                        className='px-3 py-2 mx-1 rounded-md text-sm font-medium'>
+                        className='px-2 py-2 mx-1 rounded-md text-sm font-medium'>
                     {'<'}
                 </button>
-                {Array.from({ length: pagination.totalPages }, (_, i) => (
+                {Array.from({ length: endPage - startPage+1 }, (_, i) => (
                     <button
-                        key={i + 1}
+                        key={startPage + i}
                         onClick={() => handlePageChange(i + 1)}
-                        disabled={pagination.page === i + 1}
-                        className={`px-3 py-2 mx-1 rounded-md text-sm font-medium ${pagination.page === i + 1 ? 'bg-slate-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100'}`}
+                        disabled={pagination.page === startPage + i}
+                        className={`px-2 py-2 mx-1 rounded-md text-sm font-medium ${pagination.page === startPage + i ? 'bg-slate-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100'}`}
                     >
-                        {i + 1}
+                        {startPage + i}
                     </button>
                 ))}
-                {Array.from({length:pagination.totalPages}, ( _))}
                 <button key="next" onClick={handleNextPage}
                         disabled={pagination.page === pagination.totalPages} 
-                        className='px-3 py-2 mx-1 rounded-md text-sm font-medium'>
+                        className='px-2 py-2 mx-1 rounded-md text-sm font-medium'>
                     {'>'}
+                </button>
+                <button key="next-group" onClick={handleNextGroup} disabled={pageGroup * pageGroupSize >= pagination.totalPages}
+                        className='px-2 py-2 mx-1 rounded-md text-sm font-medium'>
+                    {'>>'}
                 </button>
             </div>
         </div>
