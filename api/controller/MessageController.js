@@ -4,12 +4,6 @@ import sequelize from 'sequelize';
 export const getMessageInfo = async (req, res, next) => {
     const seq = req.params.seq;
     const {page, offset, pageSize, limit} = req.body;
-    console.log("@@@@@@@@@@@@@@@@@@@@");
-    console.log(page);
-    console.log(pageSize);
-    console.log(limit);
-    console.log(offset);
-    
     try{
         const messageInfo = await MessageInfo.findAll({ 
             attributes : {
@@ -31,7 +25,6 @@ export const getMessageInfo = async (req, res, next) => {
              },
              order : [['reg_date', 'DESC']]
         });
-        console.log("ASDFASDF");
 
         const totalItems = await MessageInfo.count({
             where : {
@@ -52,5 +45,23 @@ export const getMessageInfo = async (req, res, next) => {
         });
     }catch(error){
         next(error);
+    }
+}
+
+export const registMessage = async (req, res, next) => {
+    console.log("@@@@@@@@@@@@@@@@");
+    console.log(req.body);
+    const { wedding_seq, name, password, message } = req.body;
+    const newMessage = {
+        wedding_seq,
+        name,
+        password,
+        message
+    };
+    try {
+        const message = await MessageInfo.create(newMessage, { logging: console.log });
+        return res.status(200).json(message);
+    } catch (error) {
+        console.log(error);
     }
 }

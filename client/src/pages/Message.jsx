@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
 import {MessageContext} from '../context/MessageContext';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Message = ({seq}) => {
     const params = useParams();
+    const navigate = useNavigate();
 
     const {messageData, setMessageData} = useContext(MessageContext);
+    //페이징 처리 변수들
     const [pagination, setPagination] = useState({});
     const [page, setPage] = useState(params.page || 1)
     const pageSize = 3;
@@ -14,11 +16,17 @@ const Message = ({seq}) => {
 
     const [pageGroup, setPageGroup] = useState(1);
     const pageGroupSize = 5;
-
     // 페이지 번호 버튼 (현재 그룹에 해당하는 페이지만 표시)
     const startPage = (pageGroup - 1) * pageGroupSize + 1;
     const endPage = Math.min(pageGroup * pageGroupSize, pagination.totalPages);
  
+    const [messageFormData, setMessageFormData] = useState({
+        name : '',
+        password : '',
+        message : '',
+    });
+    const [submitError, setSubmitError] = useState(false);
+    const [submitLoading, setSubmitLoading] = useState(false);
 
     const handleChange = (e) => {
         const inputText = e.target.value;
@@ -27,9 +35,40 @@ const Message = ({seq}) => {
                 alert("최대 200자까지 입력 가능합니다.");
             }
         }
+
+        const { name, value } = e.target;
+        setMessageFormData({
+            ...messageFormData,
+            [name]: value
+        });
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        try {
+            setSubmitError(false);
+            setSubmitLoading(true);
+            const res = await fetch('/api/message/registMessage', {
+                method : 'POST',
+                headers : {
+                    'Content-Type' : 'application/json',
+                },
+                body : JSON.stringify( {
+                    ...messageFormData,
+                    wedding_seq : seq,
+                }),
+            });
+            const data = await res.json();
+
+            setSubmitLoading(false);
+            if(data.success === false){
+                setSubmitError(data.message);
+            }
+            
+            // navigate(`/message/${seq}`);
+        } catch (error) {
+            console.log(error);
+        }
         
     }
     
@@ -114,7 +153,7 @@ const Message = ({seq}) => {
                         <input type="text" name="name" id="name" onChange={handleChange} className="border border-gray-300 rounded-md p-2 w-full" placeholder="이름" maxLength='10' minLength='2' />
                     </div>
                     <div>
-                        <input type="password" name="pw" id="pw" onChange={handleChange} className="border border-gray-300 rounded-md p-2 w-full" maxLength='4' minLength='4' placeholder="비밀번호" />
+                        <input type="text" name="password" id="password" onChange={handleChange} className="border border-gray-300 rounded-md p-2 w-full" maxLength='4' minLength='4' placeholder="비밀번호" />
                     </div>
                 </div>
                 <div className="">
@@ -122,7 +161,7 @@ const Message = ({seq}) => {
                 </div>
                 
                 <div className='grid place-items-center'>
-                    <button type="button" className="bg-black hover:bg-slate-700 text-white font-bold py-2 px-4 rounded">등록하기</button>
+                    <button type="submit" className="bg-black hover:bg-slate-700 text-white font-bold py-2 px-4 rounded">등록하기</button>
                 </div>
             </form>
             <div className="w-full h-1 bg-gray-100"/>

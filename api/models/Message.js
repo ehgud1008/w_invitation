@@ -8,6 +8,13 @@ MessageInfo.init({
             type : DataTypes.INTEGER,
             primaryKey : true,
             required : true,
+            autoIncrement: true, // Auto Increment 설정
+            allowNull: false     // NULL을 허용하지 않음
+        },
+        wedding_seq : {
+            type : DataTypes.STRING,
+            required : true,
+            allowNull: false     // NULL을 허용하지 않음
         },
         name : {
             type : DataTypes.STRING,
