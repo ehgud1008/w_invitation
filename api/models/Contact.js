@@ -1,9 +1,9 @@
 import { DataTypes, Model } from 'sequelize';
 import sequelize from '../config/Database.js';
 
-class MessageInfo extends Model {}
+class ContactInfo extends Model {}
 
-MessageInfo.init({
+ContactInfo.init({
         seq : {
             type : DataTypes.INTEGER,
             primaryKey : true,
@@ -34,12 +34,12 @@ MessageInfo.init({
         },
     },{
         sequelize,
-        modelName : 'MessageInfo',
-        tableName : 'message_info',
+        modelName : 'ContactInfo',
+        tableName : 'contact_info',
         timestamps : false,
     }
 );
 
-export default MessageInfo;
+export default ContactInfo;
 
 

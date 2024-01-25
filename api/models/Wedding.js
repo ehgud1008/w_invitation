@@ -8,6 +8,8 @@ WeddingInfo.init({
             type : DataTypes.INTEGER,
             primaryKey : true,
             required : true,
+            autoIncrement: true, // Auto Increment 설정
+            allowNull: false     // NULL을 허용하지 않음
         },
         groom_ko : {
             type : DataTypes.STRING,

@@ -61,22 +61,21 @@ const Timer = ({wedding_date}) => {
     }, [wedding_date, day, hour, minute, second]);
     return (
         <div className='mb-20'>
-        {/* 디자인 추후 고려 */}
-        <div className='flex place-content-center bg-rose-red'>
-            <div className='mx-5 bg-yellow-950 text-slate-50 '>
-                {day}
-            </div>
-            <div className='mx-5 bg-yellow-950 text-slate-50 '>
-                {hour}
-            </div>
-            <div className='mx-5 bg-yellow-950 text-slate-50 '>
-                {minute}
-            </div>
-            <div className='mx-5 bg-yellow-950 text-slate-50 '>
-                {second}
+            <div className='flex justify-center items-center bg-white shadow-lg rounded-lg py-4'>
+                <div className='mx-5 bg-gray-100 text-gray-800 rounded-lg shadow px-6 py-3 text-lg font-semibold'>
+                    {day} <span className='text-sm text-gray-500'>Days</span>
+                </div>
+                <div className='mx-5 bg-gray-100 text-gray-800 rounded-lg shadow px-6 py-3 text-lg font-semibold'>
+                    {hour} <span className='text-sm text-gray-500'>Hours</span>
+                </div>
+                <div className='mx-5 bg-gray-100 text-gray-800 rounded-lg shadow px-6 py-3 text-lg font-semibold'>
+                    {minute} <span className='text-sm text-gray-500'>Minutes</span>
+                </div>
+                <div className='mx-5 bg-gray-100 text-gray-800 rounded-lg shadow px-6 py-3 text-lg font-semibold'>
+                    {second} <span className='text-sm text-gray-500'>Seconds</span>
+                </div>
             </div>
         </div>
-    </div>
   )
 }
 

@@ -14,6 +14,7 @@ import Footer from './components/Footer';
 import { MarriageProvider } from './context/MarriageContext';
 import { LocationProvider } from './context/LocationContext';
 import { MessageProvider } from './context/MessageContext';
+import { ContactProvider } from './context/ContactContext';
 
 export default function App() {
   const [wedding_date, setWeddingDate] = useState('');
@@ -23,7 +24,6 @@ export default function App() {
   return (
     <MarriageProvider>
       <LocationProvider>
-        <MessageProvider>
           <BrowserRouter>
             <Header />
             <Routes> 
@@ -33,13 +33,16 @@ export default function App() {
             <Calendar wedding_date={wedding_date}/>
             <Timer wedding_date={wedding_date}/>
             <Location seq={seq} />
-            <Contact />
-            <Account />
+            <ContactProvider>
+              <Contact seq={seq}/>
+              <Account seq={seq}/>
+            </ContactProvider>
             <RSVP />
-            <Message seq={seq}/>
+            <MessageProvider>
+              <Message seq={seq}/>
+            </MessageProvider>
             <Footer />
           </BrowserRouter>  
-        </MessageProvider>
       </LocationProvider>
     </MarriageProvider>
   )

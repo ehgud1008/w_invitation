@@ -1,16 +1,36 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { ContactContext } from "../context/ContactContext";
 
-const Contact = () => {
+const Contact = ({seq}) => {
+
+  const {constData, setContactData} = useContext(ContactContext);
   //전화하기
   const handleCall = () => {
     const tel = "010-1234-5678"; // 전화번호를 여기에 입력하세요
     window.location.href = `tel:${tel}`;
   };
-
+  
   const handleSms = () => {
     const tel = "010-1234-5678"; // 전화번호를 여기에 입력하세요
     window.location.href = `sms:${tel}`;
   };
+  useEffect( () => {
+    if(seq) {
+      const fetchContactData = async () => {
+        try {
+          const res = await fetch(`/api/contact/${seq}`);
+          const data = await res.json();
+
+          setContactData(data);
+
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      fetchContactData();
+    }
+  }, [seq])
   return (
     <div className="md:px-40 grid place-items-center mt-10 ">
       <p className="mb-3 text-sm">Contact</p>

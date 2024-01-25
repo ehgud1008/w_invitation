@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 
-const Account = () => {
+const Account = ({seq}) => {
     const [isAccountOpen1, setIsAccountOpen1] = useState(false);
     const [isAccountOpen2, setIsAccountOpen2] = useState(false);
     

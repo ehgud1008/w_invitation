@@ -49,8 +49,6 @@ export const getMessageInfo = async (req, res, next) => {
 }
 
 export const registMessage = async (req, res, next) => {
-    console.log("@@@@@@@@@@@@@@@@");
-    console.log(req.body);
     const { wedding_seq, name, password, message } = req.body;
     const newMessage = {
         wedding_seq,
