@@ -1,9 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ContactContext } from "../context/ContactContext";
 
 const Contact = ({seq}) => {
 
-  const {constData, setContactData} = useContext(ContactContext);
+  const {contactData, setContactData} = useContext(ContactContext);
+  const [weddingInfo, setWeddingInfo] = useState({});
   //전화하기
   const handleCall = () => {
     const tel = "010-1234-5678"; // 전화번호를 여기에 입력하세요
@@ -14,6 +15,17 @@ const Contact = ({seq}) => {
     const tel = "010-1234-5678"; // 전화번호를 여기에 입력하세요
     window.location.href = `sms:${tel}`;
   };
+
+  const handleContact = (contactType, phoneNumber) => {
+    if (!phoneNumber) {
+        alert('연락처 정보가 없습니다.');
+        return;
+    }
+
+    if(contactType == 'sms') window.location.href = 'sms:'+phoneNumber;
+    if(contactType == 'tel')  window.location.href = 'tel:'+phoneNumber;
+  };
+
   useEffect( () => {
     if(seq) {
       const fetchContactData = async () => {
@@ -21,8 +33,8 @@ const Contact = ({seq}) => {
           const res = await fetch(`/api/contact/${seq}`);
           const data = await res.json();
 
-          setContactData(data);
-
+          setContactData(data.data);
+          setWeddingInfo(data.weddingInfo);
         } catch (error) {
           console.log(error);
         }
@@ -41,13 +53,13 @@ const Contact = ({seq}) => {
           <div className="grid place-items-center pl-7">
             <div className="flex items-baseline mb-2">
               <span className="text-sm mr-1">신랑</span>
-              <span className="text-lg">김철수</span>
+              <span className="text-lg">{weddingInfo.groom_ko}</span>
             </div>
             <div className="flex items-center mb-5">
-              <button onClick={handleCall}>
+              <button onClick={ () => handleContact('sms', weddingInfo.groom_contact)}>
                 <img src="/images/phone.png" className="w-7 h-7 mr-4" alt="phone" />
               </button>
-              <button onClick={handleSms}>
+              <button onClick={ () => handleContact('sms', weddingInfo.groom_contact)}>
                 <img src="/images/sms.png" className="w-7 h-7" alt="sms" />
               </button>
             </div>
@@ -57,24 +69,24 @@ const Contact = ({seq}) => {
               </p>
               <div className="">
                 <div className="flex items-centermr-3">
-                  <button onClick={handleCall}>
+                  <button onClick={ () => handleContact('sms', contactData.groom_f_contact)}>
                     <img src="/images/phone.png" className="w-7 h-7 mr-2" alt="phone" />
                   </button>
-                  <button onClick={handleSms}>
+                  <button onClick={ () => handleContact('sms', contactData.groom_f_contact)}>
                     <img src="/images/sms.png" className="w-7 h-7 mr-2" alt="sms" />
                   </button>
                   <div className="border-r-2 border-slate-500 mr-2"> </div>
-                  <button onClick={handleCall}>
+                  <button onClick={ () => handleContact('sms', contactData.groom_m_contact)}>
                     <img src="/images/phone.png" className="w-7 h-7 mr-2" alt="phone" />
                   </button>
-                  <button onClick={handleSms}>
+                  <button onClick={ () => handleContact('sms', contactData.groom_m_contact)}>
                     <img src="/images/sms.png" className="w-7 h-7 mr-2" alt="sms" />
                   </button>
                 </div>
                 <div className="">
                   <div className="flex place-content-around text-xs">
-                    <p className="py-3 mr-3">김철수<br/>아버님</p>
-                    <p className="py-3">김철수<br/>어머님</p>
+                    <p className="py-3 mr-3">{weddingInfo.groom_father}<br/>아버님</p>
+                    <p className="py-3">{weddingInfo.groom_mother}<br/>어머님</p>
                   </div>
                 </div>
               </div>
@@ -86,13 +98,13 @@ const Contact = ({seq}) => {
           <div className="grid place-items-center pr-7">
             <div className="flex items-baseline mb-2">
               <span className="text-sm mr-1">신부</span>
-              <span className="text-lg">김영희</span>
+              <span className="text-lg">{weddingInfo.bride_ko}</span>
             </div>
             <div className="flex items-center mb-5">
-              <button onClick={handleCall}>
+              <button onClick={ () => handleContact('sms', weddingInfo.bride_contact)}>
                 <img src="/images/phone.png" className="w-7 h-7 mr-4" alt="phone"/>
               </button>
-              <button onClick={handleSms}>
+              <button onClick={ () => handleContact('sms', weddingInfo.bride_contact)}>
                 <img src="/images/sms.png" className="w-7 h-7" alt="sms" />
               </button>
             </div>
@@ -102,24 +114,24 @@ const Contact = ({seq}) => {
               </p>
               <div className="">
                 <div className="flex items-centermr-3">
-                  <button onClick={handleCall}>
+                  <button onClick={ () => handleContact('sms', contactData.bride_f_contact)}>
                     <img src="/images/phone.png" className="w-7 h-7 mr-2" alt="phone"/>
                   </button>
-                  <button onClick={handleSms}>
+                  <button onClick={ () => handleContact('sms', contactData.bride_f_contact)}>
                     <img src="/images/sms.png" className="w-7 h-7 mr-2" alt="sms" />
                   </button>
                   <div className="border-r-2 border-slate-500 mr-2"> </div>
-                  <button onClick={handleCall}>
+                  <button onClick={ () => handleContact('sms', contactData.bride_m_contact)}>
                     <img src="/images/phone.png" className="w-7 h-7 mr-2" alt="phone" />
                   </button>
-                  <button onClick={handleSms}>
+                  <button onClick={ () => handleContact('sms', contactData.bride_m_contact)}>
                     <img src="/images/sms.png" className="w-7 h-7 mr-2" alt="sms" />
                   </button>
                 </div>
                 <div className="">
                   <div className="flex place-content-around text-xs">
-                    <p className="py-3">김영희<br/>아버님</p>
-                    <p className="py-3">김영희<br/>어머님</p>
+                    <p className="py-3">{weddingInfo.bride_father}<br/>아버님</p>
+                    <p className="py-3">{weddingInfo.bride_mother}<br/>어머님</p>
                   </div>
                 </div>
               </div>

@@ -1,5 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import sequelize from '../config/Database.js';
+import ContactInfo from './Contact.js';
 
 class WeddingInfo extends Model {}
 
@@ -74,6 +75,9 @@ WeddingInfo.init({
         timestamps : false,
     }
 );
+
+WeddingInfo.hasMany(ContactInfo, { foreignKey : "wedding_seq", as : 'contacts'});
+ContactInfo.belongsTo(WeddingInfo, { foreignKey : 'wedding_seq', as:'weddings'})
 
 export default WeddingInfo;
 
