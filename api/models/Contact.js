@@ -40,6 +40,10 @@ ContactInfo.init({
             type : DataTypes.STRING,
             required : true,
         },
+        groom_account_bank : {
+            type : DataTypes.STRING,
+            required : true,
+        },
         bride_account : {
             type : DataTypes.STRING,
             required : true,
@@ -56,11 +60,19 @@ ContactInfo.init({
             type : DataTypes.STRING,
             required : true,
         },
+        groom_f_account_bank : {
+            type : DataTypes.STRING,
+            required : true,
+        },
         groom_m_account : {
             type : DataTypes.STRING,
             required : true,
         },
         groom_m_account_name : {
+            type : DataTypes.STRING,
+            required : true,
+        },
+        groom_m_account_bank : {
             type : DataTypes.STRING,
             required : true,
         },
@@ -72,11 +84,19 @@ ContactInfo.init({
             type : DataTypes.STRING,
             required : true,
         },
+        bride_f_account_bank : {
+            type : DataTypes.STRING,
+            required : true,
+        },
         bride_m_account : {
             type : DataTypes.STRING,
             required : true,
         },
         bride_m_account_name : {
+            type : DataTypes.STRING,
+            required : true,
+        },
+        bride_m_account_bank : {
             type : DataTypes.STRING,
             required : true,
         },

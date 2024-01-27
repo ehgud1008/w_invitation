@@ -44,7 +44,7 @@ const Contact = ({seq}) => {
     }
   }, [seq])
   return (
-    <div className="md:px-40 grid place-items-center mt-10 ">
+    <div className="md:px-40 grid place-items-center pt-10 md:px-40 bg-white">
       <p className="mb-3 text-sm">Contact</p>
       <p className="text-lg mb-3">축하를 전해보세요.</p>
       <div className="grid grid-cols-2">

@@ -167,7 +167,7 @@ const Location = ({seq}) => {
           )}
       </div>
       <div className="w-full h-1 bg-gray-100"/>
-      <div className="grid-cols-1 md:grid-cols-2 mt-2 mb-4">
+      <div className="grid-cols-1 md:grid-cols-2 mt-2">
           <div className="info px-8 rounded-lg">
             <div className='text-left pb-3'>
               <p className='mt-5 text-left font-bold '>

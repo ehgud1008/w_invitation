@@ -1,6 +1,10 @@
-import React, { useRef, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
+import { ContactContext } from '../context/ContactContext';
 
 const Account = ({seq}) => {
+
+    const {contactData, setContactData} = useContext(ContactContext);
+
     const [isAccountOpen1, setIsAccountOpen1] = useState(false);
     const [isAccountOpen2, setIsAccountOpen2] = useState(false);
     
@@ -33,8 +37,8 @@ const Account = ({seq}) => {
         }
     }
   return (
-    <div className="mt-10">
-        <p className='mb-5 grid place-items-center '>마음 전하실 곳</p>
+    <div className="pt-10 pb-10 bg-white">
+        <p className='mt-10 mb-5 grid place-items-center '>마음 전하실 곳</p>
         <div className="grid place-items-center mb-3">
             <div className="md:w-2/4 xs:w-4/5 rounded overflow-hidden">
                 <div className="border border-b bg-sky-50 py-2 cursor-pointer" onClick={toggleAccordion1}>
@@ -51,35 +55,46 @@ const Account = ({seq}) => {
                     </div>
                 </div>
                 {isAccountOpen1 && (
-                    // {[1, 2, 3].map((number, index) => (
-                    //     <div key={index}>
                     <div>
-                    <div className="p-2 text-sm">
-                        <div className='flex justify-between items-center mb-1'>
-                            <span>신한은행</span>
-                            <span className='text-xs'>예금주 : 김철수</span>
-                        </div>
-                        <div className='border-2 border-gray-300 px-3 py-2'>
-                            <div className='text-md flex justify-between items-center'> 
-                                <span ref={el => accontCopyRef.current[0] = el}>110-123-123456</span>
-                                <button onClick={() => handleAccountCopy(0)} className='border-slate-300 rounded-md bg-gray-500 text-white py-1 px-2'>복사</button>
+                        <div className="p-2 text-sm">
+                            <div className='flex justify-between items-center mb-1'>
+                                <span>{contactData.groom_account_bank}</span>
+                                <span className='text-xs'>예금주 : {contactData.groom_account_name}</span>
                             </div>
-                            
-                        </div>
-                    </div>
-                    <div className="p-2 text-sm">
-                        <div className='flex justify-between items-center mb-1'>
-                            <span>신한은행</span>
-                            <span className='text-xs'>예금주 : 김철수</span>
-                        </div>
-                        <div className='border-2 border-gray-300 px-3 py-2'>
-                            <div className='text-md flex justify-between items-center'> 
-                                <span ref={el => accontCopyRef.current[1] = el}>110-123-51234123</span>
-                                <button onClick={() => handleAccountCopy(1)} className='border-slate-300 rounded-md bg-gray-500 text-white py-1 px-2'>복사</button>
+                            <div className='border-2 border-gray-300 px-3 py-2'>
+                                <div className='text-md flex justify-between items-center'> 
+                                    <span ref={el => accontCopyRef.current[0] = el}>{contactData.groom_account}</span>
+                                    <button onClick={() => handleAccountCopy(0)} className='border-slate-300 rounded-md bg-gray-500 text-white py-1 px-2'>복사</button>
+                                </div>
+                                
                             </div>
-                            
                         </div>
-                    </div>
+                        <div className="p-2 text-sm">
+                            <div className='flex justify-between items-center mb-1'>
+                                <span>{contactData.groom_f_account_bank}</span>
+                                <span className='text-xs'>예금주 : {contactData.groom_f_account_name}</span>
+                            </div>
+                            <div className='border-2 border-gray-300 px-3 py-2'>
+                                <div className='text-md flex justify-between items-center'> 
+                                    <span ref={el => accontCopyRef.current[1] = el}>{contactData.groom_f_account}</span>
+                                    <button onClick={() => handleAccountCopy(1)} className='border-slate-300 rounded-md bg-gray-500 text-white py-1 px-2'>복사</button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div className="p-2 text-sm">
+                            <div className='flex justify-between items-center mb-1'>
+                                <span>{contactData.groom_m_account_bank}</span>
+                                <span className='text-xs'>예금주 : {contactData.groom_m_account_name}</span>
+                            </div>
+                            <div className='border-2 border-gray-300 px-3 py-2'>
+                                <div className='text-md flex justify-between items-center'> 
+                                    <span ref={el => accontCopyRef.current[1] = el}>{contactData.groom_m_account}</span>
+                                    <button onClick={() => handleAccountCopy(1)} className='border-slate-300 rounded-md bg-gray-500 text-white py-1 px-2'>복사</button>
+                                </div>
+                                
+                            </div>
+                        </div>
                     </div>
                 )}
             </div>
@@ -101,8 +116,46 @@ const Account = ({seq}) => {
                     </div>
                 </div>
                 {isAccountOpen2 && (
-                    <div className="p-2 text-sm">
-                        <p>아코디언 내용...</p>
+                    <div>
+                        <div className="p-2 text-sm">
+                            <div className='flex justify-between items-center mb-1'>
+                                <span>{contactData.bride_account_bank}</span>
+                                <span className='text-xs'>예금주 : {contactData.bride_account_name}</span>
+                            </div>
+                            <div className='border-2 border-gray-300 px-3 py-2'>
+                                <div className='text-md flex justify-between items-center'> 
+                                    <span ref={el => accontCopyRef.current[0] = el}>{contactData.bride_account}</span>
+                                    <button onClick={() => handleAccountCopy(0)} className='border-slate-300 rounded-md bg-gray-500 text-white py-1 px-2'>복사</button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div className="p-2 text-sm">
+                            <div className='flex justify-between items-center mb-1'>
+                                <span>{contactData.bride_f_account_bank}</span>
+                                <span className='text-xs'>예금주 : {contactData.bride_f_account_name}</span>
+                            </div>
+                            <div className='border-2 border-gray-300 px-3 py-2'>
+                                <div className='text-md flex justify-between items-center'> 
+                                    <span ref={el => accontCopyRef.current[1] = el}>{contactData.bride_f_account}</span>
+                                    <button onClick={() => handleAccountCopy(1)} className='border-slate-300 rounded-md bg-gray-500 text-white py-1 px-2'>복사</button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div className="p-2 text-sm">
+                            <div className='flex justify-between items-center mb-1'>
+                                <span>{contactData.bride_m_account_bank}</span>
+                                <span className='text-xs'>예금주 : {contactData.bride_m_account_name}</span>
+                            </div>
+                            <div className='border-2 border-gray-300 px-3 py-2'>
+                                <div className='text-md flex justify-between items-center'> 
+                                    <span ref={el => accontCopyRef.current[1] = el}>{contactData.bride_m_account}</span>
+                                    <button onClick={() => handleAccountCopy(1)} className='border-slate-300 rounded-md bg-gray-500 text-white py-1 px-2'>복사</button>
+                                </div>
+                                
+                            </div>
+                        </div>
                     </div>
                 )}
             </div>
