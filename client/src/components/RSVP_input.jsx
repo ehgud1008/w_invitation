@@ -62,7 +62,9 @@ const RSVP_input = ({handleOpenRSVP_input}) => {
                                                 checked={selectedSideOption === '1'}
                                                 onChange={handleOptionChange}  required />
                                         <label htmlFor="side1" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
-                                                                            ${selectedSideOption === '1' ? 'bg-blue-100 text-blue-700' : 'bg-white'}`} >
+                                                                            ${selectedSideOption === '1' ? 'text-blue-700' : 'bg-white'}`} 
+                                                                            style={selectedSideOption === '1' ? { backgroundColor: '#e4f0ff' } : { backgroundColor: 'white' }}
+                                                                            >
                                             신랑측
                                         </label>
                                     </li>
@@ -71,7 +73,9 @@ const RSVP_input = ({handleOpenRSVP_input}) => {
                                                 checked={selectedSideOption === '2'}
                                                 onChange={handleOptionChange} required />
                                         <label htmlFor="side2" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
-                                                                        ${selectedSideOption === '2' ? 'bg-purple-100 text-purple-700' : 'bg-white'}`} >
+                                                                        ${selectedSideOption === '2' ? 'text-purple-700' : 'bg-white'}`} 
+                                                                        style={selectedSideOption === '2' ? { backgroundColor: '#f6edff' } : { backgroundColor: 'white' }}
+                                                                        >
                                                 신부측
                                         </label>
                                     </li>
@@ -86,8 +90,10 @@ const RSVP_input = ({handleOpenRSVP_input}) => {
                                         <input type="radio" name="attend" id="attend1" value="1" className="hidden peer"
                                                 checked={selectedAttendOption === '1'}
                                                 onChange={handleOptionChange}  required />
-                                        <label htmlFor="attend1" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
-                                                                            ${selectedAttendOption === '1' ? 'bg-slate-700 text-white' : 'bg-white'}`} >
+                                        <label htmlFor="attend1" className={`text-center w-full px-5 py-3 font-bold bg-slate-700 bg-white border border-slate-400 rounded-lg cursor-pointer 
+                                                                            ${selectedAttendOption === '1' ? 'text-white' : 'bg-white'}`} 
+                                                                            style={selectedAttendOption === '1' ? { backgroundColor: '#64748b' } : { backgroundColor: 'white' }}
+                                                                            >
                                             참석 불가
                                         </label>
                                     </li>
@@ -96,7 +102,9 @@ const RSVP_input = ({handleOpenRSVP_input}) => {
                                                 checked={selectedAttendOption === '2'}
                                                 onChange={handleOptionChange} required />
                                         <label htmlFor="attend2" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
-                                                                        ${selectedAttendOption === '2' ? 'bg-slate-700 text-white' : 'bg-white'}`} >
+                                                                        ${selectedAttendOption === '2' ? 'text-white' : 'bg-white'}`} 
+                                                                        style={selectedAttendOption === '2' ? { backgroundColor: '#64748b' } : { backgroundColor: 'white' }}
+                                                                        >
                                             참석 가능
                                         </label>
                                     </li>
@@ -135,7 +143,9 @@ const RSVP_input = ({handleOpenRSVP_input}) => {
                                                 checked={selectedMealOption === '1'}
                                                 onChange={handleOptionChange}  required />
                                         <label htmlFor="meal1" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
-                                                                            ${selectedMealOption === '1' ? 'bg-slate-700 text-white' : 'bg-white'}`} >
+                                                                            ${selectedMealOption === '1' ? 'text-white' : 'bg-white'}`} 
+                                                                            style={selectedMealOption === '1' ? { backgroundColor: '#64748b' } : { backgroundColor: 'white' }}
+                                                                            >
                                             식사 가능
                                         </label>
                                     </li>
@@ -144,7 +154,9 @@ const RSVP_input = ({handleOpenRSVP_input}) => {
                                                 checked={selectedMealOption === '2'}
                                                 onChange={handleOptionChange} required />
                                         <label htmlFor="meal2" className={`text-center w-full py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
-                                                                        ${selectedMealOption === '2' ? 'bg-slate-700 text-white' : 'bg-white'}`} >
+                                                                        ${selectedMealOption === '2' ? 'text-white' : 'bg-white'}`} 
+                                                                        style={selectedMealOption === '2' ? { backgroundColor: '#64748b' } : { backgroundColor: 'white' }}
+                                                                        >
                                             식사 불가(답례품 수령)
                                         </label>
                                     </li>
@@ -176,7 +188,7 @@ const RSVP_input = ({handleOpenRSVP_input}) => {
                 </form>
             </div>
             <div className="buttons mt-4 flex justify-center">
-                <button onSubmit={handleRSVPsubmit} type="button" className="bg-slate-700 text-white py-3 w-full border border-slate-600 rounded-md">
+                <button onSubmit={handleRSVPsubmit} type="submit" className="bg-slate-700 text-white py-3 w-full border border-slate-600 rounded-md">
                     참석 여부 전달하기
                 </button>
             </div>
