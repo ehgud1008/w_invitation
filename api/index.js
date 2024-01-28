@@ -6,6 +6,7 @@ import weddingRouter from './routes/wedding.js';
 import locationRouter from './routes/location.js';
 import messageRouter from './routes/message.js';
 import contactRouter from './routes/contact.js';
+import rsvpRouter from './routes/rsvp.js';
 
 dotenv.config();
 mongoose.connect(process.env.MONGODB_URI, { dbName: 'myfolio' })
@@ -26,6 +27,7 @@ app.use('/api/wedding', weddingRouter);
 app.use('/api/location', locationRouter);
 app.use('/api/message', messageRouter);
 app.use('/api/contact', contactRouter);
+app.use('/api/rsvp', rsvpRouter);
 
 app.use(express.static(path.join(__dirname, 'client/dist')));
 

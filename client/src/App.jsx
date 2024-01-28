@@ -37,7 +37,7 @@ export default function App() {
               <Contact seq={seq}/>
               <Account seq={seq}/>
             </ContactProvider>
-            <RSVP />
+            <RSVP seq={seq}/>
             <MessageProvider>
               <Message seq={seq}/>
             </MessageProvider>

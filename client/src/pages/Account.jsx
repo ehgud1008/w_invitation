@@ -25,7 +25,7 @@ const Account = ({seq}) => {
         if (textToCopy) {
             navigator.clipboard.writeText(textToCopy)
               .then(() => {
-                alert('텍스트가 복사되었습니다 : ' + textToCopy);
+                alert('계좌번호가 복사되었습니다 : ' + textToCopy);
                 // 또는 성공 시 사용자에게 알림을 보여줄 수 있습니다.
                 // alert('텍스트가 복사되었습니다.');
               })

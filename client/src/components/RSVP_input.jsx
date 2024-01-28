@@ -1,50 +1,78 @@
 import React, { useState } from "react";
 
-const RSVP_input = ({handleOpenRSVP_input}) => {
+const RSVP_input = ({handleOpenRSVP_input, seq}) => {
     const [selectedSideOption, setSelectedSideOption] = useState('');       //신랑측/신부측 구분
     const [selectedAttendOption, setSelectedAttendOption] = useState('');   //참석 여부 구분
     const [selectedMealOption, setSelectedMealOption] = useState('');       //식사 여부 구분
     
-    const [companions, setCompanions] = useState('');   //동행인원 
+    const [member_cnt, setMember_cnt] = useState('');   //동행인원 
 
-    //라디오박스 option 변경 기능
-    const handleOptionChange = (event) => {
-        const name = event.target.name;
-        const value = event.target.value;
-        
-        //신랑측/신부측
-        if(name==="side") setSelectedSideOption(value);
-        //참석 여부
-        if(name==="attend") setSelectedAttendOption(value);
-        //식사 여부
-        if(name==="meal") setSelectedMealOption(value);
-
-    }
+    const [rsvpFormData, setRsvpFormData] = useState({
+        name : '',
+        contact : '',
+        member_cnt : 1,
+        memo : '',
+        side_option : 0,
+        attend_option : 0, 
+        meal_option : 0,
+    });
 
     const handleInputChange = (event) => {
-        const value = event.target.value;
-        console.log(value);
-        // 숫자만 입력되도록 제한
-        const regex = /^[0-9]*$/;
-        if (regex.test(value)) {
-            if(value <= 100){
-                setCompanions(value);
+        const { name, value } = event.target;
+        
+        console.log(name + "// " + value);
+        
+        //라디오박스 option 변경 기능
+        //신랑측/신부측
+        if(name==="side_option") setSelectedSideOption(value);
+        //참석 여부
+        if(name==="attend_option") setSelectedAttendOption(value);
+        //식사 여부
+        if(name==="meal_option") setSelectedMealOption(value);
+
+        if(name === 'member_cnt'){
+            // 숫자만 입력되도록 제한
+            const regex = /^[0-9]*$/;
+            if (regex.test(value)) {
+                if(value <= 100){
+                    setMember_cnt(value);
+                }else{
+                    alert("100명 이하 인원만 입력해주세요");
+                }
             }else{
-                alert("100명 이하 인원만 입력해주세요");
+                alert("숫자만 입력해주세요");
             }
-        }else{
-            alert("숫자만 입력해주세요");
         }
+            
+            setRsvpFormData({
+            ...rsvpFormData,
+            [name]: value
+        });
     }
     
-    const handleRSVPsubmit = () => {
-
+    const handleRSVPsubmit = async (e) => {
+        e.preventDefault();
+        co
+        try {
+            const res = await fetch('/api/rsvp/registRSVP', {
+                method : 'POST',
+                headers : {
+                    'Content-Type' : 'application/json',
+                },
+                // body : JSON.stringify{
+                //     ...rsvpFormData,
+                //     wedding_seq : seq,
+                // },
+            });
+        } catch (error) {
+            console.log(error);
+        }
     }
   return (
     <div className="fixed top-0 left-0 w-full h-full justify-center items-center bg-black bg-opacity-50 z-50 overflow-scroll">
         <div className="bg-white w-full py-6 px-6 ">
             <div className="">
-                <form action="">
+                <form onSubmit={handleRSVPsubmit}>
                     <div className="grid justify-center py-3 font-bold text-lg">
                         <span className="">참석 여부 전달하기</span>
                         <button onClick={handleOpenRSVP_input} type="button" className="absolute top-4 right-4 text-gray-500 hover:text-gray-700" >
@@ -58,9 +86,9 @@ const RSVP_input = ({handleOpenRSVP_input}) => {
                             <div className="mt-2">
                                 <ul className="grid w-full grid-cols-2">
                                     <li className="px-3 grid">
-                                        <input type="radio" name="side" id="side1" value="1" className="hidden peer"
+                                        <input type="radio" name="side_option" id="side1" value="1" className="hidden peer"
                                                 checked={selectedSideOption === '1'}
-                                                onChange={handleOptionChange}  required />
+                                                onChange={handleInputChange}  required />
                                         <label htmlFor="side1" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
                                                                             ${selectedSideOption === '1' ? 'text-blue-700' : 'bg-white'}`} 
                                                                             style={selectedSideOption === '1' ? { backgroundColor: '#e4f0ff' } : { backgroundColor: 'white' }}
@@ -69,9 +97,9 @@ const RSVP_input = ({handleOpenRSVP_input}) => {
                                         </label>
                                     </li>
                                     <li className="px-3 grid">
-                                        <input type="radio" name="side" id="side2" value="2" className="hidden peer"
+                                        <input type="radio" name="side_option" id="side2" value="2" className="hidden peer"
                                                 checked={selectedSideOption === '2'}
-                                                onChange={handleOptionChange} required />
+                                                onChange={handleInputChange} required />
                                         <label htmlFor="side2" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
                                                                         ${selectedSideOption === '2' ? 'text-purple-700' : 'bg-white'}`} 
                                                                         style={selectedSideOption === '2' ? { backgroundColor: '#f6edff' } : { backgroundColor: 'white' }}
@@ -87,25 +115,25 @@ const RSVP_input = ({handleOpenRSVP_input}) => {
                             <div className="mt-2">
                                 <ul className="grid w-full grid-cols-2">
                                     <li className="px-3 grid">
-                                        <input type="radio" name="attend" id="attend1" value="1" className="hidden peer"
+                                        <input type="radio" name="attend_option" id="attend1" value="1" className="hidden peer"
                                                 checked={selectedAttendOption === '1'}
-                                                onChange={handleOptionChange}  required />
+                                                onChange={handleInputChange}  required />
                                         <label htmlFor="attend1" className={`text-center w-full px-5 py-3 font-bold bg-slate-700 bg-white border border-slate-400 rounded-lg cursor-pointer 
                                                                             ${selectedAttendOption === '1' ? 'text-white' : 'bg-white'}`} 
                                                                             style={selectedAttendOption === '1' ? { backgroundColor: '#64748b' } : { backgroundColor: 'white' }}
                                                                             >
-                                            참석 불가
+                                            참석 가능
                                         </label>
                                     </li>
                                     <li className="px-3 grid">
-                                        <input type="radio" name="attend" id="attend2" value="2" className="hidden peer"
+                                        <input type="radio" name="attend_option" id="attend2" value="2" className="hidden peer"
                                                 checked={selectedAttendOption === '2'}
-                                                onChange={handleOptionChange} required />
+                                                onChange={handleInputChange} required />
                                         <label htmlFor="attend2" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
                                                                         ${selectedAttendOption === '2' ? 'text-white' : 'bg-white'}`} 
                                                                         style={selectedAttendOption === '2' ? { backgroundColor: '#64748b' } : { backgroundColor: 'white' }}
                                                                         >
-                                            참석 가능
+                                            참석 불가
                                         </label>
                                     </li>
                                 </ul>
@@ -115,23 +143,23 @@ const RSVP_input = ({handleOpenRSVP_input}) => {
                             <label htmlFor="name" className="item-ttl block mb-1">
                                 <span className="font-bold">성함</span><span className="point text-red-500">*</span>
                             </label>
-                            <input type="text" id="name" name="name" className="w-full border border-gray-300 rounded-md py-2 px-3" maxLength="10" placeholder="성함을 입력해주세요."/>
+                            <input type="text" id="name" name="name" onChange={handleInputChange} className="w-full border border-gray-300 rounded-md py-2 px-3" maxLength="10" placeholder="성함을 입력해주세요."/>
                         </div>
                         <div className="row-wrap row-wrap-3">
                             <label htmlFor="contact" className="item-ttl block mb-1">
                                 <span className="font-bold">대표 연락처</span><span className="point text-red-500">*</span>
                             </label>
                             <div className="inner">
-                                <input type="text" id="contact" name="contact" className="w-full border border-gray-300 rounded-md py-2 px-3"  maxLength="13" placeholder="대표연락처를 입력해주세요(-제외)."/>
+                                <input type="text" id="contact" name="contact" onChange={handleInputChange} className="w-full border border-gray-300 rounded-md py-2 px-3"  maxLength="13" placeholder="대표연락처를 입력해주세요(-제외)."/>
                             </div>
                         </div>
                         <div className="row-wrap row-wrap-4">
-                            <label htmlFor="companions" className="item-ttl block mb-1">
+                            <label htmlFor="member_cnt" className="item-ttl block mb-1">
                                 <span className="font-bold">동행인원</span><span className="point text-red-500">*</span>
                             </label>
                             <div className="inner">
-                                <input type="text" onChange={handleInputChange} value={companions}
-                                     id="companions" name="companions" placeholder="본인 포함 총 인원(최대 100명)" className="w-full border border-gray-300 rounded-md py-2 px-3" />
+                                <input type="text" onChange={handleInputChange} value={member_cnt}
+                                     id="member_cnt" name="member_cnt" placeholder="본인 포함 총 인원(최대 100명)" className="w-full border border-gray-300 rounded-md py-2 px-3" />
                             </div>
                         </div>
                         <div className="">
@@ -139,9 +167,9 @@ const RSVP_input = ({handleOpenRSVP_input}) => {
                             <div className="mt-2">
                                 <ul className="grid w-full grid-cols-2">
                                 <li className="px-3 grid">
-                                        <input type="radio" name="meal" id="meal1" value="1" className="hidden peer"
+                                        <input type="radio" name="meal_option" id="meal1" value="1" className="hidden peer"
                                                 checked={selectedMealOption === '1'}
-                                                onChange={handleOptionChange}  required />
+                                                onChange={handleInputChange}  required />
                                         <label htmlFor="meal1" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
                                                                             ${selectedMealOption === '1' ? 'text-white' : 'bg-white'}`} 
                                                                             style={selectedMealOption === '1' ? { backgroundColor: '#64748b' } : { backgroundColor: 'white' }}
@@ -150,9 +178,9 @@ const RSVP_input = ({handleOpenRSVP_input}) => {
                                         </label>
                                     </li>
                                     <li className="px-3 grid">
-                                        <input type="radio" name="meal" id="meal2" value="2" className="hidden peer"
+                                        <input type="radio" name="meal_option" id="meal2" value="2" className="hidden peer"
                                                 checked={selectedMealOption === '2'}
-                                                onChange={handleOptionChange} required />
+                                                onChange={handleInputChange} required />
                                         <label htmlFor="meal2" className={`text-center w-full py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
                                                                         ${selectedMealOption === '2' ? 'text-white' : 'bg-white'}`} 
                                                                         style={selectedMealOption === '2' ? { backgroundColor: '#64748b' } : { backgroundColor: 'white' }}
@@ -165,7 +193,7 @@ const RSVP_input = ({handleOpenRSVP_input}) => {
                         </div>
                         <div className="row-wrap row-wrap-6">
                             <span className="font-bold">추가 전달 사항</span>
-                            <textarea id="additionalNote" name="additionalNote" maxLength={100} className="mt-2 w-full border border-gray-300 rounded-md py-2 px-3 h-28 resize-none" placeholder="추가적으로 주최자에게 전달하고 싶은 내용을 작성해 주세요." />
+                            <textarea id="memo" onChange={handleInputChange} name="memo" maxLength={100} className="mt-2 w-full border border-gray-300 rounded-md py-2 px-3 h-28 resize-none" placeholder="추가적으로 주최자에게 전달하고 싶은 내용을 작성해 주세요." />
                         </div>
                         <div className="row-wrap personal-info">
                             <label className="item-ttl block mb-1">
@@ -185,12 +213,12 @@ const RSVP_input = ({handleOpenRSVP_input}) => {
                             </div>
                         </div>
                     </div>
+                    <div className="buttons mt-4 flex justify-center">
+                        <button type="submit" className="bg-slate-700 text-white py-3 w-full border border-slate-600 rounded-md">
+                            참석 여부 전달하기
+                        </button>
+                    </div>
                 </form>
-            </div>
-            <div className="buttons mt-4 flex justify-center">
-                <button onSubmit={handleRSVPsubmit} type="submit" className="bg-slate-700 text-white py-3 w-full border border-slate-600 rounded-md">
-                    참석 여부 전달하기
-                </button>
             </div>
         </div>
     </div>

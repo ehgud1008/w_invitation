@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import RSVP_input from '../components/RSVP_input';
 
-const RSVP = () => {
+const RSVP = ({seq}) => {
     const [isOpenInput, setIsOpenInput] = useState(false);
 
     const handleOpenRSVP_input = () => {
@@ -24,7 +24,7 @@ const RSVP = () => {
         </div>
         <div className="w-full h-1 bg-gray-100"/>
         
-        {isOpenInput && <RSVP_input handleOpenRSVP_input={handleOpenRSVP_input}  />}
+        {isOpenInput && <RSVP_input handleOpenRSVP_input={handleOpenRSVP_input} seq={seq} />}
 
     </div>
   )
