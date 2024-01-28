@@ -5,17 +5,18 @@ const RSVP_input = ({handleOpenRSVP_input, seq}) => {
     const [selectedAttendOption, setSelectedAttendOption] = useState('');   //참석 여부 구분
     const [selectedMealOption, setSelectedMealOption] = useState('');       //식사 여부 구분
     
-    const [member_cnt, setMember_cnt] = useState('');   //동행인원 
-
     const [rsvpFormData, setRsvpFormData] = useState({
         name : '',
         contact : '',
-        member_cnt : 1,
+        member_cnt : '',
         memo : '',
         side_option : 0,
         attend_option : 0, 
         meal_option : 0,
     });
+
+    //TODO 
+    //개인정보 수집 동의 동의 받고 등록하기
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -35,35 +36,78 @@ const RSVP_input = ({handleOpenRSVP_input, seq}) => {
             const regex = /^[0-9]*$/;
             if (regex.test(value)) {
                 if(value <= 100){
-                    setMember_cnt(value);
+                    setRsvpFormData({ ...rsvpFormData, [name]: value });
                 }else{
+                    setRsvpFormData({ ...rsvpFormData, [name]: 1 }); // 값을 리셋
+                    console.log(rsvpFormData.member_cnt);
                     alert("100명 이하 인원만 입력해주세요");
                 }
             }else{
+                setRsvpFormData({ ...rsvpFormData, [name]: 1 }); // 값을 리셋
                 alert("숫자만 입력해주세요");
             }
-        }
-            
+        }else{
             setRsvpFormData({
-            ...rsvpFormData,
-            [name]: value
-        });
+                ...rsvpFormData,
+                [name]: value
+            });
+        }
     }
     
     const handleRSVPsubmit = async (e) => {
         e.preventDefault();
-        co
+        // 유효성 검사 예시
+        if (!rsvpFormData.name.trim()) {
+            alert('성함을 입력해주세요.');
+            return;
+        }
+
+        if (!rsvpFormData.contact.trim()) {
+            alert('연락처를 입력해주세요.');
+            return;
+        }
+        
+        if (!rsvpFormData.member_cnt) {
+            alert('동행인원을 입력해주세요.');
+            return;
+        }
+        
+        if (!rsvpFormData.side_option) {
+            alert('신랑측/신부측 여부를 선택해주세요.');
+            return;
+        }
+        if (!rsvpFormData.attend_option) {
+            alert('참석여부를 선택해주세요.');
+            return;
+        }
+        if (!rsvpFormData.meal_option) {
+            alert('식사여부를 선택해주세요.');
+            return;
+        }
+        // 연락처 형식 검사 (예시: 한국 전화번호 형식)
+        const phoneRegex = /^\d{2,3}-\d{3,4}-\d{4}$/;
+        if (!phoneRegex.test(rsvpFormData.contact)) {
+            alert('올바른 연락처 형식이 아닙니다.');
+            return;
+        }
         try {
             const res = await fetch('/api/rsvp/registRSVP', {
                 method : 'POST',
                 headers : {
                     'Content-Type' : 'application/json',
                 },
-                // body : JSON.stringify{
-                //     ...rsvpFormData,
-                //     wedding_seq : seq,
-                // },
+                body : JSON.stringify({
+                    ...rsvpFormData,
+                    wedding_seq : seq,
+                }),
             });
+            if (res.ok) {
+                alert('참석 여부가 등록되었습니다.');
+                // 추가적인 처리 (예: 페이지 리디렉션)
+                handleOpenRSVP_input();
+            } else {
+                alert('오류가 발생했습니다. 다시 시도해주세요.');
+            }
         } catch (error) {
             console.log(error);
         }
@@ -88,7 +132,7 @@ const RSVP_input = ({handleOpenRSVP_input, seq}) => {
                                     <li className="px-3 grid">
                                         <input type="radio" name="side_option" id="side1" value="1" className="hidden peer"
                                                 checked={selectedSideOption === '1'}
-                                                onChange={handleInputChange}  required />
+                                                onChange={handleInputChange}  />
                                         <label htmlFor="side1" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
                                                                             ${selectedSideOption === '1' ? 'text-blue-700' : 'bg-white'}`} 
                                                                             style={selectedSideOption === '1' ? { backgroundColor: '#e4f0ff' } : { backgroundColor: 'white' }}
@@ -99,7 +143,7 @@ const RSVP_input = ({handleOpenRSVP_input, seq}) => {
                                     <li className="px-3 grid">
                                         <input type="radio" name="side_option" id="side2" value="2" className="hidden peer"
                                                 checked={selectedSideOption === '2'}
-                                                onChange={handleInputChange} required />
+                                                onChange={handleInputChange} />
                                         <label htmlFor="side2" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
                                                                         ${selectedSideOption === '2' ? 'text-purple-700' : 'bg-white'}`} 
                                                                         style={selectedSideOption === '2' ? { backgroundColor: '#f6edff' } : { backgroundColor: 'white' }}
@@ -117,7 +161,7 @@ const RSVP_input = ({handleOpenRSVP_input, seq}) => {
                                     <li className="px-3 grid">
                                         <input type="radio" name="attend_option" id="attend1" value="1" className="hidden peer"
                                                 checked={selectedAttendOption === '1'}
-                                                onChange={handleInputChange}  required />
+                                                onChange={handleInputChange}   />
                                         <label htmlFor="attend1" className={`text-center w-full px-5 py-3 font-bold bg-slate-700 bg-white border border-slate-400 rounded-lg cursor-pointer 
                                                                             ${selectedAttendOption === '1' ? 'text-white' : 'bg-white'}`} 
                                                                             style={selectedAttendOption === '1' ? { backgroundColor: '#64748b' } : { backgroundColor: 'white' }}
@@ -128,7 +172,7 @@ const RSVP_input = ({handleOpenRSVP_input, seq}) => {
                                     <li className="px-3 grid">
                                         <input type="radio" name="attend_option" id="attend2" value="2" className="hidden peer"
                                                 checked={selectedAttendOption === '2'}
-                                                onChange={handleInputChange} required />
+                                                onChange={handleInputChange} />
                                         <label htmlFor="attend2" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
                                                                         ${selectedAttendOption === '2' ? 'text-white' : 'bg-white'}`} 
                                                                         style={selectedAttendOption === '2' ? { backgroundColor: '#64748b' } : { backgroundColor: 'white' }}
@@ -158,7 +202,7 @@ const RSVP_input = ({handleOpenRSVP_input, seq}) => {
                                 <span className="font-bold">동행인원</span><span className="point text-red-500">*</span>
                             </label>
                             <div className="inner">
-                                <input type="text" onChange={handleInputChange} value={member_cnt}
+                                <input type="number" onChange={handleInputChange} value={rsvpFormData.member_cnt}
                                      id="member_cnt" name="member_cnt" placeholder="본인 포함 총 인원(최대 100명)" className="w-full border border-gray-300 rounded-md py-2 px-3" />
                             </div>
                         </div>
@@ -169,7 +213,7 @@ const RSVP_input = ({handleOpenRSVP_input, seq}) => {
                                 <li className="px-3 grid">
                                         <input type="radio" name="meal_option" id="meal1" value="1" className="hidden peer"
                                                 checked={selectedMealOption === '1'}
-                                                onChange={handleInputChange}  required />
+                                                onChange={handleInputChange}  />
                                         <label htmlFor="meal1" className={`text-center w-full px-5 py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
                                                                             ${selectedMealOption === '1' ? 'text-white' : 'bg-white'}`} 
                                                                             style={selectedMealOption === '1' ? { backgroundColor: '#64748b' } : { backgroundColor: 'white' }}
@@ -180,7 +224,7 @@ const RSVP_input = ({handleOpenRSVP_input, seq}) => {
                                     <li className="px-3 grid">
                                         <input type="radio" name="meal_option" id="meal2" value="2" className="hidden peer"
                                                 checked={selectedMealOption === '2'}
-                                                onChange={handleInputChange} required />
+                                                onChange={handleInputChange} />
                                         <label htmlFor="meal2" className={`text-center w-full py-3 font-bold bg-white border border-slate-400 rounded-lg cursor-pointer 
                                                                         ${selectedMealOption === '2' ? 'text-white' : 'bg-white'}`} 
                                                                         style={selectedMealOption === '2' ? { backgroundColor: '#64748b' } : { backgroundColor: 'white' }}

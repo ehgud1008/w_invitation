@@ -59,7 +59,7 @@ const Message = ({seq}) => {
                 }),
             });
             const data = await res.json();
-
+            
             setSubmitLoading(false);
             if(data.success === false){
                 setSubmitError(data.message);
@@ -113,6 +113,10 @@ const Message = ({seq}) => {
         setPage(startPage + index - 1); // 수정된 코드
     }
 
+    //메시지 삭제
+    const handleMessageDelete = () => {
+        //TODO 해당 메시지 삭제
+    }
     useEffect( () => {
         if(seq) {
             const fetchMessageData = async () => {
@@ -175,7 +179,7 @@ const Message = ({seq}) => {
                                     <div className="text-sm">{message.reg_date}</div>
                                 </div>
                                 <p className="mb-2">{message.message}</p>
-                                <a href="" className="text-red-500">댓글삭제</a>
+                                <a href="" className="text-red-500" onClick={handleMessageDelete}>댓글삭제</a>
                             </li>
                         </ul>
                     ))) : 
