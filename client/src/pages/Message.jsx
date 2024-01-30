@@ -147,8 +147,8 @@ const Message = ({seq}) => {
     }, [seq, page]);
 
   return (
-    <div className="md:px-40 bg-white px-5">
-        <div className="py-8">
+    <div className='mx-auto bg-fafafa sm:w-full md:w-2/4'>
+        <div className="p-8">
             <div className="grid place-items-center text-md font-bold mb-4">Guest Book</div>
             <div className="grid place-items-center text-sm mb-5">축하 메시지를 남겨주세요.</div>
             <form onSubmit={handleSubmit} className='flex flex-col gap-4 mb-5'>

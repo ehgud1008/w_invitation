@@ -37,10 +37,10 @@ const Account = ({seq}) => {
         }
     }
   return (
-    <div className="pt-10 pb-10 bg-white">
-        <p className='mt-10 mb-5 grid place-items-center '>마음 전하실 곳</p>
+    <div className='mx-auto bg-fafafa sm:w-full md:w-2/4'>
+        <p className='pt-10 pb-5 grid place-items-center '>마음 전하실 곳</p>
         <div className="grid place-items-center mb-3">
-            <div className="md:w-2/4 xs:w-4/5 rounded overflow-hidden">
+            <div className="px-10 w-full rounded overflow-hidden">
                 <div className="border border-b bg-sky-50 py-2 cursor-pointer" onClick={toggleAccordion1}>
                     <div className="flex justify-between items-center">
                         <div className="flex items-center ml-3">

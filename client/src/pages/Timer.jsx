@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { MarriageContext } from '../context/MarriageContext';
 
 const Timer = ({wedding_date}) => {
     const [day, setDay] = useState('');
     const [hour, setHour] = useState('');
     const [minute, setMinute] = useState('');
     const [second, setSecond] = useState('');
+
+    const { marriageData } = useContext(MarriageContext);
 
     useEffect( () => {
         if(wedding_date){
@@ -60,51 +63,49 @@ const Timer = ({wedding_date}) => {
         }    
     }, [wedding_date, day, hour, minute, second]);
     return (
-        <div className='mb-20'>
-            <div className='flex justify-center items-center bg-white shadow-lg rounded-lg py-4'>
+        <div className='mx-auto bg-fafafa sm:w-full md:w-2/4'>
+            {/* <div className='flex justify-center items-center bg-white shadow-lg rounded-lg py-4'>
                 <div className='mx-5 bg-gray-100 text-gray-800 rounded-lg shadow px-6 py-3 text-lg font-semibold'>
-                    {day} <span className='text-sm text-gray-500'>Days</span>
+                    <span className='text-sm text-gray-500'>Days</span>{day} 
                 </div>
                 <div className='mx-5 bg-gray-100 text-gray-800 rounded-lg shadow px-6 py-3 text-lg font-semibold'>
-                    {hour} <span className='text-sm text-gray-500'>Hours</span>
+                   <span className='text-sm text-gray-500'>Hours</span>{hour} 
                 </div>
                 <div className='mx-5 bg-gray-100 text-gray-800 rounded-lg shadow px-6 py-3 text-lg font-semibold'>
-                    {minute} <span className='text-sm text-gray-500'>Minutes</span>
+                    <span className='text-sm text-gray-500'>Minutes</span>{minute} 
                 </div>
                 <div className='mx-5 bg-gray-100 text-gray-800 rounded-lg shadow px-6 py-3 text-lg font-semibold'>
-                    {second} <span className='text-sm text-gray-500'>Seconds</span>
+                    <span className='text-sm text-gray-500'>Seconds</span>{second} 
                 </div>
-            </div>
+            </div> */}
 
-            <div class="flex justify-center items-center space-x-1 text-gray-700">
-            <div class="flex flex-col items-center">
-                <span class="text-sm font-medium">DAYS</span>
-                <span class="font-semibold">115</span>
+            <div className="">
+                <div className='flex justify-center items-center '>
+                    <div className="flex flex-col items-center px-3">
+                        <span className="text-sm font-medium">DAYS</span>
+                        <span className="font-semibold">{day} </span>
+                    </div>
+                    <div className="flex flex-col items-center px-3">
+                        <span className="text-sm font-medium">HOUR</span>
+                        <span className="font-semibold">{hour}</span>
+                    </div>
+                    <div className="flex flex-col items-center px-3">
+                        <span className="text-sm font-medium">MIN</span>
+                        <span className="font-semibold">{minute}</span>
+                    </div>
+                    <div className="flex flex-col items-center px-3">
+                        <span className="text-sm font-medium">SEC</span>
+                        <span className="font-semibold">{second}</span>
+                    </div>
+                </div>
             </div>
-            <div class="flex flex-col items-center">
-                <span class="font-semibold">&nbsp;</span>    
-                <span class="font-semibold">:</span>
-            </div>
-            <div class="flex flex-col items-center">
-                <span class="text-sm font-medium">HOUR</span>
-                <span class="font-semibold">20</span>
-            </div>
-            <span class="font-semibold">:</span>
-            <div class="flex flex-col items-center">
-                <span class="text-sm font-medium">MIN</span>
-                <span class="font-semibold">48</span>
-            </div>
-            <span class="font-semibold">:</span>
-            <div class="flex flex-col items-center">
-                <span class="text-sm font-medium">SEC</span>
-                <span class="font-semibold">37</span>
-            </div>
-            </div>
-            <div class="text-center">
-            <span class="text-base">지금, 나의 결혼식이</span>
-            <span class="text-lg font-semibold">116일</span>
-            <span class="text-base">남았습니다.</span>
-            </div>
+            {marriageData && (
+                <div className="text-center">
+                    <span className="">{marriageData.groom_ko.substr(1)}, {marriageData.bride_ko.substr(1)}의 결혼식이 </span>
+                    <span className=" font-semibold">{day}일 </span>
+                    <span className="">남았습니다.</span>
+                </div>
+            )}
         </div>
         
   )

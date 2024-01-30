@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 body{
-    /* background-color: rgb(241, 245, 241); */
-    background-image: url('../images/background.jpg');
+    background-color: #efefef;
+    /* background-image: url('../images/background.jpg'); */
     width: 100%;
     height: 100%;
 }
