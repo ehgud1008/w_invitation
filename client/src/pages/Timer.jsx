@@ -75,7 +75,38 @@ const Timer = ({wedding_date}) => {
                     {second} <span className='text-sm text-gray-500'>Seconds</span>
                 </div>
             </div>
+
+            <div class="flex justify-center items-center space-x-1 text-gray-700">
+            <div class="flex flex-col items-center">
+                <span class="text-sm font-medium">DAYS</span>
+                <span class="font-semibold">115</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <span class="font-semibold">&nbsp;</span>    
+                <span class="font-semibold">:</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <span class="text-sm font-medium">HOUR</span>
+                <span class="font-semibold">20</span>
+            </div>
+            <span class="font-semibold">:</span>
+            <div class="flex flex-col items-center">
+                <span class="text-sm font-medium">MIN</span>
+                <span class="font-semibold">48</span>
+            </div>
+            <span class="font-semibold">:</span>
+            <div class="flex flex-col items-center">
+                <span class="text-sm font-medium">SEC</span>
+                <span class="font-semibold">37</span>
+            </div>
+            </div>
+            <div class="text-center">
+            <span class="text-base">지금, 나의 결혼식이</span>
+            <span class="text-lg font-semibold">116일</span>
+            <span class="text-base">남았습니다.</span>
+            </div>
         </div>
+        
   )
 }
 
