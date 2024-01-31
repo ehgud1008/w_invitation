@@ -23,6 +23,7 @@ export default {
         'accordion-blue' : '#edeef1',
         'accordion-rose' : '#f7f3f4',
         'fafafa': '#fafafa',
+        'eee' : '#eee',
       }
     },
     screens: {
