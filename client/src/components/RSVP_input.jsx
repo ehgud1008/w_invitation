@@ -35,15 +35,14 @@ const RSVP_input = ({handleOpenRSVP_input, seq}) => {
             // 숫자만 입력되도록 제한
             const regex = /^[0-9]*$/;
             if (regex.test(value)) {
-                if(value <= 100){
+                if(value <= 10){
                     setRsvpFormData({ ...rsvpFormData, [name]: value });
                 }else{
-                    setRsvpFormData({ ...rsvpFormData, [name]: 1 }); // 값을 리셋
-                    console.log(rsvpFormData.member_cnt);
-                    alert("100명 이하 인원만 입력해주세요");
+                    setRsvpFormData({ ...rsvpFormData, [name]: '' }); // 값을 리셋
+                    alert("10명 이하 인원만 입력해주세요");
                 }
             }else{
-                setRsvpFormData({ ...rsvpFormData, [name]: 1 }); // 값을 리셋
+                setRsvpFormData({ ...rsvpFormData, [name]: '' }); // 값을 리셋
                 alert("숫자만 입력해주세요");
             }
         }else{
@@ -62,15 +61,11 @@ const RSVP_input = ({handleOpenRSVP_input, seq}) => {
             return;
         }
 
-        if (!rsvpFormData.contact.trim()) {
-            alert('연락처를 입력해주세요.');
-            return;
-        }
+        // if (!rsvpFormData.contact.trim()) {
+        //     alert('연락처를 입력해주세요.');
+        //     return;
+        // }
         
-        if (!rsvpFormData.member_cnt) {
-            alert('동행인원을 입력해주세요.');
-            return;
-        }
         
         if (!rsvpFormData.side_option) {
             alert('신랑측/신부측 여부를 선택해주세요.');
@@ -80,16 +75,32 @@ const RSVP_input = ({handleOpenRSVP_input, seq}) => {
             alert('참석여부를 선택해주세요.');
             return;
         }
+        
+        if (!rsvpFormData.member_cnt) {
+            alert('동행인원을 입력해주세요.');
+            return;
+        }else{
+            if(rsvpFormData.member_cnt > 10){
+                setRsvpFormData({ ...rsvpFormData, member_cnt: '' }); // 값을 리셋
+                alert('10명 이하 인원만 입력해주세요.');
+                return;
+            }
+        }
+
+        if (rsvpFormData.contact) {
+            // 연락처 형식 검사 (예시: 한국 전화번호 형식)
+            const phoneRegex = /^\d{2,3}-\d{3,4}-\d{4}$/;
+            if (!phoneRegex.test(rsvpFormData.contact)) {
+                alert('올바른 연락처 형식이 아닙니다.');
+                return;
+            }
+        }
+
         if (!rsvpFormData.meal_option) {
             alert('식사여부를 선택해주세요.');
             return;
         }
-        // 연락처 형식 검사 (예시: 한국 전화번호 형식)
-        const phoneRegex = /^\d{2,3}-\d{3,4}-\d{4}$/;
-        if (!phoneRegex.test(rsvpFormData.contact)) {
-            alert('올바른 연락처 형식이 아닙니다.');
-            return;
-        }
+
         try {
             const res = await fetch('/api/rsvp/registRSVP', {
                 method : 'POST',
@@ -112,9 +123,10 @@ const RSVP_input = ({handleOpenRSVP_input, seq}) => {
             console.log(error);
         }
     }
+    // <div className='mx-auto bg-fafafa sm:w-full md:w-2/5'></div>
   return (
-    <div className="fixed top-0 left-0 w-full h-full justify-center items-center bg-black bg-opacity-50 z-50 overflow-scroll">
-        <div className="bg-white w-full py-6 px-6 ">
+    <div className="mx-auto sm:w-full md:w-2/5 fixed top-0 w-full h-full justify-center items-center z-50 overflow-scroll">
+        <div className="bg-white py-6 px-6 ">
             <div className="">
                 <form onSubmit={handleRSVPsubmit}>
                     <div className="grid justify-center py-3 font-bold text-lg">
@@ -191,7 +203,7 @@ const RSVP_input = ({handleOpenRSVP_input, seq}) => {
                         </div>
                         <div className="row-wrap row-wrap-3">
                             <label htmlFor="contact" className="item-ttl block mb-1">
-                                <span className="font-bold">대표 연락처</span><span className="point text-red-500">*</span>
+                                <span className="font-bold">대표 연락처</span>
                             </label>
                             <div className="inner">
                                 <input type="text" id="contact" name="contact" onChange={handleInputChange} className="w-full border border-gray-300 rounded-md py-2 px-3"  maxLength="13" placeholder="대표연락처를 입력해주세요(-제외)."/>
@@ -203,7 +215,7 @@ const RSVP_input = ({handleOpenRSVP_input, seq}) => {
                             </label>
                             <div className="inner">
                                 <input type="number" onChange={handleInputChange} value={rsvpFormData.member_cnt}
-                                     id="member_cnt" name="member_cnt" placeholder="본인 포함 총 인원(최대 100명)" className="w-full border border-gray-300 rounded-md py-2 px-3" />
+                                     id="member_cnt" name="member_cnt" placeholder="본인 포함 총 인원(최대 10명)" className="w-full border border-gray-300 rounded-md py-2 px-3" />
                             </div>
                         </div>
                         <div className="">
@@ -229,7 +241,7 @@ const RSVP_input = ({handleOpenRSVP_input, seq}) => {
                                                                         ${selectedMealOption === '2' ? 'text-white' : 'bg-white'}`} 
                                                                         style={selectedMealOption === '2' ? { backgroundColor: '#64748b' } : { backgroundColor: 'white' }}
                                                                         >
-                                            식사 불가(답례품 수령)
+                                            식사 불가
                                         </label>
                                     </li>
                                 </ul>

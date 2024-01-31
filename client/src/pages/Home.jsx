@@ -71,27 +71,29 @@ const Home = ({setWeddingDate, setSeq}) => {
   // 결혼날짜, 메인사진, 갤러리 사진(최대 10장), 영상링크하나,
   //식장 주소, 식장 약도, 식장번호, [지하철(호선, 출구, 도보)], [버스(정류장)]
   return (
-    <main className='mx-auto bg-fafafa sm:w-full md:w-2/4'>
+    <main className='mx-auto bg-fafafa sm:w-full md:w-2/5'>
       {marriageData && 
         (
-          <div className="flex flex-col items-center justify-center min-h-screen pt-20">
-              <div className="flex font-bold mb-4 items-center">
-                <span className='col'>
-                  <p className='text-lg tracking-widest'>{marriageData.groom_ko}</p>
-                </span>
-                <span className='grid place-items-center mx-5 tracking-widest indent-3.5'>
-                  <p className='text-xl border-solid border-b-2 border-slate-500'>{stringFormatDate(marriageData.wedding_date, "M")}</p>
-                  <p className='text-xl'>{stringFormatDate(marriageData.wedding_date, "D")}</p>
-                </span>
-                <span className='col'>
-                  <p className='text-lg ml-5 tracking-widest'>{marriageData.bride_ko}</p>
-                </span>
+          <div className="flex flex-col min-h-screen pt-20">
+              <div className="flex flex-col  border-l-2 border-black ml-8">
+                <div className='pl-5 text-2xl'>
+                  {stringFormatDate(marriageData.wedding_date, "Y")} / {stringFormatDate(marriageData.wedding_date, "M")} / {stringFormatDate(marriageData.wedding_date, "D")}
+                </div>
+                <div className='pl-5 text-xl'>
+                  {stringFormatDate(marriageData.wedding_date, "W")}
+                </div>
               </div>
               {/* <img src="/images/wedding_sample.jpg" alt="신랑 & 신부" className="rounded-full h-40 w-40 object-cover mb-4 animate-pulse" /> */}
-              <div className='mx-8 mt-5'>
-                <img src="/images/wedding_sample.jpg" alt="신랑 & 신부" className="full h-100 w-50 object-cover mb-8 aspect-[2/3]"/>
+              <div className='px-8 pt-5'>
+                <img src="/images/wedding_sample.jpg" alt="신랑 & 신부" className="full h-50 w-50 object-cover aspect-[9/10]"/>
               </div>
-              <p className="text-md text-gray-700 mb-8 text-center">
+              <div className='pr-8 grid justify-end text-xl mt-5 mb-3'>
+                {marriageData.groom_ko} / {marriageData.bride_ko}
+              </div>
+              <div className='pr-8 grid justify-end text-xl'>
+                {stringFormatDate(marriageData.wedding_date, "W")} {stringFormatDate(marriageData.wedding_date, "A")} {stringFormatDate(marriageData.wedding_date, "H")} 시 {stringFormatDate(marriageData.wedding_date, "MM")}
+              </div>
+              {/* <p className="text-md text-gray-700 mb-8 text-center">
                 {stringFormatDate(marriageData.wedding_date, "Y")}년&nbsp;
                 {stringFormatDate(marriageData.wedding_date, "M")}월&nbsp;
                 {stringFormatDate(marriageData.wedding_date, "D")}일&nbsp;
@@ -100,7 +102,7 @@ const Home = ({setWeddingDate, setSeq}) => {
                 {stringFormatDate(marriageData.wedding_date, "H")}시&nbsp;
                 {stringFormatDate(marriageData.wedding_date, "MM")}<br/>
 
-              </p>
+              </p> */}
               <div className='mx-20 mt-5 grid place-items-center mb-16'>
                 <img src='/images/wedding.png' className='w-40 h-40'/>
                 <p className='text-center leading-9'>

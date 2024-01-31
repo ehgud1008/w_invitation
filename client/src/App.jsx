@@ -25,7 +25,7 @@ export default function App() {
     <MarriageProvider>
       <LocationProvider>
           <BrowserRouter>
-            <Header />
+            {/* <Header /> */}
             <Routes> 
               <Route path='/wedding/:url' element={<Home setWeddingDate={setWeddingDate} setSeq={setSeq}/>} />
             </Routes>

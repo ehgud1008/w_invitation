@@ -99,7 +99,7 @@ const Calendar = ({wedding_date}) => {
 
     
   return (
-    <div className='mx-auto bg-fafafa sm:w-full md:w-2/4'>
+    <div className='mx-auto bg-fafafa sm:w-full md:w-2/5'>
       <div className="calendar-section p-4 pb-10 pt-10">
         <div className="calendar-wrap">
           <div className="relative bg-white rounded-lg shadow-md p-4">

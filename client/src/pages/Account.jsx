@@ -37,7 +37,7 @@ const Account = ({seq}) => {
         }
     }
   return (
-    <div className='mx-auto bg-fafafa sm:w-full md:w-2/4'>
+    <div className='mx-auto bg-fafafa sm:w-full md:w-2/5'>
         <p className='pt-10 pb-5 grid place-items-center '>마음 전하실 곳</p>
         <div className="grid place-items-center mb-3">
             <div className="px-10 w-full rounded overflow-hidden">

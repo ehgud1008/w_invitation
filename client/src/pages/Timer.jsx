@@ -63,7 +63,7 @@ const Timer = ({wedding_date}) => {
         }    
     }, [wedding_date, day, hour, minute, second]);
     return (
-        <div className='mx-auto bg-fafafa sm:w-full md:w-2/4'>
+        <div className='mx-auto bg-fafafa sm:w-full md:w-2/5'>
             {/* <div className='flex justify-center items-center bg-white shadow-lg rounded-lg py-4'>
                 <div className='mx-5 bg-gray-100 text-gray-800 rounded-lg shadow px-6 py-3 text-lg font-semibold'>
                     <span className='text-sm text-gray-500'>Days</span>{day} 

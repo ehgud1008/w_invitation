@@ -147,7 +147,7 @@ const Message = ({seq}) => {
     }, [seq, page]);
 
   return (
-    <div className='mx-auto bg-fafafa sm:w-full md:w-2/4'>
+    <div className='mx-auto bg-fafafa sm:w-full md:w-2/5'>
         <div className="p-8">
             <div className="grid place-items-center text-md font-bold mb-4">Guest Book</div>
             <div className="grid place-items-center text-sm mb-5">축하 메시지를 남겨주세요.</div>
