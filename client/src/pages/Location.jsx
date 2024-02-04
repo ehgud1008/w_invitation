@@ -87,26 +87,13 @@ const Location = ({seq}) => {
 
   return (
     <div className='mx-auto bg-white overflow-x-hidden 2xs:w-1/1 xs:w-full sm:w-3/4 md:w-2/4 lg:w-2/5 xl:w-1/3'>
-      <div className="grid place-items-center text-xl font-bold py-5">오 시 는 길</div>
+      <div className="grid place-items-center text-xl font-bold mt-5 py-5">
+        <span>Location</span>
+        <span>오 시 는 길</span>
+      </div>
       <div id="map" className='w-full h-64 z-0'>
       </div>
       <div className="map-area bg-white p-6 rounded-lg">
-        <div className='flex'>
-          {/* <div className="mb-4">
-              <div className="text-lg font-semibold mb-2">웨딩 시그니처 4층 아너스홀</div>
-              <div className="text-sm mb-2">
-                  <p>서울시 마포구 양화로 87 (서교동378-7)</p>
-                  <p>Tel. 02-00-0000</p>
-              </div>
-          </div> */}
-        </div>
-          {/* <div id="map_canvas" className="map">
-              <div className="w-full h-full">
-                  <a href="https://map.kakao.com/?urlX=510720.0&amp;urlY=1124069.0&amp;itemId=26497843&amp;q=%EC%84%9C%EC%9A%B8%EC%88%B2A%ED%83%80%EC%9B%8C&amp;srcid=26497843&amp;map_type=TYPE_MAP&amp;from=roughmap" target="_blank">
-                      <img className="map rounded-lg" src="//t1.daumcdn.net/roughmap/imgmap/e4a136bdc0a737dd8c6a0812eebdb5fa1bfe55660e458c000633c51c83b13def" width="100%" height="100%" />
-                  </a>
-              </div>
-          </div> */}
           <div className='px-3 pb-3 w-full flex items-center justify-between'>
             <span className='flex items-center font-bold'>
               <img src='/images/location.png' className='w-4 h-4 mr-2' alt="location" />

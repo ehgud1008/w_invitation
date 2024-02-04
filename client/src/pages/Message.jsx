@@ -179,7 +179,7 @@ const Message = ({seq}) => {
                                     <div className="text-sm">{message.reg_date}</div>
                                 </div>
                                 <p className="mb-2">{message.message}</p>
-                                <a href="" className="text-red-500" onClick={handleMessageDelete}>댓글삭제</a>
+                                <a href="" className="text-red-500 text-xs" onClick={handleMessageDelete}>댓글삭제</a>
                             </li>
                         </ul>
                     ))) : 
