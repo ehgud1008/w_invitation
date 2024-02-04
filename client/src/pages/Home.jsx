@@ -4,50 +4,23 @@ import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/
 import { useParams } from 'react-router-dom';
 import { MarriageContext } from '../context/MarriageContext';
 import { LocationContext } from '../context/LocationContext';
+import ContactList from '../components/ContactList';
+import {stringFormatDate} from '../utils/CommonUtils';
 
 const Home = ({setWeddingDate, setSeq}) => {
   const params = useParams();
   const url = params.url;
   const { marriageData, setMarriageData } = useContext(MarriageContext);
   const {locationData} = useContext(LocationContext);
-  const weekNames = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
-  const weekEngNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  //날짜 뽑아오기('Y', 'M', 'D', "H", "MM", "S", "W")
-  const stringFormatDate = (dateString, format) => {
-    if (!dateString || !format) return '';
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
-    // 'YYYY-MM-DD hh:mm:ss' 형식의 문자열을 Date 객체로 변환
-    const date = new Date(dateString);
-  
-    // 유효한 날짜인지 확인
-    if (isNaN(date.getTime())) {
-      return '';
-    }
-  
-    switch (format) {
-      case 'Y':
-        return date.getFullYear().toString(); // 연도 반환
-      case 'M':
-        return (date.getMonth() + 1).toString().padStart(2, '0'); // 월 반환 (1을 더하고 두 자리로 표시)
-      case 'D':
-        return date.getDate().toString().padStart(2, '0'); // 일 반환 (두 자리로 표시)
-      case 'H':
-        return date.getHours().toString(); // 시
-      case 'MM':
-        return date.getMinutes().toString() === "0" ? "" : date.getMinutes().toString() + "분"; // 분
-      case 'S':
-        return date.getSeconds().toString(); // 초
-      case 'W':
-        return weekNames[date.getDay()]; // 요일
-      case 'W-en':
-        return weekEngNames[date.getDay()]; // 요일
-      case 'A':
-        return date.getHours() > 12 ? '오후' : '오전'; // 오전/오후
-      default:
-        return '';
-    }
-  };
-  
+  const handleOpenContactList = () => {
+    console.log("DDDD");
+    setIsContactOpen(!isContactOpen);
+    if(!isContactOpen) document.body.style.overflow = 'hidden'; // 스크롤바를 숨깁니다.
+    else document.body.style.overflow = 'auto'; // 스크롤바를 다시 표시합니다.
+  }
+
   useEffect( () => {
     const fetchWeddingInfo = async () => {
       try {
@@ -75,10 +48,10 @@ const Home = ({setWeddingDate, setSeq}) => {
   // 결혼날짜, 메인사진, 갤러리 사진(최대 10장), 영상링크하나,
   //식장 주소, 식장 약도, 식장번호, [지하철(호선, 출구, 도보)], [버스(정류장)]
   return (
-    <main className='mx-auto bg-white sm:w-full md:w-2/5'>
+    <main className='mx-auto bg-white overflow-x-hidden sm:w-full md:w-2/5 xl:w-1/4'>
       {marriageData && 
         (
-          <div className="flex flex-col min-h-screen pt-20">
+          <div className="flex flex-col min-h-screen pt-28">
               <div className="flex flex-col  border-l-2 border-black ml-8 py-2">
                 <div className='pl-5 text-2xl'>
                   {stringFormatDate(marriageData.wedding_date, "Y")} / {stringFormatDate(marriageData.wedding_date, "M")} / {stringFormatDate(marriageData.wedding_date, "D")}
@@ -125,7 +98,9 @@ const Home = ({setWeddingDate, setSeq}) => {
                   <img src="/images/tel.png" className='w-5 h-5'/><span className='pl-2'>연락하기</span>
                 </button>
               </div>
-
+              
+              {isContactOpen && <ContactList handleOpenContactList={handleOpenContactList}/>}
+              
               {/* <div className='grid place-items-center mb-16 '>
                   <button className='flex items-center py-5 lg:px-56 md:px-32 sm:px-20 xs:px-16 rounded-lg text-rose-red font-semibold bg-rose-100 opacity-70'>
                     <img src='/images/interview2.png' className='w-5 h-5 mr-1.5' alt='interview' />신랑 & 신부의 인터뷰
