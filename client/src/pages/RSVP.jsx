@@ -11,7 +11,7 @@ const RSVP = ({seq}) => {
     }
       
   return (
-    <div className='mx-auto bg-fafafa sm:w-full md:w-2/5'>
+    <div className='mx-auto bg-white overflow-x-hidden 2xs:w-1/1 xs:w-full sm:w-3/4 md:w-2/4 lg:w-2/5 xl:w-1/3'>
         <div className="w-full h-1 bg-gray-100"/>
         <div className="mt-10 y-8 grid place-items-center">
             <p className='grid place-content-center text-md font-bold'>참석 여부 전달</p>

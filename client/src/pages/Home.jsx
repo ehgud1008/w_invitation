@@ -48,7 +48,7 @@ const Home = ({setWeddingDate, setSeq}) => {
   // 결혼날짜, 메인사진, 갤러리 사진(최대 10장), 영상링크하나,
   //식장 주소, 식장 약도, 식장번호, [지하철(호선, 출구, 도보)], [버스(정류장)]
   return (
-    <main className='mx-auto bg-white overflow-x-hidden sm:w-full md:w-2/5 xl:w-1/4'>
+    <main className='mx-auto bg-white overflow-x-hidden 2xs:w-1/1 xs:w-full sm:w-3/4 md:w-2/4 lg:w-2/5 xl:w-1/3'>
       {marriageData && 
         (
           <div className="flex flex-col min-h-screen pt-28">

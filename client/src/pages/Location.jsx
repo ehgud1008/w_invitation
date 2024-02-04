@@ -86,7 +86,7 @@ const Location = ({seq}) => {
   }, [seq]);
 
   return (
-    <div className='mx-auto bg-white sm:w-full md:w-1/4'>
+    <div className='mx-auto bg-white overflow-x-hidden 2xs:w-1/1 xs:w-full sm:w-3/4 md:w-2/4 lg:w-2/5 xl:w-1/3'>
       <div className="grid place-items-center text-xl font-bold py-5">오 시 는 길</div>
       <div id="map" className='w-full h-64 z-0'>
       </div>

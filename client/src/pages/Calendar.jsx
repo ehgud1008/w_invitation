@@ -125,8 +125,8 @@ const Calendar = ({wedding_date}) => {
     //     </div>
     //   </div>
     // </div>
-    <div className='mx-auto bg-fafafa sm:w-full md:w-1/4 px-8'>
-      <div className="calendar-section p-4 pb-10 pt-10">
+    <div className='mx-auto bg-white overflow-x-hidden 2xs:w-1/1 xs:w-full sm:w-3/4 md:w-2/4 lg:w-2/5 xl:w-1/3'>
+      <div className="calendar-section p-4 pb-10 pt-10 ">
         <div className='mx-auto text-center '>
           <div className='text-2xl'>
             {stringFormatDate(wedding_date, "Y")}.{stringFormatDate(wedding_date, "M")}.{stringFormatDate(wedding_date, "D")}

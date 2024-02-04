@@ -23,7 +23,7 @@ const Gallery = () => {
   }, []);
 
   return (
-      <div className='mx-auto bg-fafafa sm:w-full md:w-1/4'>
+    <div className='mx-auto bg-white overflow-x-hidden xs:w-full sm:w-3/4 md:w-2/4 lg:w-2/5 xl:w-1/3'>
         <div className='grid place-items-center mb-5'>
             <h1 className='text-3xl font-bold mb-2'> -Gellery-</h1>
             <h3 className='text-md'>두 사람의 사랑을 담은 순간</h3>
