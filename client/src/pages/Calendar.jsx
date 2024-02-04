@@ -70,11 +70,11 @@ const Calendar = ({wedding_date}) => {
             for(var j = 7*(i-1); j < 7*(i-1)+7; j++){
                 const condition = j >= firstDateIndex && j < lastDateIndex+1 ? 'in' : 'out';
                 if(j == 7*(i-1)){
-                    dates[j] = `<tr><td class="text-lg py-2 px-3 ${condition} text-center">${dates[j]}</td>`;    
+                    dates[j] = `<tr><td class="text-lg py-2 xs:px-3 ${condition} text-center">${dates[j]}</td>`;    
                 }else if (j == (7*(i-1)+7)-1){
-                    dates[j] = `<td class="text-lg py-2 px-3 ${condition} text-center">${dates[j]}</td></tr>`;   
+                    dates[j] = `<td class="text-lg py-2 xs:px-3 ${condition} text-center">${dates[j]}</td></tr>`;   
                 }else{
-                    dates[j] = `<td class="text-lg py-2 px-3 ${condition} text-center">${dates[j]}</td>`;
+                    dates[j] = `<td class="text-lg py-2 xs:px-3 ${condition} text-center">${dates[j]}</td>`;
                  }
             }
 
@@ -126,7 +126,7 @@ const Calendar = ({wedding_date}) => {
     //   </div>
     // </div>
     <div className='mx-auto bg-white overflow-x-hidden 2xs:w-1/1 xs:w-full sm:w-3/4 md:w-2/4 lg:w-2/5 xl:w-1/3'>
-      <div className="calendar-section p-4 pb-10 pt-10 ">
+      <div className="calendar-section xs:p-4 pb-10 pt-10 ">
         <div className='mx-auto text-center '>
           <div className='text-2xl'>
             {stringFormatDate(wedding_date, "Y")}.{stringFormatDate(wedding_date, "M")}.{stringFormatDate(wedding_date, "D")}
@@ -136,7 +136,7 @@ const Calendar = ({wedding_date}) => {
           </div>
         </div>
         <div className="calendar-wrap border-t border-b mt-5">
-          <div className="relative p-4">
+          <div className="relative xs:p-4 ">
             <div className="flex justify-between items-center">
             </div>
             <table className="w-full text-center">

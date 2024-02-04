@@ -123,9 +123,9 @@ const RSVP_input = ({handleOpenRSVP_input, seq}) => {
             console.log(error);
         }
     }
-    // <div className='mx-auto bg-fafafa sm:w-full md:w-2/5'></div>
+    // className='mx-auto bg-white overflow-x-hidden 2xs:w-1/1 xs:w-full sm:w-3/4 md:w-2/4 lg:w-2/5 xl:w-1/3'
   return (
-    <div className="mx-auto sm:w-full md:w-2/5 fixed top-0 w-full h-full justify-center items-center z-50 overflow-scroll">
+    <div className="mx-auto bg-white overflow-x-hidden 2xs:w-1/1 xs:w-full sm:w-3/4 md:w-2/4 lg:w-2/5 xl:w-1/3 fixed top-0 w-full h-full justify-center items-center z-50 overflow-scroll">
         <div className="bg-white py-6 px-6 ">
             <div className="">
                 <form onSubmit={handleRSVPsubmit}>
