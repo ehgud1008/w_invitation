@@ -95,43 +95,16 @@ const Calendar = ({wedding_date}) => {
 
     
   return (
-    // <div className='mx-auto bg-fafafa sm:w-full md:w-2/5'>
-    //   <div className="calendar-section p-4 pb-10 pt-10">
-    //     <div className="calendar-wrap">
-    //       <div className="relative bg-white rounded-lg p-4">
-    //         <div className="flex justify-between items-center mb-4">
-    //           <div className="font-bold"><span className='text-xl'>{monthEng}</span> <span className='text-md'>{dateNum}</span> </div>
-    //           <div className="day-time">
-    //               <span className="text-sm">{viewWeek} {viewDate}</span>
-    //           </div>
-    //         </div>
-    //         <table className="w-full text-center">
-    //           <thead>
-    //             <tr className="border-b">
-    //               <th className="py-2 text-red-500">Sun</th>
-    //               <th className="py-2">Mon</th>
-    //               <th className="py-2">Tue</th>
-    //               <th className="py-2">Wed</th>
-    //               <th className="py-2">Thu</th>
-    //               <th className="py-2">Fri</th>
-    //               <th className="py-2 text-blue-500">Sat</th>
-    //             </tr>
-    //           </thead>
-    //           <tbody dangerouslySetInnerHTML={ {__html:dates}}>
-    //           </tbody>
-    //         </table>
-    //       </div>
-          
-    //     </div>
-    //   </div>
-    // </div>
+    // color: #544f4f;
+    // font-weight: 400!important;
+    // text-shadow: 0 0 #aaa;
     <div className='mx-auto bg-white overflow-x-hidden 2xs:w-1/1 xs:w-full sm:w-3/4 md:w-2/4 lg:w-2/5 xl:w-1/3'>
       <div className="calendar-section xs:p-4 pb-10 pt-10 ">
         <div className='mx-auto text-center '>
-          <div className='text-2xl'>
+          <div className='text-xl opacity-90 text-544f4f font-semibold'>
             {stringFormatDate(wedding_date, "Y")}.{stringFormatDate(wedding_date, "M")}.{stringFormatDate(wedding_date, "D")}
           </div>
-          <div className='my-2 text-lg'>
+          <div className='my-2 text-md opacity-80 text-544f4f font-normal'>
             {stringFormatDate(wedding_date, "W")} {stringFormatDate(wedding_date, "A")} {stringFormatDate(wedding_date, "H")} {stringFormatDate(wedding_date, "MM")}
           </div>
         </div>
@@ -141,7 +114,7 @@ const Calendar = ({wedding_date}) => {
             </div>
             <table className="w-full text-center">
               <thead>
-                <tr className="">
+                <tr className="text-544f4f">
                   <th className="py-1 text-red-500">일</th>
                   <th className="py-1">월</th>
                   <th className="py-1">화</th>

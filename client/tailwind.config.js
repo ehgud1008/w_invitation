@@ -6,12 +6,12 @@ export default {
   ],
   theme: {
     letterSpacing: {
-      tightest: '-.075em',
-      tighter: '-.05em',
-      tight: '-.025em',
+      tightest: '-075em',
+      tighter: '-05em',
+      tight: '-025em',
       normal: '0',
-      wide: '.025em',
-      wider: '.0.8em',
+      wide: '0.25em',
+      wider: '0.8em',
       widest: '1em',
     },
     extend: {
@@ -24,6 +24,13 @@ export default {
         'accordion-rose' : '#f7f3f4',
         'fafafa': '#fafafa',
         'eee' : '#eee',
+        '544f4f' : '#544f4f',
+      },
+      fontFamily : {
+        'godo' : ['godo'],
+        'dodum' : ['dodum'],
+        'sans' : ['sans'],
+        'lora' : ['lora'],
       }
     },
     screens: {

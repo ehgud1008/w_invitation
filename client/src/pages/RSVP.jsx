@@ -14,7 +14,7 @@ const RSVP = ({seq}) => {
     <div className='mx-auto bg-white overflow-x-hidden 2xs:w-1/1 xs:w-full sm:w-3/4 md:w-2/4 lg:w-2/5 xl:w-1/3'>
         <div className="w-full h-1 bg-gray-100"/>
         <div className="mt-10 y-8 grid place-items-center">
-            <p className='grid place-content-center text-md font-bold'>참석 여부 전달</p>
+            <p className='grid place-content-center text-md font-bold '>참석 여부 전달</p>
             <p className='my-5 text-md py-5 text-center'>축하의 마음으로 참석해주시는 한 분 한 분<br />
                 귀한 마음으로 모실 수 있도록 <br />
                 부담없이 알려주시면 정성을 다해 준비하겠습니다.<br />

@@ -37,8 +37,11 @@ const Account = ({seq}) => {
         }
     }
   return (
-    <div className='mx-auto bg-white overflow-x-hidden 2xs:w-1/1 xs:w-full sm:w-3/4 md:w-2/4 lg:w-2/5 xl:w-1/3'>
-        <p className='pt-10 pb-5 grid place-items-center '>마음 전하실 곳</p>
+    <div className='mx-auto bg-white overflow-x-hidden 2xs:w-1/1 xs:w-full sm:w-3/4 md:w-2/4 lg:w-2/5 xl:w-1/3 pb-8'>
+        <div className=' grid place-items-center '>
+            <p className='pt-10 tracking-wide text-xs font-bold text-rose-400 mb-1 uppercase'>Account</p>
+            <p className='pb-5 text-lg font-bold text-rose-400'>마음 전하실 곳</p>
+        </div>
         <div className="grid place-items-center mb-3">
             <div className="px-10 w-full rounded overflow-hidden">
                 <div className="border border-b bg-sky-50 py-2 cursor-pointer" onClick={toggleAccordion1}>

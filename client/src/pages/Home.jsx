@@ -52,11 +52,11 @@ const Home = ({setWeddingDate, setSeq}) => {
       {marriageData && 
         (
           <div className="flex flex-col min-h-screen pt-28">
-              <div className="flex flex-col  border-l-2 border-black ml-8 py-2">
+              <div className="flex flex-col  border-l-2 border-black ml-8 py-2 font-lora">
                 <div className='pl-5 text-2xl'>
                   {stringFormatDate(marriageData.wedding_date, "Y")} / {stringFormatDate(marriageData.wedding_date, "M")} / {stringFormatDate(marriageData.wedding_date, "D")}
                 </div>
-                <div className='pl-5 text-xl uppercase'>
+                <div className='pl-5 text-md uppercase'>
                   {stringFormatDate(marriageData.wedding_date, "W-en")}
                 </div>
               </div>
@@ -64,10 +64,10 @@ const Home = ({setWeddingDate, setSeq}) => {
               <div className='px-8 pt-5'>
                 <img src="/images/wedding_sample.jpg" alt="신랑 & 신부" className="w-full object-cover aspect-[9/10]"/>
               </div>
-              <div className='pr-8 grid justify-end text-xl mt-5 mb-3'>
-                {marriageData.groom_ko} / {marriageData.bride_ko}
+              <div className='pr-8 grid justify-end text-xl mt-5 mb-3 font-dodum'>
+                {marriageData.groom_ko} · {marriageData.bride_ko}
               </div>
-              <div className='pr-8 grid justify-items-end text-md'>
+              <div className='pr-8 grid justify-items-end text-md font-dodum'>
                 <span>{stringFormatDate(marriageData.wedding_date, "W")} {stringFormatDate(marriageData.wedding_date, "A")} {stringFormatDate(marriageData.wedding_date, "H")} 시 {stringFormatDate(marriageData.wedding_date, "MM")}</span>
                 <span>{locationData && locationData.hall_name}</span>
               </div>
@@ -80,7 +80,7 @@ const Home = ({setWeddingDate, setSeq}) => {
                 {stringFormatDate(marriageData.wedding_date, "H")}시&nbsp;
                 {stringFormatDate(marriageData.wedding_date, "MM")}<br/>
               </p> */}
-              <div className='mx-20 mt-28 grid place-items-center mb-16'>
+              <div className='mx-20 mt-28 grid place-items-center mb-12'>
                 <img src='/images/wedding.png' className='w-40 h-40'/>
                 <p className='text-center leading-7'>
                   믿음으로 함께하고 사랑으로 하나되는 저희 약속의 자리에소중한 분들을 모시고자 합니다.<br/>

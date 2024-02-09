@@ -63,58 +63,43 @@ const Timer = ({wedding_date}) => {
         }    
     }, [wedding_date, day, hour, minute, second]);
     return (
-        <div className='mx-auto bg-white overflow-x-hidden 2xs:w-1/1 xs:w-full sm:w-3/4 md:w-2/4 lg:w-2/5 xl:w-1/3'>
-            {/* <div className='flex justify-center items-center bg-white shadow-lg rounded-lg py-4'>
-                <div className='mx-5 bg-gray-100 text-gray-800 rounded-lg shadow px-6 py-3 text-lg font-semibold'>
-                    <span className='text-sm text-gray-500'>Days</span>{day} 
-                </div>
-                <div className='mx-5 bg-gray-100 text-gray-800 rounded-lg shadow px-6 py-3 text-lg font-semibold'>
-                   <span className='text-sm text-gray-500'>Hours</span>{hour} 
-                </div>
-                <div className='mx-5 bg-gray-100 text-gray-800 rounded-lg shadow px-6 py-3 text-lg font-semibold'>
-                    <span className='text-sm text-gray-500'>Minutes</span>{minute} 
-                </div>
-                <div className='mx-5 bg-gray-100 text-gray-800 rounded-lg shadow px-6 py-3 text-lg font-semibold'>
-                    <span className='text-sm text-gray-500'>Seconds</span>{second} 
-                </div>
-            </div> */}
-
+        <div className='mx-auto bg-white overflow-x-hidden 2xs:w-1/1 xs:w-full sm:w-3/4 md:w-2/4 lg:w-2/5 xl:w-1/3 pt-3 pb-10'>
             <div className="">
                 <div className='flex justify-center items-center '>
                     <div className="flex flex-col items-center px-3">
-                        <span className="text-xs font-medium pb-2">DAYS</span>
-                        <span className="text-2xl font-semibold">{day} </span>
+                        <span className="text-xs text-gray-400 font-semibold pb-2">DAYS</span>
+                        <span className="text-2xl font-semibold text-544f4f">{day} </span>
                     </div>
                     <div className='grid'>
                         <span>&nbsp;</span>
                         <span> : </span>
                     </div>
                     <div className="flex flex-col items-center px-3">
-                        <span className="text-xs font-medium pb-2">HOUR</span>
-                        <span className="text-2xl font-semibold">{hour}</span>
+                        <span className="text-xs text-gray-400 font-semibold pb-2">HOUR</span>
+                        <span className="text-2xl font-semibold text-544f4f">{hour}</span>
                     </div>
                     <div className='grid'>
                         <span>&nbsp;</span>
                         <span> : </span>
                     </div>
                     <div className="flex flex-col items-center px-3">
-                        <span className="text-xs font-medium pb-2">MIN</span>
-                        <span className="text-2xl font-semibold">{minute}</span>
+                        <span className="text-xs text-gray-400 font-semibold pb-2">MIN</span>
+                        <span className="text-2xl font-semibold text-544f4f">{minute}</span>
                     </div>
                     <div className='grid'>
                         <span>&nbsp;</span>
                         <span> : </span>
                     </div>
                     <div className="flex flex-col items-center px-3">
-                        <span className="text-xs font-medium pb-2">SEC</span>
-                        <span className="text-2xl font-semibold">{second}</span>
+                        <span className="text-xs text-gray-400 font-semibold pb-2">SEC</span>
+                        <span className="text-2xl font-semibold text-544f4f">{second}</span>
                     </div>
                 </div>
             </div>
             {marriageData && (
-                <div className="text-lg text-center mt-4">
+                <div className="text-544f4f text-md text-center mt-4 font-semibold">
                     <span className="">{marriageData.groom_ko.substr(1)}, {marriageData.bride_ko.substr(1)}의 결혼식이 </span>
-                    <span className=" font-semibold">{day}일 </span>
+                    <span className="text-rose-400 font-semibold">{day}일 </span>
                     <span className="">남았습니다.</span>
                 </div>
             )}

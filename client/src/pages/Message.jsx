@@ -149,8 +149,8 @@ const Message = ({seq}) => {
   return (
     <div className='mx-auto bg-white overflow-x-hidden 2xs:w-1/1 xs:w-full sm:w-3/4 md:w-2/4 lg:w-2/5 xl:w-1/3'>
         <div className="p-8">
-            <div className="grid place-items-center text-md font-bold mb-4">Guest Book</div>
-            <div className="grid place-items-center text-sm mb-5">축하 메시지를 남겨주세요.</div>
+            <div className="grid place-items-center text-xs font-bold mb-1 tracking-wide text-rose-400 uppercase">Guest Book</div>
+            <div className="grid place-items-center mb-5 text-lg font-bold text-rose-400">축하 메시지를 남겨주세요.</div>
             <form onSubmit={handleSubmit} className='flex flex-col gap-4 mb-5'>
                 <div className="grid grid-cols-2 gap-4 mb-4">
                     <div>

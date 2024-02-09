@@ -4,7 +4,25 @@
 
 body{
     background-color: #efefef;
-    /* background-image: url('../images/background.jpg'); */
+    background-image: url('../images/background.jpg');
     width: 100%;
     height: 100%;
+    font-family: 'dodum';
+}
+
+@font-face {
+    font-family: 'godo';
+    src: url('../public/fonts/godoFont/GodoB.ttf');
+}
+@font-face {
+    font-family: 'dodum';
+    src: url('../public/fonts/Gowun_Dodum/GowunDodum-Regular.ttf');
+}
+@font-face {
+    font-family: 'sans';
+    src: url('../public/fonts/source-sans-pro/SourceSansPro-Regular.otf');
+}
+@font-face {
+    font-family: 'lora';
+    src: url('../public/fonts/Lora/static/Lora-Medium.ttf');
 }
