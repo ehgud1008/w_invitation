@@ -13,23 +13,7 @@ const ContactList = ({handleOpenContactList, contactData}) => {
     if(contactType == 'sms') window.location.href = 'sms:'+phoneNumber;
     if(contactType == 'tel')  window.location.href = 'tel:'+phoneNumber;
   };
-
-
-  // useEffect( () => {
-  //   const fetchContact = async () => {
-  //     if(seq > 0){
-  //       console.log(contactData);
-  //       if(!contactData){
-  //         console.log("ASDF");
-  //         const res = await fetch(`/api/contact/${seq}`);
-  //         const data = await res.json();
-  //         setContactData(data.data);
-  //         console.log("GHSDF");
-  //       }
-  //     }
-  //   };
-  //   fetchContact();
-  // }, [contactData]);
+  
   return (
     <div className="mx-auto overflow-x-hidden  2xs:w-1/1 xs:w-full sm:w-3/4 md:w-2/4 lg:w-2/5 xl:w-1/3 fixed bg-contactList text-white top-0 w-full h-full justify-center items-center z-50 overflow-scroll p-4">
       <div className="py-6 pt-10 ">
