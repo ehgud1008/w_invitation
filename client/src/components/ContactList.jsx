@@ -31,7 +31,7 @@ const ContactList = ({handleOpenContactList, contactData}) => {
   //   fetchContact();
   // }, [contactData]);
   return (
-    <div className="mx-auto sm:w-full md:w-2/5 fixed bg-contactList text-white top-0 w-full h-full justify-center items-center z-50 overflow-scroll p-4">
+    <div className="mx-auto overflow-x-hidden  2xs:w-1/1 xs:w-full sm:w-3/4 md:w-2/4 lg:w-2/5 xl:w-1/3 fixed bg-contactList text-white top-0 w-full h-full justify-center items-center z-50 overflow-scroll p-4">
       <div className="py-6 pt-10 ">
           <span className='grid justify-center tracking-wide text-xs text-zinc-100 mb-1 uppercase'>Contact</span>
           <span className="grid justify-center tracking-wide ">연락하기</span>
