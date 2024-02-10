@@ -16,11 +16,19 @@ ContactInfo.init({
             required : true,
             allowNull: false     // NULL을 허용하지 않음
         },
+        groom_contact : {
+            type : DataTypes.STRING,
+            required : true,
+        },
         groom_f_contact : {
             type : DataTypes.STRING,
             required : true,
         },
         groom_m_contact : {
+            type : DataTypes.STRING,
+            required : true,
+        },
+        bride_contact : {
             type : DataTypes.STRING,
             required : true,
         },

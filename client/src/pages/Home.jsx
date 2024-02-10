@@ -6,6 +6,7 @@ import { MarriageContext } from '../context/MarriageContext';
 import { LocationContext } from '../context/LocationContext';
 import ContactList from '../components/ContactList';
 import {stringFormatDate} from '../utils/CommonUtils';
+import { ContactContext } from "../context/ContactContext";
 
 const Home = ({setWeddingDate, setSeq}) => {
   const params = useParams();
@@ -14,8 +15,9 @@ const Home = ({setWeddingDate, setSeq}) => {
   const {locationData} = useContext(LocationContext);
   const [isContactOpen, setIsContactOpen] = useState(false);
 
-  const handleOpenContactList = () => {
-    console.log("DDDD");
+  const {contactData, setContactData} = useContext(ContactContext);
+
+  const handleOpenContactList = (contactData) => {
     setIsContactOpen(!isContactOpen);
     if(!isContactOpen) document.body.style.overflow = 'hidden'; // 스크롤바를 숨깁니다.
     else document.body.style.overflow = 'auto'; // 스크롤바를 다시 표시합니다.
@@ -37,6 +39,7 @@ const Home = ({setWeddingDate, setSeq}) => {
         setSeq(data.seq);
 
       } catch (error) {
+        console.log("first useEffect");
         console.log(error);
       }
     } 
@@ -44,9 +47,27 @@ const Home = ({setWeddingDate, setSeq}) => {
     fetchWeddingInfo();
   }, [url, setMarriageData]);
 
-  //seq, 신랑이름, 신랑영어이름, 신랑서열(1,2,3,4...), 신부이름, 신부영어이름, 신부서열,
-  // 결혼날짜, 메인사진, 갤러리 사진(최대 10장), 영상링크하나,
-  //식장 주소, 식장 약도, 식장번호, [지하철(호선, 출구, 도보)], [버스(정류장)]
+  //연락처 정보 조회
+  useEffect( () => {
+    const fetchContact = async () => {
+      if(marriageData){
+        console.log(contactData);
+        if(!contactData){
+          try {
+            const res = await fetch(`/api/contact/${marriageData.seq}`);
+            const data = await res.json();
+            setContactData(data.data);
+            console.log("GHSDF");
+          } catch (error) {
+            console.log("second useEffect");
+            console.log(error);
+          }
+        }
+      }
+    };
+    fetchContact();
+  }, [marriageData]);
+
   return (
     <main className='mx-auto bg-white overflow-x-hidden 2xs:w-1/1 xs:w-full sm:w-3/4 md:w-2/4 lg:w-2/5 xl:w-1/3'>
       {marriageData && 
@@ -60,7 +81,6 @@ const Home = ({setWeddingDate, setSeq}) => {
                   {stringFormatDate(marriageData.wedding_date, "W-en")}
                 </div>
               </div>
-              {/* <img src="/images/wedding_sample.jpg" alt="신랑 & 신부" className="rounded-full h-40 w-40 object-cover mb-4 animate-pulse" /> */}
               <div className='px-8 pt-5'>
                 <img src="/images/wedding_sample.jpg" alt="신랑 & 신부" className="w-full object-cover aspect-[9/10]"/>
               </div>
@@ -71,15 +91,6 @@ const Home = ({setWeddingDate, setSeq}) => {
                 <span>{stringFormatDate(marriageData.wedding_date, "W")} {stringFormatDate(marriageData.wedding_date, "A")} {stringFormatDate(marriageData.wedding_date, "H")} 시 {stringFormatDate(marriageData.wedding_date, "MM")}</span>
                 <span>{locationData && locationData.hall_name}</span>
               </div>
-              {/* <p className="text-md text-gray-700 mb-8 text-center">
-                {stringFormatDate(marriageData.wedding_date, "Y")}년&nbsp;
-                {stringFormatDate(marriageData.wedding_date, "M")}월&nbsp;
-                {stringFormatDate(marriageData.wedding_date, "D")}일&nbsp;
-                {stringFormatDate(marriageData.wedding_date, "W")}&nbsp;
-                {stringFormatDate(marriageData.wedding_date, "A")}&nbsp;
-                {stringFormatDate(marriageData.wedding_date, "H")}시&nbsp;
-                {stringFormatDate(marriageData.wedding_date, "MM")}<br/>
-              </p> */}
               <div className='mx-20 mt-28 grid place-items-center mb-12'>
                 <img src='/images/wedding.png' className='w-40 h-40'/>
                 <p className='text-center leading-7'>
@@ -95,11 +106,11 @@ const Home = ({setWeddingDate, setSeq}) => {
                   <span className='text-md'>{marriageData.bride_father} · {marriageData.bride_mother}</span> <span className='text-sm'>의 {marriageData.bride_no}</span><span className='text-md ml-5'>{marriageData.bride_ko}</span>
                 </p>
                 <button className='flex items-center mt-4 px-10 py-2 rounded-lg font-semibold bg-white opacity-70 border border-slate-300'>
-                  <img src="/images/tel.png" className='w-5 h-5'/><span className='pl-2'>연락하기</span>
+                  <img src="/images/tel.png" className='w-5 h-5'/><span className='pl-2' onClick={handleOpenContactList}>연락하기</span>
                 </button>
               </div>
               
-              {isContactOpen && <ContactList handleOpenContactList={handleOpenContactList}/>}
+              {isContactOpen && <ContactList handleOpenContactList={handleOpenContactList} contactData={contactData} />}
               
               {/* <div className='grid place-items-center mb-16 '>
                   <button className='flex items-center py-5 lg:px-56 md:px-32 sm:px-20 xs:px-16 rounded-lg text-rose-red font-semibold bg-rose-100 opacity-70'>

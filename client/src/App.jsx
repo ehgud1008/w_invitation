@@ -25,17 +25,17 @@ export default function App() {
     <MarriageProvider>
       <LocationProvider>
           <BrowserRouter>
-            {/* <Header /> */}
-            <Routes> 
-              <Route path='/wedding/:url' element={<Home setWeddingDate={setWeddingDate} setSeq={setSeq}/>} />
-            </Routes>
-            <Gallery />
-            <Calendar wedding_date={wedding_date}/>
-            <Timer wedding_date={wedding_date}/>
-            <Location seq={seq} />
             <ContactProvider>
-              <Contact seq={seq}/>
-              <Account seq={seq}/>
+              {/* <Header /> */}
+              <Routes> 
+                <Route path='/wedding/:url' element={<Home setWeddingDate={setWeddingDate} setSeq={setSeq}/>} />
+              </Routes>
+              <Gallery />
+              <Calendar wedding_date={wedding_date}/>
+              <Timer wedding_date={wedding_date}/>
+              <Location seq={seq} />
+                {/* <Contact seq={seq}/> */}
+                <Account seq={seq}/>
             </ContactProvider>
             <RSVP seq={seq}/>
             <MessageProvider>
