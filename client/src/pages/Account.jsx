@@ -43,7 +43,7 @@ const Account = ({seq}) => {
             <p className='pb-5 text-lg font-bold text-rose-400'>마음 전하실 곳</p>
         </div>
         <div className="grid place-items-center mb-3">
-            <div className="px-10 w-full rounded overflow-hidden">
+            <div className="md:w-3/4 xs:w-4/5 border rounded overflow-hidden">
                 <div className="border border-b bg-sky-50 py-2 cursor-pointer" onClick={toggleAccordion1}>
                     <div className="flex justify-between items-center">
                         <div className="flex items-center ml-3">
@@ -104,7 +104,7 @@ const Account = ({seq}) => {
         </div>
 
         <div className="grid place-items-center mb-3">
-            <div className="md:w-2/4 xs:w-4/5 border rounded overflow-hidden">
+            <div className="md:w-3/4 xs:w-4/5 border rounded overflow-hidden">
                 <div className="border-b bg-pink-50 py-2 cursor-pointer" onClick={toggleAccordion2}>
                     <div className="flex justify-between items-center">
                         <div className="flex items-center ml-3">

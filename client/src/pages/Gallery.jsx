@@ -1,17 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import GalleryList from '../components/GalleryList'
+import ImageSlider from '../components/ImageSlider';
 
 const Gallery = () => {
   const [openImageList, setOpenImageList] = useState(false);
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+
   const [imageData, setImageData] = useState({
     seq : 0,
     title : '김철수',
     weddingImages : ['/images/1.png', '/images/2.png', '/images/3.png', '/images/4.png']
   });
   
+  //이미지 모달 열기 func
+  const handleImageModelOpen = () => {
+    setIsImageModalOpen(true);
+    document.body.style.overflow = 'hidden'; // 스크롤바를 숨깁니다.
+  }
+
+  //이미지 모달창 닫기 func
+  const handleModalClose = () => {
+    setIsImageModalOpen(false);
+    document.body.style.overflow = 'auto'; // 스크롤바를 다시 표시합니다.
+  }
+
   const handleMoreImage = () => {
     setOpenImageList(!openImageList);
-    console.log(openImageList);
   }
 
   useEffect( ( ) => {
@@ -30,13 +44,26 @@ const Gallery = () => {
         </div>
         <div className='grid md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-2 mx-8'>
           {imageData.weddingImages.map((image, index) => (
-            <img key={index} src={image} className='aspect-[2/3] my-2 w-full hover:opacity-70' onClick={handleMoreImage}/>      
+            <img key={index} src={image} className='aspect-[2/3] my-2 w-full hover:opacity-70' onClick={handleImageModelOpen}/>      
             ))}
         </div>
         <div className='grid place-items-center my-5'>
             <button onClick={handleMoreImage}>사진 더보기</button>
         </div>
-        
+        {/* {isImageModalOpen && (
+            <div className='myModal backdrop-blur-sm fixed top-0 left-0 w-full h-full flex items-center justify-center' id="mapModal">
+              <div className="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+              <div className="modal-content z-50">
+                <button onClick={handleModalClose} className="absolute top-0 right-0 mt-4 mr-4 py-2 px-4">
+                  <img src="/images/close.png" className='w-6 h-6' alt="close" />
+                </button>
+                <div className='w-4/5 mx-auto'>
+                  <img src="/images/hall_map.jpg" className='' alt="hall_map" id="img01" />
+                </div>
+              </div>
+            </div>
+          )} */}
+        {isImageModalOpen && <ImageSlider/>}
         {openImageList && <GalleryList />}
       </div>
   )
