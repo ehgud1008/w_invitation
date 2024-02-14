@@ -4,23 +4,23 @@ import {useSwipeable} from 'react-swipeable';
 const ImageSlider = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    const handlers = useSwipeable({
-        onSwipedLeft: () => nextSlide(),
-        onSwipedRight: () => prevSlide(),
-    });
-    
     const [imageData, setImageData] = useState({
         seq : 0,
         title : '김철수',
         weddingImages : ['/images/1.png', '/images/2.png', '/images/3.png', '/images/4.png']
-      });
+    });
+    
+    const handlers = useSwipeable({
+        onSwipedLeft: () => nextSlide(),
+        onSwipedRight: () => prevSlide(),
+    });
 
     const nextSlide = () => {
-        setCurrentIndex((currentIndex + 1) % imageData.weddingImages.length);
+        setCurrentIndex(current => (current + 1) % imageData.weddingImages.length);
     };
 
     const prevSlide = () => {
-        setCurrentIndex((currentIndex - 1 + imageData.weddingImages.length) % imageData.weddingImages.length);
+        setCurrentIndex(current => (current - 1 + imageData.weddingImages.length) % imageData.weddingImages.length);
     };
 
     // 자동 슬라이드를 위한 useEffect
@@ -31,23 +31,33 @@ const ImageSlider = () => {
 
     //     return () => clearInterval(interval);
     // }, [currentIndex]);
-
     return (
-        <div {...handlers} className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div {...handlers} className="fixed inset-0 flex items-center justify-center z-50 bg-white bg-opacity-95">
+            <button type="button" className="absolute top-4 right-4 text-gray-500 hover:text-gray-700" >
+                            <svg className="w-8 h-8" viewBox="0 0 24 24">
+                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path>
+                            </svg>
+                        </button>
             <button
-                className="p-4 bg-white bg-opacity-80 rounded-full mr-4"
+                className="absolute left-5 z-50 p-1 font-bold "
                 onClick={prevSlide}
             >
                 &lt;
             </button>
-                <img src={imageData.weddingImages[currentIndex]} alt={`Slide ${currentIndex}`} className="w-4/5 object-contain max-h-[100vh]" />
+            <div className="flex justify-center w-full">
+                {/* <img src={imageData.weddingImages[currentIndex]} alt="Previous" className="w-full object-contain" />
+                <img src={imageData.weddingImages[currentIndex]} alt="Current" className="w-full object-contain" />
+                <img src={imageData.weddingImages[currentIndex]} alt="Next" className="w-full object-contain" /> */}
+                {/* <img src={imageData.weddingImages[currentIndex]} alt={`Slide ${currentIndex}`} className="w-full object-contain max-h-[80vh]"/> */}
+                <img src={imageData.weddingImages[currentIndex]} alt={`Slide ${currentIndex}`} className="object-contain max-h-[80vh]" />
+            </div>
             <button
-                className="p-4 bg-white bg-opacity-80 rounded-full ml-4"
+                className="absolute right-5 z-50 p-1 font-bold "
                 onClick={nextSlide}
             >
                 &gt;
             </button>
-            <span className="mt-2 text-white text-opacity-80">
+            <span className="absolute bottom-10  text-opacity-80 font-bold ">
                 {currentIndex + 1}/{imageData.weddingImages.length}
             </span>
         </div>

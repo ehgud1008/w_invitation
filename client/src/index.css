@@ -26,3 +26,25 @@ body{
     font-family: 'lora';
     src: url('../public/fonts/Lora/static/Lora-Medium.ttf');
 }
+
+.slide-enter {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  
+  .slide-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 300ms, transform 300ms;
+  }
+  
+  .slide-exit {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .slide-exit-active {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 300ms, transform 300ms;
+  }
