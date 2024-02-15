@@ -12,16 +12,10 @@ const Gallery = () => {
     weddingImages : ['/images/1.png', '/images/2.png', '/images/3.png', '/images/4.png']
   });
   
-  //이미지 모달 열기 func
-  const handleImageModelOpen = () => {
-    setIsImageModalOpen(true);
-    document.body.style.overflow = 'hidden'; // 스크롤바를 숨깁니다.
-  }
-
-  //이미지 모달창 닫기 func
-  const handleModalClose = () => {
-    setIsImageModalOpen(false);
-    document.body.style.overflow = 'auto'; // 스크롤바를 다시 표시합니다.
+  const handleOpenImageSlider = () => {
+    setIsImageModalOpen(!isImageModalOpen);
+    if(!isImageModalOpen) document.body.style.overflow = 'hidden'; // 스크롤바를 숨깁니다.
+    else document.body.style.overflow = 'auto'; // 스크롤바를 다시 표시합니다.
   }
 
   const handleMoreImage = () => {
@@ -44,7 +38,7 @@ const Gallery = () => {
         </div>
         <div className='grid md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-2 mx-8'>
           {imageData.weddingImages.map((image, index) => (
-            <img key={index} src={image} className='aspect-[2/3] my-2 w-full hover:opacity-70' onClick={handleImageModelOpen}/>      
+            <img key={index} src={image} className='aspect-[2/3] my-2 w-full hover:opacity-70' onClick={handleOpenImageSlider}/>      
             ))}
         </div>
         <div className='grid place-items-center my-5'>
@@ -63,7 +57,7 @@ const Gallery = () => {
               </div>
             </div>
           )} */}
-        {isImageModalOpen && <ImageSlider/>}
+        {isImageModalOpen && <ImageSlider handleOpenImageSlider={handleOpenImageSlider}/>}
         {openImageList && <GalleryList />}
       </div>
   )
