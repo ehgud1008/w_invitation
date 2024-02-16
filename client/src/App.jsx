@@ -30,7 +30,7 @@ export default function App() {
               <Routes> 
                 <Route path='/wedding/:url' element={<Home setWeddingDate={setWeddingDate} setSeq={setSeq}/>} />
               </Routes>
-              <Gallery />
+              <Gallery seq={seq}/>
               <Calendar wedding_date={wedding_date}/>
               <Timer wedding_date={wedding_date}/>
               <Location seq={seq} />
