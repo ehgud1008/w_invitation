@@ -6,14 +6,14 @@ const Gallery = () => {
   const [openImageList, setOpenImageList] = useState(false);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
-  const [imageData, setImageData] = useState({
+  const [imageData] = useState({
     seq : 0,
     title : '김철수',
     weddingImages : ['/images/1.png', '/images/2.png', '/images/3.png', '/images/4.png']
   });
   
   const handleOpenImageSlider = () => {
-    setIsImageModalOpen(!isImageModalOpen);
+        setIsImageModalOpen(!isImageModalOpen);
     if(!isImageModalOpen) document.body.style.overflow = 'hidden'; // 스크롤바를 숨깁니다.
     else document.body.style.overflow = 'auto'; // 스크롤바를 다시 표시합니다.
   }
