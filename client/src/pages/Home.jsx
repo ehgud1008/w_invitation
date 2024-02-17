@@ -51,13 +51,11 @@ const Home = ({setWeddingDate, setSeq}) => {
   useEffect( () => {
     const fetchContact = async () => {
       if(marriageData){
-        console.log(contactData);
         if(!contactData){
           try {
             const res = await fetch(`/api/contact/${marriageData.seq}`);
             const data = await res.json();
             setContactData(data.data);
-            console.log("GHSDF");
           } catch (error) {
             console.log("second useEffect");
             console.log(error);
