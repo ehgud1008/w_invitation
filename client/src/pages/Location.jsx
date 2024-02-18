@@ -5,6 +5,7 @@ import { LocationContext } from '../context/LocationContext';
 const Location = ({seq}) => {
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
   const {locationData, setLocationData} = useContext(LocationContext);
+  const [latlng, setLatlng] = useState([]);
 
   //약도 모달 열기 func
   const handleModelOpen = () => {
@@ -52,7 +53,42 @@ const Location = ({seq}) => {
     const tel = locationData.hall_contact; // 전화번호를 여기에 입력하세요
     window.location.href = `tel:${tel}`;
   }
+  
+  //현재 기기 모바일인지 체크
+  const isMobile = () => {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    return /android|avantgo|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od|ad)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(40|60)|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(userAgent);
+  }
+  const openNavi = (goto) => () => {
+    const address = locationData.address;
+    const lat = latlng.Ma;
+    const lng = latlng.La;
 
+    console.log(latlng);
+    if(goto == 'kakaoNavi'){
+      if(isMobile()) {
+        // location.href = "kakaonavi-wguide://navigate?ep=" + lat + ","+lng;
+        location.href = 'kakaoNavi://route?ep=' + lat + ',' + lng + '&by=CAR';
+      }else{
+        window.open('https://map.kakao.com/link/to/' + locationData.address + ',' + lat + "," + lng, '_blank');
+      }
+    }else if(goto == 'naverMap'){
+      if (isMobile()) {
+        window.open('nmap://place?lat=' + lat + '&lng=' + lng + '&appname=wedding_invitation', '_blank');
+      } else {
+        window.open('https://map.naver.com/v5/search/' + locationData.address, '_blank');
+      }
+    }else if(goto == 'kakaoMap'){
+      if (isMobile()) {
+        // 모바일 기기에서 실행할 경우
+        window.open('kakaomap://route?sp=37.537229,127.005515&ep=' + lat + ',' + lng + '&by=PUBLICTRANSIT', '_blank');
+      } else {
+        // PC에서 실행할 경우
+        window.open('https://map.kakao.com/link/to/' + locationData.address + ',' + lat + ',' + lng, '_blank');
+      }
+    }
+  }
+  
   useEffect( ()=> {
     if(seq > 0){
       const fetchLocationData = async () => {
@@ -70,6 +106,11 @@ const Location = ({seq}) => {
         }
       }
       fetchLocationData();
+    }
+  }, [seq]);
+
+  useEffect ( () => {
+    if(locationData != null){
       // Kakao Maps SDK 초기화
       window.kakao.maps.load(() => {
         const container = document.getElementById('map');
@@ -77,28 +118,40 @@ const Location = ({seq}) => {
             center: new window.kakao.maps.LatLng(37.5665, 126.9780), // 초기 지도 중심 좌표
             level: 3, // 줌 레벨
         };
-
+  
         // 지도 생성
         const map = new window.kakao.maps.Map(container, options);
-
+  
         // 주소-좌표 변환 객체를 생성합니다
         // const geocoder = new window.kakao.maps.services.Geocoder();
         const geocoder = new window.kakao.maps.services.Geocoder();
-
-
+  
+  
         const imageSrc = '/images/weddingMarker.png', // 마커이미지의 주소입니다    
               imageSize = new kakao.maps.Size(50, 50), // 마커이미지의 크기입니다
               imageOption = {offset: new kakao.maps.Point(25, 50)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
               
         // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
         var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-
+  
+        const panTo = () => {
+          // 이동할 위도 경도 위치를 생성합니다 
+          var moveLatLon = new kakao.maps.LatLng(33.450580, 126.574942);
+          
+          // 지도 중심을 부드럽게 이동시킵니다
+          // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+          map.panTo(moveLatLon);            
+        }    
+        
         // 주소로 좌표를 검색합니다
-        geocoder.addressSearch('서울시 마포구 양화로 87 (서교동378-7)', function(result, status) {
+        geocoder.addressSearch(locationData.address, function(result, status) {
           // 정상적으로 검색이 완료됐으면 
           if (status === window.kakao.maps.services.Status.OK) {
             const coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
-            
+
+            //좌표세팅
+            setLatlng(coords);
+
             // 결과값으로 받은 위치를 마커로 표시합니다
             var marker = new kakao.maps.Marker({
               map: map,
@@ -113,15 +166,14 @@ const Location = ({seq}) => {
               
             // 마우스 드래그로 지도 이동 가능여부를 설정합니다
             map.setDraggable(true);
-
+  
             // 결과값으로 받은 위치를 지도의 중심으로 설정합니다
             map.setCenter(coords);
           } 
         });
       });
-
     }
-  }, [seq]);
+  }, [locationData]);
 
   return (
     <div className='mx-auto bg-white overflow-x-hidden 2xs:w-1/1 xs:w-full sm:w-3/4 md:w-2/4 lg:w-2/5 xl:w-1/3'>
@@ -157,17 +209,27 @@ const Location = ({seq}) => {
                     <img src="/images/tmap.png" className='w-10 h-10 border-2 border-slate-500 mb-2 rounded-full'/>
                     <span>티맵</span>
                   </li> */}
+                  {/* <a href="kakaonavi-wguide://navigate?ep=37.5662952,126.9779451">
+                      <img src="/images/kakaonavi.png" className='w-14 h-14 mb-2 rounded-full'/>
+                      <span className='font-bold text-sm'>카카오내비</span>
+                  </a> */}
                   <li className='grid justify-items-center'>
-                    <img src="/images/kakaonavi.png" className='w-14 h-14 mb-2 rounded-full'/>
-                    <span className='font-bold text-sm'>카카오내비</span>
+                    <a onClick={openNavi('kakaoNavi')}>
+                        <img src="/images/kakaonavi.png" className='w-14 h-14 mb-2 rounded-full'/>
+                        <span className='font-bold text-sm'>카카오내비</span>
+                    </a>
                   </li>
                   <li className='grid justify-items-center'>
-                    <img src="/images/navermap.png" className='w-14 h-14 mb-2 rounded-full'/>
-                    <span className='font-bold text-sm'>네이버지도</span>
+                    <a onClick={openNavi('naverMap')}>
+                      <img src="/images/navermap.png" className='w-14 h-14 mb-2 rounded-full'/>
+                      <span className='font-bold text-sm'>네이버지도</span>
+                    </a>
                   </li>
                   <li className='grid justify-items-center'>
-                    <img src="/images/kakaomap.png" className='w-14 h-14 mb-2 rounded-full'/>
-                    <span className='font-bold text-sm'>카카오맵</span>
+                    <a onClick={openNavi('kakaoMap')}>
+                      <img src="/images/kakaomap.png" className='w-14 h-14 mb-2 rounded-full'/>
+                      <span className='font-bold text-sm'>카카오맵</span>
+                    </a>
                   </li>
               </ul>
           </div>

@@ -73,7 +73,7 @@ const Home = ({setWeddingDate, setSeq}) => {
           <div className="flex flex-col min-h-screen pt-28">
               <div className="flex flex-col  border-l-2 border-black ml-8 py-2 font-lora">
                 <div className='pl-5 text-2xl'>
-                  {stringFormatDate(marriageData.wedding_date, "Y")} / {stringFormatDate(marriageData.wedding_date, "M")} / {stringFormatDate(marriageData.wedding_date, "D")}
+                  {stringFormatDate(marriageData.wedding_date, "Y")}.{stringFormatDate(marriageData.wedding_date, "M")}.{stringFormatDate(marriageData.wedding_date, "D")}
                 </div>
                 <div className='pl-5 text-md uppercase'>
                   {stringFormatDate(marriageData.wedding_date, "W-en")}
