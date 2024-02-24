@@ -1,14 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {useSwipeable} from 'react-swipeable';
 
 const ImageSlider = ({handleOpenImageSlider, imageArray, index}) => {
     const [currentIndex, setCurrentIndex] = useState(index);
-    
-    const handlers = useSwipeable({
-        onSwipedLeft: () => nextSlide(),
-        onSwipedRight: () => prevSlide(),
-    });
+    const sliderRef = useRef(null);
 
+    const handlers = useSwipeable({
+        onSwiping: () => {
+            // 드래그가 시작되면 슬라이더의 스크롤을 비활성화
+            const slider = sliderRef.current;
+            if (slider) {
+                slider.style.overflowX = 'hidden';
+            }
+        },
+        onSwiped: () => {
+            // 드래그가 끝나면 슬라이더의 스크롤을 다시 활성화
+            const slider = sliderRef.current;
+            if (slider) {
+                slider.style.overflowX = 'auto';
+            }
+        },
+        onSwipedLeft: () => setCurrentIndex(current => (current + 1) % imageArray.length),
+        onSwipedRight: () => setCurrentIndex(current => (current - 1 + imageArray.length) % imageArray.length),
+    });
     const nextSlide = () => {
         setCurrentIndex(current => (current + 1) % imageArray.length);
     };
@@ -16,7 +30,18 @@ const ImageSlider = ({handleOpenImageSlider, imageArray, index}) => {
     const prevSlide = () => {
         setCurrentIndex(current => (current - 1 + imageArray.length) % imageArray.length);
     };
+    const scrollToSlide = (index) => {
+        const slider = sliderRef.current;
+        if (slider) {
+            const slideWidth = slider.offsetWidth;
+            const newScrollLeft = index * slideWidth;
+            slider.scrollTo({ left: newScrollLeft, behavior: 'smooth' });
+        }
+    };
 
+    useEffect(() => {
+        scrollToSlide(currentIndex);
+    }, [currentIndex]);
     return (
         <div {...handlers} className="fixed inset-0 flex items-center justify-center z-50 bg-white bg-opacity-95">
             <button
@@ -25,12 +50,15 @@ const ImageSlider = ({handleOpenImageSlider, imageArray, index}) => {
             >
                 &lt;
             </button>
-                {/* transition-duration: 500ms;
-    transition-timing-function: ease; */}
-        {/* <div className="flex justify-center w-full max-h-[100vh] transition-all duration-300 ease-in-out"> */}
-
-            <div className="flex justify-center w-full max-h-[100vh] slide-enter-active">
-                <img src={imageArray[currentIndex]} alt={`Slide ${currentIndex}`} className="object-contain max-h-[100vh]" />
+            <div ref={sliderRef} className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth w-full max-h-[100vh]">
+                {imageArray.map((src, idx) => (
+                    <img
+                        key={idx}
+                        src={src}
+                        alt={`Slide ${idx}`}
+                        className="object-contain max-h-[100vh] snap-center min-w-full"
+                    />
+                ))}
             </div>
             <button
                 className="absolute right-5 z-50 p-1 font-bold "
