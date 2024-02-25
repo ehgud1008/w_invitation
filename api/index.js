@@ -1,5 +1,5 @@
 import express from 'express';
-import mongoose, { mongo } from 'mongoose';
+// import mongoose, { mongo } from 'mongoose';
 import dotenv from 'dotenv';
 import path from 'path';
 import weddingRouter from './routes/wedding.js';
@@ -10,9 +10,9 @@ import rsvpRouter from './routes/rsvp.js';
 import fileRouter from './routes/file.js';
 
 dotenv.config();
-mongoose.connect(process.env.MONGODB_URI, { dbName: 'myfolio' })
-    .then(() =>{ console.log("Connected to DB");})
-    .catch((error)=> {console.log(error);});
+// mongoose.connect(process.env.MONGODB_URI, { dbName: 'myfolio' })
+//     .then(() =>{ console.log("Connected to DB");})
+//     .catch((error)=> {console.log(error);});
 
 const __dirname = path.resolve();
 
