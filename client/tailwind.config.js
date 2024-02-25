@@ -28,9 +28,7 @@ export default {
         '544f4f' : '#544f4f',
       },
       fontFamily : {
-        'godo' : ['godo'],
         'dodum' : ['dodum'],
-        'sans' : ['sans'],
         'lora' : ['lora'],
       }
     },
