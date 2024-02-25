@@ -39,14 +39,14 @@ app.get('*', (req,res) => {
 
 //=======================================================================
 
-const app2 = express();
-app2.use(express.json());
+// const app2 = express();
+// app2.use(express.json());
 
-app2.use(express.static(path.join(__dirname, 'client/dist')));
-app2.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-});
+// app2.use(express.static(path.join(__dirname, 'client/dist')));
+// app2.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+// });
 
-app2.listen(4000, function () {
-    console.log('Server running on port 4000');
-});
+// app2.listen(4000, function () {
+//     console.log('Server running on port 4000');
+// });
